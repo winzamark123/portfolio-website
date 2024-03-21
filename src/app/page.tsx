@@ -1,12 +1,13 @@
-import BentoBox from './_components/BentoBox';
+import Projects from './_components/Projects/Projects';
+import Landing from './_components/Landing/Landing';
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between ">
-      <div className="flex h-10 w-10 border border-white"></div>
-      <div className="flex h-10 w-10 border border-blue-500"></div>
-      <div className="flex h-96 w-32 border-spacing-20 border border-blue-800"></div>
+    <main className="p-1/10 pt-1/20 flex min-h-screen flex-col">
+      <div className="flex h-96 w-full border border-white">
+        <Landing />
+      </div>
       <div className="flex h-96 w-full border border-blue-950">
-        <BentoBox />
+        <Projects />
       </div>
     </main>
   );

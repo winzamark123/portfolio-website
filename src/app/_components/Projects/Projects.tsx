@@ -1,23 +1,18 @@
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
-type Project = {
+import BentoBox from './_components/BentoBox';
+
+export type ProjectItem = {
   title: string;
   description: string;
   github_repo: string;
   url?: string;
 };
 
-const Projects: [Project] = [
+const ProjectList: ProjectItem[] = [
   {
     title: 'JustSayin',
-    description: 'Project 1 Description',
-    github_repo: '',
+    description:
+      'Mobile application displaying daily quotes from your favorite authors on your lock screen widget',
+    github_repo: 'https://github.com/winzamark123/JustSayin',
   },
   {
     title: 'HackDavis Website',
@@ -46,23 +41,10 @@ const Projects: [Project] = [
   },
 ];
 
-export default function BentoBox() {
+export default function Projects() {
   return (
-    <main className="h-full w-full justify-normal border border-white">
-      <div className="h-full w-full bg-purple-500 p-20">
-        <Card>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter>
-        </Card>
-      </div>
+    <main>
+      <BentoBox ProjectList={ProjectList} />
     </main>
   );
 }
