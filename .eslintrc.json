@@ -17,18 +17,18 @@
       "sourceType": "module"
     },
     "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-              "bracketSpacing": true,
-              "tabWidth": 2,
-              "printWidth": 80,
-              "useTabs": false,
-              "trailingComma": "es5",
-              "endOfLine": "auto",
-              "semi": true,
-              "singleQuote": true
-            }
+      "prettier/prettier": [
+          "error",
+          {
+            "bracketSpacing": true,
+            "tabWidth": 2,
+            "printWidth": 80,
+            "useTabs": false,
+            "trailingComma": "es5",
+            "endOfLine": "auto",
+            "semi": true,
+            "singleQuote": true
+          }
         ],
         "lit-a11y/alt-text": [
             2

@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      padding: {
+        '1/10': '10%',
+        '1/20': '5%',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
 @layer base {
   :root {
@@ -27,7 +28,7 @@
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    --background: 210 58% 11%;
     --foreground: 60 9.1% 97.8%;
     --card: 20 14.3% 4.1%;
     --card-foreground: 60 9.1% 97.8%;
@@ -48,9 +49,6 @@
     --ring: 20.5 90.2% 48.2%;
   }
 
-}
-
-@layer base {
   * {
     @apply border-border;
     @apply min-w-0;
@@ -59,5 +57,10 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  h1{
+    font-size: 5rem;
   }
 }
