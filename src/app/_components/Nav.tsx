@@ -1,12 +1,12 @@
 'use client';
 import Link from 'next/link';
 import { ModeToggle } from './ModeToggle';
-import { Instagram, Github, Linkedin, Mail } from 'lucide-react';
+import { Instagram, Github, Linkedin, Mail, FilePenLine } from 'lucide-react';
 
-type NavLink = {
-  name: string;
-  path: string;
-};
+// type NavLink = {
+//   name: string;
+//   path: string;
+// };
 
 type SocialProp = {
   icon: React.ReactNode;
@@ -43,6 +43,13 @@ const SocialProps: SocialProp[] = [
     url: 'mailto:teeranadecheng@gmail.com',
     description: 'Mail',
   },
+  {
+    icon: (
+      <FilePenLine className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
+    ),
+    url: 'mailto:teeranadecheng@gmail.com',
+    description: 'Mail',
+  },
 ];
 
 // const navLinks: NavLink[] = [
@@ -54,7 +61,7 @@ const SocialProps: SocialProp[] = [
 
 export default function Nav() {
   return (
-    <nav className="fixed flex h-4/5 w-20 flex-col justify-center items-center gap-3">
+    <nav className="fixed flex h-4/5 w-20 flex-col items-center justify-center gap-3">
       {/* {navLinks.map((link) => (
         <Link key={link.path} href={link.path} className="">
           {link.name}
