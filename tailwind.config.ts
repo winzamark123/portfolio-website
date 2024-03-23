@@ -22,6 +22,10 @@ const config = {
         '1/10': '10%',
         '1/20': '5%',
       },
+      height: {
+        'half-screen': '50vh',
+        'screen-4/5': '80vh',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
