@@ -6,12 +6,14 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
+import React from 'react';
 
 type ExperienceProp = {
   company: string;
   position: string;
   description: string;
   date: string;
+//   icon: React.ReactNode;
 };
 
 const ExperienceProps: ExperienceProp[] = [
@@ -54,9 +56,12 @@ export default function Experience() {
           {'</'}Experience{'>'}
         </h2>
       </div>
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col p-10">
         {ExperienceProps.map((experience, index) => (
-          <Card key={experience.company} className="w-96">
+          <Card
+            key={experience.company}
+            className={`w-96 ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}
+          >
             <CardHeader>
               <CardTitle>{experience.company}</CardTitle>
               <CardDescription>{experience.position}</CardDescription>
