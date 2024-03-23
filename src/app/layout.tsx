@@ -1,4 +1,4 @@
-import Nav from './_components/Nav';
+import Nav from './_components/Nav/Nav';
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import './globals.scss';

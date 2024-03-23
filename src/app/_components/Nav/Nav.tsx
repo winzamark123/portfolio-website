@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { ModeToggle } from './ModeToggle';
+import { ModeToggle } from './_components/ModeToggle';
 import { Instagram, Github, Linkedin, Mail, FilePenLine } from 'lucide-react';
 
 // type NavLink = {
