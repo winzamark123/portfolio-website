@@ -1,6 +1,7 @@
 import Projects from './_components/Projects/Projects';
 import Landing from './_components/Landing/Landing';
 import Profile from './_components/Profile/Profile';
+import Experience from './_components/Experience/Experience';
 import Tag from './_components/Tag';
 export default function Home() {
   return (
@@ -11,10 +12,12 @@ export default function Home() {
       <div className="flex h-half-screen w-full border border-purple-400">
         <Profile />
       </div>
-      <div className="flex h-36 w-full border border-red-400">
+      <div className="flex h-36 w-full">
         <Tag TagProp="</Code,Coffee,Repeat>" numberProp={3} />
       </div>
-      <div className="flex justify-normal p-2 pt-10"></div>
+      <div className="flex h-fit w-full border border-white">
+        <Experience />
+      </div>
       <div className="flex h-96 w-full border border-blue-950">
         <Projects />
       </div>
