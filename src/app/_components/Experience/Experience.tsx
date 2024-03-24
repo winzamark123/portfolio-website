@@ -70,7 +70,7 @@ const ExperienceProps: ExperienceProp[] = [
   {
     company: 'TASA',
     position: 'Web Developer',
-    description: 'Created a website for a 100+ person organization.',
+    description: 'Created a website for a 150+ person organization.',
     date: 'Sep 2022 - Sep 2023',
     icon: TASA,
     bg: TASA_bg,
