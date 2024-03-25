@@ -47,8 +47,8 @@ const SocialProps: SocialProp[] = [
     icon: (
       <FilePenLine className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
     ),
-    url: 'mailto:teeranadecheng@gmail.com',
-    description: 'Mail',
+    url: '',
+    description: 'Resume',
   },
 ];
 
@@ -62,14 +62,16 @@ const SocialProps: SocialProp[] = [
 export default function Nav() {
   return (
     <nav className="fixed flex h-4/5 w-20 flex-col items-center justify-center gap-3">
-      {/* {navLinks.map((link) => (
-        <Link key={link.path} href={link.path} className="">
-          {link.name}
-        </Link>
-      ))} */}
       {SocialProps.map((social, index) => (
-        <Link key={index} href={social.url} className="flex flex-col ">
+        <Link
+          key={index}
+          href={social.url}
+          className="group relative flex flex-col items-center"
+        >
           {social.icon}
+          <span className="absolute left-full ml-2 hidden w-max rounded-md bg-black px-2 py-2 text-sm text-white group-hover:block">
+            {social.description}
+          </span>
         </Link>
       ))}
       <ModeToggle />
