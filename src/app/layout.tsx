@@ -26,7 +26,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <Nav />
-            {children}
+            <div className="flex flex-col items-center justify-center">
+              {children}
+            </div>
           </ThemeProvider>
         </body>
       </html>
