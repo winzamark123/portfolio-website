@@ -18,7 +18,7 @@ export default function Home() {
       <div className="flex h-fit w-full border border-white">
         <Experience />
       </div>
-      <div className="flex h-96 w-full border border-blue-950">
+      <div className="flex h-fit w-full border border-white">
         <Projects />
       </div>
     </main>

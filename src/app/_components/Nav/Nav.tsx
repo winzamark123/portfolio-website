@@ -3,11 +3,6 @@ import Link from 'next/link';
 import { ModeToggle } from './_components/ModeToggle';
 import { Instagram, Github, Linkedin, Mail, FilePenLine } from 'lucide-react';
 
-// type NavLink = {
-//   name: string;
-//   path: string;
-// };
-
 type SocialProp = {
   icon: React.ReactNode;
   url: string;
@@ -51,13 +46,6 @@ const SocialProps: SocialProp[] = [
     description: 'Resume',
   },
 ];
-
-// const navLinks: NavLink[] = [
-//   { name: 'Home', path: '/' },
-//   { name: 'About', path: '/about' },
-//   { name: 'Experience', path: '/experience' },
-//   { name: 'Projects', path: '/projects' },
-// ];
 
 export default function Nav() {
   return (
