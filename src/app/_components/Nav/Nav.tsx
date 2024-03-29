@@ -56,7 +56,7 @@ export default function Nav() {
           href={social.url}
           className="group relative flex flex-col items-center"
         >
-          {social.icon}
+          <div className="hover:text-emerald-500">{social.icon}</div>
           <span className="absolute left-full ml-2 hidden w-max rounded-md bg-black px-2 py-2 text-sm text-white group-hover:block">
             {social.description}
           </span>

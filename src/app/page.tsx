@@ -5,7 +5,7 @@ import Experience from './_components/Experience/Experience';
 import Tag from './_components/Tag';
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col p-1/10 pt-1/20">
+    <main className="min-h-screen max-w-screen-2xl p-1/10 pt-1/20">
       <div className="flex h-screen-4/5 w-full border border-white">
         <Landing />
       </div>
