@@ -21,7 +21,7 @@ const SocialProps: SocialProp[] = [
     icon: (
       <Instagram className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
     ),
-    url: '',
+    url: 'https://www.instagram.com/winzamark12/',
     description: 'Instagram',
   },
   {

@@ -1,3 +1,8 @@
+import EditorNav from './_components/EditorNav';
+import EditorTop from './_components/EditorTop';
+import EditorContent from './_components/EditorContent';
+import EditorFooter from './_components/EditorFooter';
+
 import {
   ResizableHandle,
   ResizablePanel,
@@ -8,28 +13,22 @@ export default function Editor() {
   return (
     <main className="h-full w-full">
       <ResizablePanelGroup direction="horizontal" className="rounded-lg ">
-        <ResizablePanel defaultSize={30} className="border border-white">
-          <div className="flex h-[20px] items-center justify-center p-6">
-            <span className="font-semibold">One</span>
-          </div>
+        <ResizablePanel defaultSize={25} minSize={20} className="">
+          <EditorNav />
         </ResizablePanel>
-        <ResizableHandle />
-        <ResizablePanel>
+        <ResizableHandle withHandle={true} direction="horizontal" />
+        <ResizablePanel minSize={55}>
           <ResizablePanelGroup direction="vertical">
-            <ResizablePanel
-              defaultSize={10}
-              className="border border-purple-500"
-            >
-              <div className="flex h-full w-full items-center justify-center">
-                <div className="h-full w-1/4 bg-gray-700"></div>
-                <div className="h-full w-3/4 bg-gray-900"></div>
-              </div>
+            <ResizablePanel defaultSize={10} maxSize={15}>
+              <EditorTop />
+            </ResizablePanel>
+            <ResizableHandle withHandle={true} direction="vertical" />
+            <ResizablePanel defaultSize={80}>
+              <EditorContent />
             </ResizablePanel>
             <ResizableHandle />
-            <ResizablePanel>
-              <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold">Three</span>
-              </div>
+            <ResizablePanel maxSize={15}>
+              <EditorFooter />
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
