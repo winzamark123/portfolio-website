@@ -23,6 +23,7 @@ const config = {
         '1/20': '5%',
       },
       height: {
+        'third-screen': '33.333vh',
         'half-screen': '50vh',
         'screen-4/5': '80vh',
       },
