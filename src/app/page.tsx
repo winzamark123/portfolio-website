@@ -6,10 +6,10 @@ import Tag from './_components/Tag';
 export default function Home() {
   return (
     <main className="min-h-screen max-w-screen-2xl p-1/10 pt-1/20">
-      <div className="flex h-screen-4/5 w-full border border-white">
+      <div className="flex h-screen-4/5 w-full ">
         <Landing />
       </div>
-      <div className="flex h-half-screen w-full border border-purple-400">
+      <div className="flex h-half-screen w-full">
         <Profile />
       </div>
       <div className="flex h-36 w-full">
