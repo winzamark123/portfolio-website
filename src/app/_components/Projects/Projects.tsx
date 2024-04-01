@@ -2,7 +2,7 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import HackDavisProject from './_components/HackDavisProject';
 
 import HackDavisLogo from '@public/projects/HackDavis/HackDavis_White_Logo.svg';
-import HackDavisContentImage from '@public/projects/HackDavis/hackdavis_homepage.png';
+import HackDavisContentImage from '@public/projects/HackDavis/HackDavis_homepage.png';
 
 export type ProjectItem = {
   title: string;
