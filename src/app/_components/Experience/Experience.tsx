@@ -3,7 +3,7 @@ import React from 'react';
 import Rhombus_logo from '@public/experiences/Rhombus.svg';
 import Rhombus_bg from '@public/experiences/Rhombus_back_logo.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
-import HackDavis_bg from '@public/experiences/hackdavis_back_logo.svg';
+import HackDavis_bg from '@public/experiences/Hackdavis_back_logo.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
 import Kebloom_bg from '@public/experiences/Kebloom_back_logo.svg';
 import TASA from '@public/experiences/TASA.svg';
