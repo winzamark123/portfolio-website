@@ -4,9 +4,27 @@ import { motion } from 'framer-motion';
 
 import type { ProjectItem } from '../Projects';
 
+const textMotion = {
+  rest: {
+    color: 'grey',
+    y: 0,
+    opacity: 0,
+  },
+  hover: {
+    color: 'blue',
+    y: -100,
+    opacity: 1,
+  },
+};
+
 export default function HackDavisProject(project: ProjectItem) {
   return (
-    <main className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 lg:col-span-6">
+    <motion.main
+      className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 lg:col-span-6"
+      initial="rest"
+      animate="rest"
+      whileHover="hover"
+    >
       <div className="grid sm:grid-cols-2">
         <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
           <div className="relative flex aspect-square size-12 rounded-full before:absolute before:-inset-2 before:rounded-full">
@@ -20,13 +38,7 @@ export default function HackDavisProject(project: ProjectItem) {
               />
             )}
           </div>
-          <motion.div
-            className="space-y-2"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            whileHover={{ y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-          >
+          <motion.div className="space-y-2" variants={textMotion}>
             <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
               {project.title}
             </h2>
@@ -83,6 +95,6 @@ export default function HackDavisProject(project: ProjectItem) {
           </svg>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }
