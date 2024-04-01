@@ -61,4 +61,8 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
+  h1{
+    @apply text-5xl font-extrabold;
+  }
+
 }
