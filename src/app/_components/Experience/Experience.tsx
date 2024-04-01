@@ -1,15 +1,17 @@
+'use client';
 import React from 'react';
 import Rhombus_logo from '@public/experiences/Rhombus.svg';
-import Rhombus_bg from '@public/experiences/Rhombus_back_logo.png';
+import Rhombus_bg from '@public/experiences/Rhombus_back_logo.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
-import HackDavis_bg from '@public/experiences/HackDavis_bg.png';
+import HackDavis_bg from '@public/experiences/hackdavis_back_logo.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
-import Kebloom_bg from '@public/experiences/Kebloom_back_logo.png';
+import Kebloom_bg from '@public/experiences/Kebloom_back_logo.svg';
 import TASA from '@public/experiences/TASA.svg';
-import TASA_bg from '@public/experiences/TASA_back_logo.png';
+import TASA_bg from '@public/experiences/TASA_back_logo.svg';
 import GDSC from '@public/experiences/GDSC.svg';
-import GDSC_bg from '@public/experiences/GDSC_back_logo.png';
+import GDSC_bg from '@public/experiences/Google_back_logo.svg';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type { StaticImageData } from 'next/image';
 
@@ -77,6 +79,17 @@ const ExperienceProps: ExperienceProp[] = [
   },
 ];
 
+const cardMotion = {
+  rest: {
+    backgroundSize: '0% 0%', // Hide the background image
+    backgroundPosition: '200% bottom', // Center the background image
+  },
+  hover: {
+    backgroundSize: '75% 75%', // Show the background image fully
+    backgroundPosition: '200% bottom', // Center the background image
+  },
+};
+
 export default function Experience() {
   return (
     <main className="flex w-full flex-col ">
@@ -89,31 +102,34 @@ export default function Experience() {
         {ExperienceProps.map((experience, index) => (
           <Card
             key={experience.company}
-            style={
-              {
-                '--image-url': `url(${experience.bg.src})`,
-              } as React.CSSProperties
-            }
-            className={`w-96 ${index % 2 === 1 ? 'ml-auto' : 'mr-auto'} bg-cover bg-no-repeat hover:bg-[image:var(--image-url)]`}
+            className={`w-96 ${index % 2 === 1 ? 'ml-auto' : 'mr-auto'}`}
           >
-            <CardHeader>
-              <div className="flex justify-between">
-                <CardTitle>{experience.company}</CardTitle>
-                <Image
-                  src={experience.icon}
-                  alt={experience.company}
-                  width={50}
-                  height={50}
-                />
-              </div>
-              <CardDescription>{experience.position}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>{experience.description}</p>
-            </CardContent>
-            <CardFooter>
-              <p>{experience.date}</p>
-            </CardFooter>
+            <motion.div
+              className="w-full rounded-lg bg-no-repeat"
+              initial="rest"
+              whileHover="hover"
+              variants={cardMotion}
+              style={{ backgroundImage: `url(${experience.bg.src})` }}
+            >
+              <CardHeader>
+                <div className="flex justify-between">
+                  <CardTitle>{experience.company}</CardTitle>
+                  <Image
+                    src={experience.icon}
+                    alt={experience.company}
+                    width={50}
+                    height={50}
+                  />
+                </div>
+                <CardDescription>{experience.position}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>{experience.description}</p>
+              </CardContent>
+              <CardFooter>
+                <p>{experience.date}</p>
+              </CardFooter>
+            </motion.div>
           </Card>
         ))}
       </div>
