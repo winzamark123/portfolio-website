@@ -6,8 +6,8 @@ import HackDavis_logo from '@public/experiences/HackDavis.svg';
 import HackDavis_bg from '@public/experiences/Hackdavis_back_logo.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
 import Kebloom_bg from '@public/experiences/Kebloom_back_logo.svg';
-import TASA from '@public/experiences/Tasa.svg';
-import TASA_bg from '@public/experiences/Tasa_back_logo.svg';
+import TASA from '@public/experiences/Thai_American_Association.svg';
+import TASA_bg from '@public/experiences/Thai_logo.svg';
 import GDSC from '@public/experiences/GDSC.svg';
 import GDSC_bg from '@public/experiences/Google_back_logo.svg';
 
