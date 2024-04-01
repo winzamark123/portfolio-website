@@ -1,6 +1,8 @@
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import HackDavisProject from './_components/HackDavisProject';
+
 import HackDavisLogo from '@public/projects/HackDavis/HackDavis_White_Logo.svg';
+import HackDavisContentImage from '@public/projects/HackDavis/HackDavis_homepage.png';
 
 export type ProjectItem = {
   title: string;
@@ -10,6 +12,7 @@ export type ProjectItem = {
   github_repo: string;
   logo?: string | StaticImport;
   url?: string;
+  contentImage?: string | StaticImport;
 };
 
 const ProjectList: ProjectItem[] = [
@@ -24,6 +27,7 @@ const ProjectList: ProjectItem[] = [
     github_repo: '',
     url: 'https://hackdavis.io/',
     logo: HackDavisLogo,
+    contentImage: HackDavisContentImage,
   },
   {
     title: 'JUSTSAYIN',

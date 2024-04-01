@@ -27,7 +27,7 @@ export default function Editor() {
               <EditorContent />
             </ResizablePanel>
             <ResizableHandle />
-            <ResizablePanel defaultSize={20} maxSize={15}>
+            <ResizablePanel defaultSize={15} maxSize={15}>
               <EditorFooter />
             </ResizablePanel>
           </ResizablePanelGroup>
