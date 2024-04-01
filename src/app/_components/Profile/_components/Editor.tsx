@@ -11,13 +11,13 @@ import {
 
 export default function Editor() {
   return (
-    <main className="h-full w-full">
+    <main className="h-full w-full text-white">
       <ResizablePanelGroup direction="horizontal" className="rounded-lg ">
         <ResizablePanel defaultSize={25} minSize={20} className="">
           <EditorNav />
         </ResizablePanel>
         <ResizableHandle withHandle={true} direction="horizontal" />
-        <ResizablePanel minSize={55}>
+        <ResizablePanel defaultSize={75} minSize={55}>
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={10} maxSize={15}>
               <EditorTop />
@@ -27,7 +27,7 @@ export default function Editor() {
               <EditorContent />
             </ResizablePanel>
             <ResizableHandle />
-            <ResizablePanel maxSize={15}>
+            <ResizablePanel defaultSize={20} maxSize={15}>
               <EditorFooter />
             </ResizablePanel>
           </ResizablePanelGroup>
