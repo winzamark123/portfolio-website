@@ -12,8 +12,8 @@ import GDSC from '@public/experiences/GDSC.svg';
 import GDSC_bg from '@public/experiences/Google_back_logo.svg';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import type { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 import {
   Card,
