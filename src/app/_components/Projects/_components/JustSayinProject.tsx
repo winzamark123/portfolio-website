@@ -7,16 +7,16 @@ import ProjectDisplay from './_utils/ProjectDisplay';
 
 import type { ProjectItem } from '../Projects';
 
-export default function HackDavisProject(project: ProjectItem) {
+export default function JustSayinProject(project: ProjectItem) {
   return (
     <motion.main
-      className="relative col-span-full overflow-hidden rounded-xl bg-gray-600 pl-5 text-white transition-colors duration-300 ease-in-out hover:bg-cyan-900 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-cyan-900 lg:col-span-6 "
+      className="relative col-span-full overflow-hidden rounded-xl border border-white pl-5 transition-colors duration-300 ease-in-out hover:bg-rose-900 lg:col-span-6"
       initial="rest"
       animate="rest"
       whileHover="hover"
     >
       <div className="grid sm:grid-cols-2">
-        <div className="absolute top-5 flex aspect-square size-12">
+        <div className="absolute right-5 top-5 flex aspect-square size-12">
           <ProjectLogo {...project} />
         </div>
         <ProjectContent {...project} />
