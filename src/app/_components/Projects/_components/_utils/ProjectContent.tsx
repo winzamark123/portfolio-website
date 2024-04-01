@@ -42,7 +42,7 @@ const titleMotion = {
 
 export default function HackDavisProject(project: ProjectItem) {
   return (
-    <main className="relative z-10 flex flex-col justify-end">
+    <main className="relative z-10 flex flex-col justify-end px-5">
       <motion.div
         className="absolute top-1/4 flex flex-col items-center dark:text-white"
         variants={titleMotion}
@@ -54,7 +54,7 @@ export default function HackDavisProject(project: ProjectItem) {
         <span className="flex gap-2 text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
           {project.descriptionTitle}
         </span>
-        <p className="text-gray-700 dark:text-gray-300">
+        <p className="pb-5 text-gray-700 dark:text-gray-300">
           {project.description}
         </p>
       </motion.div>

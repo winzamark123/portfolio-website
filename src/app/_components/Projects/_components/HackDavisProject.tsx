@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import ProjectContent from './_utils/ProjectContent';
 import ProjectLogo from './_utils/ProjectLogo';
-import Image from 'next/image';
+import ProjectDisplay from './_utils/ProjectDisplay';
 
 import type { ProjectItem } from '../Projects';
 
@@ -18,23 +18,7 @@ export default function HackDavisProject(project: ProjectItem) {
       <div className="grid sm:grid-cols-2">
         <ProjectLogo {...project} />
         <ProjectContent {...project} />
-        <div className="relative h-fit overflow-hidden rounded-tl-lg border dark:border-white/10 dark:bg-white/5 sm:ml-6 sm:mt-auto">
-          <div className="absolute left-3 top-2 flex gap-1">
-            <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
-            <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
-            <span className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"></span>
-          </div>
-          <div className="h-half-screen">
-            {project.contentImage && (
-              <Image
-                src={project.contentImage}
-                alt={project.title}
-                layout="fill"
-                objectFit="contain"
-              />
-            )}
-          </div>
-        </div>
+        <ProjectDisplay {...project} />
       </div>
     </motion.main>
   );
