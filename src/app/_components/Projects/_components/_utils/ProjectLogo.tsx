@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { ProjectItem } from '../Projects';
+import type { ProjectItem } from '../../Projects';
 
 export default function ProjectLogo(project: ProjectItem) {
   return (

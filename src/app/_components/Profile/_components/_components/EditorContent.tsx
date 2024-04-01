@@ -66,7 +66,7 @@ function contentDisplay(title: string, contentType: contentItem[]) {
   return (
     <div className="flex flex-col gap-1">
       <span>{title}</span>
-      <div className="flex gap-5 ">
+      <div className="flex items-center justify-center gap-5">
         {contentType.map((item, index) => (
           <div key={index} className="group hover:text-emerald-600">
             <svg
