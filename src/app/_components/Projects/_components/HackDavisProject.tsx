@@ -1,4 +1,6 @@
+'use client';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 import type { ProjectItem } from '../Projects';
 
@@ -18,14 +20,20 @@ export default function HackDavisProject(project: ProjectItem) {
               />
             )}
           </div>
-          <div className="space-y-2">
+          <motion.div
+            className="space-y-2"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            whileHover={{ y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+          >
             <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
               {project.title}
             </h2>
             <p className="text-gray-700 dark:text-gray-300">
               {project.description}
             </p>
-          </div>
+          </motion.div>
         </div>
         <div className="relative -mb-[34px] -mr-[34px] mt-6 h-fit overflow-hidden rounded-tl-lg border p-6 py-6 dark:border-white/10 dark:bg-white/5 sm:ml-6 sm:mt-auto">
           <div className="absolute left-3 top-2 flex gap-1">

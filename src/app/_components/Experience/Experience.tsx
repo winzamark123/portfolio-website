@@ -1,14 +1,14 @@
 import React from 'react';
-import Rhombus_logo from '@public/logos/Rhombus.svg';
-import Rhombus_bg from '@public/logos/Rhombus_back_logo.png';
-import HackDavis_logo from '@public/logos/HackDavis.svg';
-import HackDavis_bg from '@public/logos/HackDavis_bg.png';
-import Kebloom from '@public/logos/Kebloom.svg';
-import Kebloom_bg from '@public/logos/Kebloom_back_logo.png';
-import TASA from '@public/logos/TASA.svg';
-import TASA_bg from '@public/logos/TASA_back_logo.png';
-import GDSC from '@public/logos/GDSC.svg';
-import GDSC_bg from '@public/logos/GDSC_back_logo.png';
+import Rhombus_logo from '@public/experiences/Rhombus.svg';
+import Rhombus_bg from '@public/experiences/Rhombus_back_logo.png';
+import HackDavis_logo from '@public/experiences/HackDavis.svg';
+import HackDavis_bg from '@public/experiences/HackDavis_bg.png';
+import Kebloom from '@public/experiences/Kebloom.svg';
+import Kebloom_bg from '@public/experiences/Kebloom_back_logo.png';
+import TASA from '@public/experiences/TASA.svg';
+import TASA_bg from '@public/experiences/TASA_back_logo.png';
+import GDSC from '@public/experiences/GDSC.svg';
+import GDSC_bg from '@public/experiences/GDSC_back_logo.png';
 
 import Image from 'next/image';
 import type { StaticImageData } from 'next/image';
