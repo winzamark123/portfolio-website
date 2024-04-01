@@ -1,50 +1,76 @@
 'use client';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Cow from '@public/projects/HackDavis/cow.svg';
+import Duck from '@public/projects/HackDavis/duck.svg';
+import Frog from '@public/projects/HackDavis/frog.svg';
+import Rabbit from '@public/projects/HackDavis/rabbit.svg';
+import ProjectLogo from './ProjectLogo';
 
 import type { ProjectItem } from '../Projects';
 
 const textMotion = {
   rest: {
-    color: 'grey',
-    y: 0,
+    y: 100,
     opacity: 0,
   },
   hover: {
-    color: 'blue',
-    y: -100,
+    y: 0,
     opacity: 1,
+  },
+};
+
+const animalMotion = {
+  rest: {
+    y: 30,
+  },
+  hover: {
+    y: 0,
+  },
+};
+
+const titleMotion = {
+  rest: {
+    y: 50,
+    opacity: 1,
+  },
+  hover: {
+    y: 0,
+    opacity: 0,
   },
 };
 
 export default function HackDavisProject(project: ProjectItem) {
   return (
     <motion.main
-      className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 lg:col-span-6"
+      className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white px-5 dark:border-gray-800 dark:bg-gray-900 lg:col-span-6"
       initial="rest"
       animate="rest"
       whileHover="hover"
     >
       <div className="grid sm:grid-cols-2">
-        <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
-          <div className="relative flex aspect-square size-12 rounded-full before:absolute before:-inset-2 before:rounded-full">
-            {project.logo && (
-              <Image
-                src={project.logo}
-                alt={project.title}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-full"
-              />
-            )}
-          </div>
-          <motion.div className="space-y-2" variants={textMotion}>
-            <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
-              {project.title}
-            </h2>
+        <div className="relative z-10 flex flex-col justify-end">
+          <ProjectLogo {...project} />
+          <motion.div
+            className="absolute top-1/4 flex flex-col items-center dark:text-white"
+            variants={titleMotion}
+          >
+            <h1>{project.title}</h1>
+            <span>{project.type}</span>
+          </motion.div>
+          <motion.div className="" variants={textMotion}>
+            <span className="flex gap-2 text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
+              {project.descriptionTitle}
+            </span>
             <p className="text-gray-700 dark:text-gray-300">
               {project.description}
             </p>
+          </motion.div>
+          <motion.div className="flex items-end" variants={animalMotion}>
+            <Image src={Rabbit} alt="Rabbit" className="" />
+            <Image src={Duck} alt="Duck" className="" />
+            <Image src={Cow} alt="Cow" className="" />
+            <Image src={Frog} alt="Frog" className="" />
           </motion.div>
         </div>
         <div className="relative -mb-[34px] -mr-[34px] mt-6 h-fit overflow-hidden rounded-tl-lg border p-6 py-6 dark:border-white/10 dark:bg-white/5 sm:ml-6 sm:mt-auto">
