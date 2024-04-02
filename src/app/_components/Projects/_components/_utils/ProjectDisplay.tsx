@@ -31,7 +31,7 @@ const windowMotion = {
 export default function ProjectDisplay(project: ProjectItem) {
   return (
     <motion.main
-      className="relative h-fit overflow-hidden rounded-tl-lg border dark:border-white/10 dark:bg-white/5"
+      className="relative h-fit overflow-hidden rounded-tl-lg"
       variants={windowMotion}
     >
       <div className="absolute z-10 flex h-6 w-full gap-1 rounded-tl-lg">
