@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import type { ProjectItem } from '../../Projects';
 
-const displayMotion = {
+const HackDavisDisplayMotion = {
   rest: {
     x: 40,
     y: 50,
@@ -17,7 +17,7 @@ const displayMotion = {
   },
 };
 
-const windowMotion = {
+const HackDavisWindowMotion = {
   rest: {
     y: 100,
     transition: { duration: 1, delay: 0.5 },
@@ -27,21 +27,65 @@ const windowMotion = {
     x: -20,
   },
 };
+const JustSayinDisplayMotion = {
+  rest: {
+    x: 40,
+    y: 100,
+    scale: 1.5,
+    transition: { duration: 1, delay: 0.5 },
+  },
+  hover: {
+    x: 0,
+    y: 0,
+    scale: 1,
+  },
+};
 
-export default function ProjectDisplay(project: ProjectItem) {
+const JustSayinWindowMotion = {
+  rest: {
+    y: 100,
+    transition: { duration: 1, delay: 0.5 },
+  },
+  hover: {
+    y: 20,
+  },
+};
+
+export function HackDavisProjectDisplay(project: ProjectItem) {
   return (
     <motion.main
       className="relative h-fit overflow-hidden rounded-tl-lg"
-      variants={windowMotion}
+      variants={HackDavisWindowMotion}
     >
-      <div className="absolute z-10 flex h-6 w-full gap-1 rounded-tl-lg">
-        <div className="flex gap-2 p-2">
+      <div className="absolute z-10 flex h-6 w-full gap-1 rounded-2xl">
+        <div className="flex w-full gap-2 rounded-2xl p-2 ">
           <span className="block size-2 rounded-full border bg-red-400 dark:border-white/10"></span>
           <span className="block size-2 rounded-full border bg-yellow-400 dark:border-white/10"></span>
           <span className="block size-2 rounded-full border bg-green-400 dark:border-white/10"></span>
         </div>
       </div>
-      <motion.div className="z-0 flex h-half-screen" variants={displayMotion}>
+      <motion.div
+        className="z-0 flex h-half-screen"
+        variants={HackDavisDisplayMotion}
+      >
+        {project && project.contentImage && (
+          <Image
+            src={project.contentImage}
+            alt={project.title}
+            className="z-0"
+          />
+        )}
+      </motion.div>
+    </motion.main>
+  );
+}
+export function JustSayinProjectDisplay(project: ProjectItem) {
+  return (
+    <motion.main
+      className="relative h-fit overflow-hidden rounded-tl-lg border dark:border-white"
+      variants={JustSayinWindowMotion}
+    >
+      <motion.div className="z-0 flex" variants={JustSayinDisplayMotion}>
         {project && project.contentImage && (
           <Image
             src={project.contentImage}
