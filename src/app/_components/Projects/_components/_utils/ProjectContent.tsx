@@ -62,6 +62,30 @@ const JustSayinTitle = {
   },
 };
 
+const SmallProjectText = {
+  rest: {
+    x: 100,
+    opacity: 0,
+    transition: { duration: 1, delay: 0.5 },
+  },
+  hover: {
+    x: 0,
+    opacity: 1,
+  },
+};
+
+const SmallProjectTitle = {
+  rest: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 1, delay: 0.5 },
+  },
+  hover: {
+    x: -50,
+    opacity: 0,
+  },
+};
+
 export function HackDavisProjectContent(project: ProjectItem) {
   return (
     <main className="relative z-10 flex flex-col justify-end px-5 text-white">
@@ -98,6 +122,45 @@ export function JustSayinProjectContent(project: ProjectItem) {
         <span>{project.type}</span>
       </motion.div>
       <motion.div className="" variants={JustSayinText}>
+        <span className="flex gap-2 text-lg font-medium transition ">
+          {project.descriptionTitle}
+        </span>
+        <p className="p-5 pl-0">{project.description}</p>
+      </motion.div>
+    </main>
+  );
+}
+export function SmallProjectContent(project: ProjectItem) {
+  return (
+    <main className="relative z-10 flex flex-col items-center justify-end text-white">
+      <motion.div
+        className="flex flex-col items-center dark:text-white"
+        variants={SmallProjectTitle}
+      >
+        <h1>{project.title}</h1>
+        <span>{project.type}</span>
+      </motion.div>
+      <motion.div className="absolute top-1/4" variants={SmallProjectText}>
+        <span className="flex gap-2 text-lg font-medium transition ">
+          {project.descriptionTitle}
+        </span>
+        <p className="p-5 pl-0">{project.description}</p>
+      </motion.div>
+    </main>
+  );
+}
+
+export function LStoreProjectContent(project: ProjectItem) {
+  return (
+    <main className="relative z-10 flex flex-col items-center justify-end text-white">
+      <motion.div
+        className="flex flex-col items-center dark:text-white"
+        variants={SmallProjectTitle}
+      >
+        <h1>{project.title}</h1>
+        <span>{project.type}</span>
+      </motion.div>
+      <motion.div className="absolute top-1/4" variants={SmallProjectText}>
         <span className="flex gap-2 text-lg font-medium transition ">
           {project.descriptionTitle}
         </span>
