@@ -2,9 +2,9 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { HackDavisProjectContent } from './_utils/ProjectContent';
+import { DavisPNGProjectContent } from './_utils/ProjectContent';
 import ProjectLogo from './_utils/ProjectLogo';
-import { HackDavisProjectDisplay } from './_utils/ProjectDisplay';
+import { DavisPNGProjectDisplay } from './_utils/ProjectDisplay';
 
 import type { ProjectItem } from '../Projects';
 
@@ -16,8 +16,8 @@ export default function HackDavisProject(project: ProjectItem) {
           <div className="absolute top-5 flex aspect-square size-12">
             <ProjectLogo {...project} />
           </div>
-          <HackDavisProjectContent {...project} />
-          <HackDavisProjectDisplay {...project} />
+          <DavisPNGProjectContent {...project} />
+          <DavisPNGProjectDisplay {...project} />
         </div>
       </Link>
     </motion.main>

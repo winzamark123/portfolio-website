@@ -96,3 +96,21 @@ export function JustSayinProjectDisplay(project: ProjectItem) {
     </motion.main>
   );
 }
+export function DavisPNGProjectDisplay(project: ProjectItem) {
+  return (
+    <motion.main
+      className="relative overflow-hidden rounded-tl-lg"
+      variants={JustSayinWindowMotion}
+    >
+      <motion.div className="z-0 flex" variants={JustSayinDisplayMotion}>
+        {project && project.contentImage && (
+          <Image
+            src={project.contentImage}
+            alt={project.title}
+            className="z-0"
+          />
+        )}
+      </motion.div>
+    </motion.main>
+  );
+}

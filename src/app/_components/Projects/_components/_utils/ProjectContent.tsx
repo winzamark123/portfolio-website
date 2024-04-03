@@ -106,3 +106,22 @@ export function JustSayinProjectContent(project: ProjectItem) {
     </main>
   );
 }
+export function DavisPNGProjectContent(project: ProjectItem) {
+  return (
+    <main className="relative z-10 flex flex-col justify-end text-white ">
+      <motion.div
+        className="absolute top-1/4 flex flex-col items-center dark:text-white"
+        variants={JustSayinTitle}
+      >
+        <h1>{project.title}</h1>
+        <span>{project.type}</span>
+      </motion.div>
+      <motion.div className="" variants={JustSayinText}>
+        <span className="flex gap-2 text-lg font-medium transition ">
+          {project.descriptionTitle}
+        </span>
+        <p className="p-5 pl-0">{project.description}</p>
+      </motion.div>
+    </main>
+  );
+}
