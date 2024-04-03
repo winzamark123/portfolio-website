@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+
 import Rhombus_logo from '@public/experiences/Rhombus.svg';
 import Rhombus_bg from '@public/experiences/Rhombus_back_logo.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
@@ -79,7 +80,7 @@ const ExperienceProps: ExperienceProp[] = [
   },
 ];
 
-const cardMotion = {
+const cardBGMotion = {
   rest: {
     backgroundSize: '0% 0%', // Hide the background image
     backgroundPosition: '200% bottom', // Center the background image
@@ -100,37 +101,46 @@ export default function Experience() {
       </div>
       <div className="flex w-full flex-col p-10">
         {ExperienceProps.map((experience, index) => (
-          <Card
+          <motion.div
             key={experience.company}
             className={`w-96 ${index % 2 === 1 ? 'ml-auto' : 'mr-auto'}`}
+            drag
+            dragConstraints={{
+              top: -50,
+              left: -50,
+              right: 50,
+              bottom: 50,
+            }}
           >
-            <motion.div
-              className="w-full rounded-lg bg-no-repeat"
-              initial="rest"
-              whileHover="hover"
-              variants={cardMotion}
-              style={{ backgroundImage: `url(${experience.bg.src})` }}
-            >
-              <CardHeader>
-                <div className="flex justify-between">
-                  <CardTitle>{experience.company}</CardTitle>
-                  <Image
-                    src={experience.icon}
-                    alt={experience.company}
-                    width={50}
-                    height={50}
-                  />
-                </div>
-                <CardDescription>{experience.position}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{experience.description}</p>
-              </CardContent>
-              <CardFooter>
-                <p>{experience.date}</p>
-              </CardFooter>
-            </motion.div>
-          </Card>
+            <Card>
+              <motion.div
+                className="w-full rounded-lg bg-no-repeat"
+                initial="rest"
+                whileHover="hover"
+                variants={cardBGMotion}
+                style={{ backgroundImage: `url(${experience.bg.src})` }}
+              >
+                <CardHeader>
+                  <div className="flex justify-between">
+                    <CardTitle>{experience.company}</CardTitle>
+                    <Image
+                      src={experience.icon}
+                      alt={experience.company}
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                  <CardDescription>{experience.position}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>{experience.description}</p>
+                </CardContent>
+                <CardFooter>
+                  <p>{experience.date}</p>
+                </CardFooter>
+              </motion.div>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </main>
