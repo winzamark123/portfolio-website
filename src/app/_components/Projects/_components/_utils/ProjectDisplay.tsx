@@ -29,25 +29,24 @@ const HackDavisWindowMotion = {
 };
 const JustSayinDisplayMotion = {
   rest: {
-    x: 40,
-    y: 100,
-    scale: 1.5,
     transition: { duration: 1, delay: 0.5 },
   },
   hover: {
-    x: 0,
     y: 0,
-    scale: 1,
   },
 };
 
 const JustSayinWindowMotion = {
   rest: {
-    y: 100,
+    y: 50,
+    x: 100,
+    rotate: -30,
     transition: { duration: 1, delay: 0.5 },
   },
   hover: {
-    y: 20,
+    y: 50,
+    x: 0,
+    rotate: 0,
   },
 };
 
@@ -82,7 +81,7 @@ export function HackDavisProjectDisplay(project: ProjectItem) {
 export function JustSayinProjectDisplay(project: ProjectItem) {
   return (
     <motion.main
-      className="relative h-fit overflow-hidden rounded-tl-lg border dark:border-white"
+      className="relative overflow-hidden rounded-tl-lg"
       variants={JustSayinWindowMotion}
     >
       <motion.div className="z-0 flex" variants={JustSayinDisplayMotion}>

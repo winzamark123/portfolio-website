@@ -162,8 +162,8 @@ export default function Projects() {
                 </div>
               </div>
               <div
-                className="bg-whitehover:bg-rose-500 relative col-span-full overflow-hidden 
-                rounded-xl border border-gray-200 pt-20 dark:border-gray-800
+                className="relative col-span-full overflow-hidden rounded-xl border 
+                border-gray-200 bg-white  hover:bg-rose-500 dark:border-gray-800
                 dark:bg-gray-900 dark:hover:bg-rose-500 lg:col-span-2 lg:row-span-2"
               >
                 <JustSayinProject {...ProjectList[1]} />
