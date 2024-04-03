@@ -67,13 +67,12 @@ export function JustSayinProjectDisplay(project: ProjectItem) {
   };
   const JustSayinWindowMotion = {
     rest: {
-      y: 50,
+      y: 20,
       x: 100,
       rotate: -30,
       transition: { duration: 1, delay: 0.5 },
     },
     hover: {
-      y: 60,
       x: 0,
       rotate: 0,
     },
@@ -83,7 +82,10 @@ export function JustSayinProjectDisplay(project: ProjectItem) {
       className="relative overflow-hidden rounded-tl-lg"
       variants={JustSayinWindowMotion}
     >
-      <motion.div className="z-0 flex" variants={JustSayinDisplayMotion}>
+      <motion.div
+        className="z-0 flex items-center justify-center "
+        variants={JustSayinDisplayMotion}
+      >
         {project && project.contentImage && (
           <Image src={project.contentImage} alt={project.title} />
         )}
