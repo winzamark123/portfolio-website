@@ -27,6 +27,7 @@ const HackDavisWindowMotion = {
     x: -20,
   },
 };
+
 const JustSayinDisplayMotion = {
   rest: {
     transition: { duration: 1, delay: 0.5 },
@@ -35,7 +36,6 @@ const JustSayinDisplayMotion = {
     y: 0,
   },
 };
-
 const JustSayinWindowMotion = {
   rest: {
     y: 50,
@@ -44,9 +44,30 @@ const JustSayinWindowMotion = {
     transition: { duration: 1, delay: 0.5 },
   },
   hover: {
-    y: 50,
+    y: 60,
     x: 0,
     rotate: 0,
+  },
+};
+
+const SmallWindowMotion = {
+  rest: {
+    transition: { duration: 1, delay: 0.5 },
+  },
+  hover: {
+    y: 0,
+  },
+};
+const SmallDisplayMotion = {
+  rest: {
+    transition: { duration: 1, delay: 0.5 },
+    scale: 1,
+    opacity: 1,
+    y: 0,
+  },
+  hover: {
+    y: 50,
+    opacity: 0,
   },
 };
 
@@ -86,29 +107,21 @@ export function JustSayinProjectDisplay(project: ProjectItem) {
     >
       <motion.div className="z-0 flex" variants={JustSayinDisplayMotion}>
         {project && project.contentImage && (
-          <Image
-            src={project.contentImage}
-            alt={project.title}
-            className="z-0"
-          />
+          <Image src={project.contentImage} alt={project.title} />
         )}
       </motion.div>
     </motion.main>
   );
 }
-export function DavisPNGProjectDisplay(project: ProjectItem) {
+export function SmallProjectDisplay(project: ProjectItem) {
   return (
     <motion.main
-      className="relative overflow-hidden rounded-tl-lg"
-      variants={JustSayinWindowMotion}
+      className="relative overflow-hidden rounded-tl-lg "
+      variants={SmallWindowMotion}
     >
-      <motion.div className="z-0 flex" variants={JustSayinDisplayMotion}>
+      <motion.div className="z-0 flex" variants={SmallDisplayMotion}>
         {project && project.contentImage && (
-          <Image
-            src={project.contentImage}
-            alt={project.title}
-            className="z-0"
-          />
+          <Image src={project.contentImage} alt={project.title} />
         )}
       </motion.div>
     </motion.main>

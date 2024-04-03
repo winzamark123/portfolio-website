@@ -2,22 +2,24 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { DavisPNGProjectContent } from './_utils/ProjectContent';
+import { SmallProjectContent } from './_utils/ProjectContent';
 import ProjectLogo from './_utils/ProjectLogo';
-import { DavisPNGProjectDisplay } from './_utils/ProjectDisplay';
+import { SmallProjectDisplay } from './_utils/ProjectDisplay';
 
 import type { ProjectItem } from '../Projects';
 
-export default function HackDavisProject(project: ProjectItem) {
+export default function DavisPNGProject(project: ProjectItem) {
   return (
     <motion.main initial="rest" animate="rest" whileHover="hover">
-      <Link href="https://davispng.com/">
-        <div className="grid sm:grid-cols-2">
+      <Link href={project.url}>
+        <div className="flex flex-col gap-3 p-5 pt-20">
           <div className="absolute top-5 flex aspect-square size-12">
             <ProjectLogo {...project} />
           </div>
-          <DavisPNGProjectContent {...project} />
-          <DavisPNGProjectDisplay {...project} />
+          <SmallProjectContent {...project} />
+          <div className="">
+            <SmallProjectDisplay {...project} />
+          </div>
         </div>
       </Link>
     </motion.main>
