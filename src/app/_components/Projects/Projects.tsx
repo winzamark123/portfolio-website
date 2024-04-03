@@ -8,6 +8,11 @@ import JustSayinContentImage from '@public/projects/JustSayin/JustSayin_Phone.sv
 import HackDavisLogo from '@public/projects/HackDavis/HackDavis_White_Logo.svg';
 import HackDavisContentImage from '@public/projects/HackDavis/HackDavis_homepage.png';
 
+import DavisPNGLogo from '@public/projects/DavisPNG/DavisPNG_Logo.svg';
+import DavisPNGContentImage from '@public/projects/DavisPNG/DavisPNG_Landing.svg';
+
+import ImageGPTContentImage from '@public/projects/ImageGPT/ImageGPT_Landing.svg';
+
 export type ProjectItem = {
   title: string;
   type: string;
@@ -62,6 +67,18 @@ const ProjectList: ProjectItem[] = [
     with clients. Focused on providing a platform for students. ',
     github_repo: 'https://github.com/winzamark123/DavisPNG_Frontend',
     url: 'https://davispng.com/',
+    logo: DavisPNGLogo,
+    contentImage: DavisPNGContentImage,
+  },
+  {
+    title: 'IMAGEGPT',
+    type: 'AI CHATBOT',
+    descriptionTitle: 'ImageGPT AI Chatbot',
+    description:
+      'An AI Chatbot web application that uses Python Tesseract OCR and OpenAI API. \
+    Providing users with the ability to upload images and receive text-based responses before GPT4 Multi-Modal',
+    github_repo: 'https://github.com/hdjekso/imageGPT',
+    contentImage: ImageGPTContentImage,
   },
 ];
 
