@@ -113,7 +113,10 @@ export default function Projects() {
                 <HackDavisProject {...ProjectList[0]} />
               </div>
 
-              <div className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 lg:col-span-4">
+              <div
+                className="relative col-span-full overflow-hidden rounded-xl 
+              border border-gray-200 bg-white hover:bg-slate-700 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-slate-700 lg:col-span-4"
+              >
                 <LStoreProject {...ProjectList[2]} />
               </div>
               <div
