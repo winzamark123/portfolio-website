@@ -22,6 +22,7 @@
     "react-dom": "^18",
     "react-resizable-panels": "^2.0.16",
     "sass": "^1.72.0",
+    "sharp": "^0.33.3",
     "simple-icons": "^11.10.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7"

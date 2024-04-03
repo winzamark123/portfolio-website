@@ -73,7 +73,16 @@ export default function Projects() {
         <div className="mx-auto max-w-6xl px-6 text-gray-500">
           <div className="relative">
             <div className="relative z-10 grid grid-cols-6 gap-3">
-              <HackDavisProject {...ProjectList[0]} />
+              <div
+                className="relative col-span-full overflow-hidden rounded-xl
+              bg-gray-600 pl-5 text-white transition-colors duration-300
+              ease-in-out hover:cursor-pointer hover:bg-cyan-900
+              dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-cyan-900
+              lg:col-span-6"
+              >
+                <HackDavisProject {...ProjectList[0]} />
+              </div>
+
               <div className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 lg:col-span-4">
                 <div className="grid sm:grid-cols-2">
                   <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
@@ -152,7 +161,11 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-              <div className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 sm:col-span-3 lg:col-span-2 lg:row-span-2">
+              <div
+                className="relative col-span-full overflow-hidden rounded-xl border 
+                border-gray-200 bg-white  hover:bg-rose-500 dark:border-gray-800
+                dark:bg-gray-900 dark:hover:bg-rose-500 lg:col-span-2 lg:row-span-2"
+              >
                 <JustSayinProject {...ProjectList[1]} />
               </div>
               <div className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900 sm:col-span-3 lg:col-span-2">
