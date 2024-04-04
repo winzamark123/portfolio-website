@@ -1,4 +1,6 @@
+'use client';
 import { ArrowBigDownDash } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Landing() {
   return (
@@ -12,10 +14,22 @@ export default function Landing() {
           {'</'}Full-Stack Developer, CS Grad 2025{'>'}
         </p>
         <h1 className="mt-32 flex justify-end text-7xl">WIN CHENG</h1>
-        <div className="flex w-full flex-col items-center justify-center">
+        <motion.div
+          className="flex w-full flex-col items-center justify-center"
+          animate={{
+            y: [0, -10, 0],
+          }}
+          transition={{
+            y: {
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: 'easeInOut',
+            },
+          }}
+        >
           <ArrowBigDownDash size={50} className="m-auto" />
           <p>SCROLL</p>
-        </div>
+        </motion.div>
       </div>
     </main>
   );
