@@ -1,4 +1,6 @@
 import Nav from './_components/Nav/Nav';
+import Footer from './_components/Footer/Footer';
+
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import './globals.scss';
@@ -31,6 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="flex flex-col items-center justify-center">
               {children}
             </div>
+            <Footer />
           </ThemeProvider>
         </body>
       </html>
