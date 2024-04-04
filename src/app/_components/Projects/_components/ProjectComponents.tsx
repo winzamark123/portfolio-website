@@ -72,7 +72,7 @@ export function LStoreProject(project: ProjectItem) {
   return (
     <motion.main initial="rest" animate="rest" whileHover="hover">
       <Link href={project.url}>
-        <div className="flex flex-col gap-3 p-5 pt-20">
+        <div className="flex flex-col gap-3 p-5 pt-10">
           <div className="absolute top-5 flex aspect-square size-12">
             <ProjectLogo {...project} />
           </div>

@@ -7,7 +7,7 @@ import {
 } from './_components/ProjectComponents';
 
 import JustSayinLogo from '@public/projects/JustSayin/JustSayin_Logo.svg';
-import JustSayinContentImage from '@public/projects/JustSayin/JustSayin_Phone.svg';
+import JustSayinContentImage from '@public/projects/JustSayin/JustSayin_Phone.png';
 
 import HackDavisLogo from '@public/projects/HackDavis/HackDavis_White_Logo.svg';
 import HackDavisContentImage from '@public/projects/HackDavis/HackDavis_homepage.png';

@@ -15,10 +15,10 @@ export default function Home() {
       <div className="flex h-36 w-full">
         <Tag TagProp="</Code,Coffee,Repeat>" numberProp={3} />
       </div>
-      <div className="flex h-fit w-full border border-white">
+      <div className="flex h-fit w-full ">
         <Experience />
       </div>
-      <div className="flex h-fit w-full border border-white">
+      <div className="flex h-fit w-full ">
         <Projects />
       </div>
     </main>
