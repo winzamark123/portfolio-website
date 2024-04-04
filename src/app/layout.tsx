@@ -17,7 +17,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <head>
+          <link rel="icon" href="/ResumeIcon.ico" />
+        </head>
         <body>
           <ThemeProvider
             attribute="class"
