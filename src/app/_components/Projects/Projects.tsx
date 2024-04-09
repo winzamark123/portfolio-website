@@ -115,7 +115,7 @@ export default function Projects() {
 
               <div
                 className="relative col-span-full overflow-hidden rounded-xl 
-              border border-gray-200 bg-white hover:bg-slate-700 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-slate-700 lg:col-span-4"
+              border border-gray-200 bg-gray-600 hover:bg-slate-700 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-slate-700 lg:col-span-4"
               >
                 <LStoreProject {...ProjectList[2]} />
               </div>
