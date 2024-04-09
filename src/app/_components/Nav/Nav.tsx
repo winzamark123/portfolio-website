@@ -42,7 +42,7 @@ const SocialProps: SocialProp[] = [
     icon: (
       <FilePenLine className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
     ),
-    url: '',
+    url: '/Cheng_Teeranade_Resume.pdf',
     description: 'Resume',
   },
 ];
