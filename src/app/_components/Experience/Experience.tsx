@@ -112,7 +112,7 @@ export default function Experience() {
               bottom: 50,
             }}
           >
-            <Card>
+            <Card className="bg-slate-400 hover:bg-slate-700 dark:bg-sky-950 dark:hover:bg-slate-700">
               <motion.div
                 className="w-full rounded-lg bg-no-repeat"
                 initial="rest"

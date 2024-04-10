@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import profile_pic from '@public/profile_pic.png';
+import profile_pic from '@public/profile_pic.jpg';
 import { ArrowLeftSquare } from 'lucide-react';
 
 export default function Myself() {
