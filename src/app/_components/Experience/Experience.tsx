@@ -1,6 +1,4 @@
 'use client';
-import React from 'react';
-
 import Rhombus_logo from '@public/experiences/Rhombus.svg';
 import Rhombus_bg from '@public/experiences/Rhombus_back_logo.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
@@ -93,11 +91,9 @@ const cardBGMotion = {
 
 export default function Experience() {
   return (
-    <main className="flex w-full flex-col ">
-      <div className="flex w-full flex-col items-center">
-        <h2 className="text-5xl text-emerald-600">
-          {'</'}Experience{'>'}
-        </h2>
+    <main className="flex w-full flex-col">
+      <div className="flex w-full flex-col">
+        <h2 className="text-5xl font-semibold ">Experience</h2>
       </div>
       <div className="flex w-full flex-col p-10">
         {ExperienceProps.map((experience, index) => (
