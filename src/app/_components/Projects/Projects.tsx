@@ -15,11 +15,11 @@ import HackDavisContentImage from '@public/projects/HackDavis/HackDavis_homepage
 import DavisPNGLogo from '@public/projects/DavisPNG/DavisPNG_Logo.svg';
 import DavisPNGContentImage from '@public/projects/DavisPNG/DavisPNG_Landing.svg';
 
-// import ImageGPTContentImage from '@public/projects/ImageGPT/ImageGPT_Landing.svg';
 import ImageGPTContentImage from '@public/projects/ImageGPT/ChatPage.jpeg';
 import ImageGPTLogo from '@public/projects/ImageGPT/ImageGPT_Logo.svg';
 
 import LStoreContentImage from '@public/projects/LStore/LStore_Diagram.svg';
+import ProjectCard from './_components/ProjectCard';
 
 export type ProjectItem = {
   title: string;
@@ -102,42 +102,26 @@ export default function Projects() {
       <div className="py-16">
         <div className="mx-auto max-w-6xl px-6 text-gray-500">
           <div className="relative">
-            <div className="relative z-10 grid grid-cols-6 gap-3">
-              <div
-                className="relative col-span-full overflow-hidden rounded-xl
-              bg-gray-600 pl-5 text-white transition-colors duration-300
-              ease-in-out hover:cursor-pointer hover:bg-cyan-900
-              dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-cyan-900
-              lg:col-span-6"
-              >
+            <div className="relative z-10 grid grid-cols-1 gap-3 md:grid-cols-6">
+              <ProjectCard span="6" hoverColor="bg-cyan-900">
                 <HackDavisProject {...ProjectList[0]} />
-              </div>
-
-              <div
-                className="relative col-span-full overflow-hidden rounded-xl 
-              border border-gray-200 bg-gray-600 hover:bg-slate-700 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-slate-700 lg:col-span-4"
-              >
+              </ProjectCard>
+              <ProjectCard span="4" hoverColor="bg-slate-700">
                 <LStoreProject {...ProjectList[2]} />
-              </div>
+              </ProjectCard>
               <div
-                className="relative overflow-hidden rounded-xl border 
-                border-gray-200 bg-gray-800 hover:bg-rose-500 dark:border-gray-800
-                dark:bg-gray-900 dark:hover:bg-rose-500 lg:col-span-2 lg:row-span-2"
+                className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 
+                bg-gray-800 hover:bg-rose-500 dark:border-gray-800 dark:bg-gray-900
+                dark:hover:bg-rose-500 lg:col-span-2 lg:row-span-2"
               >
                 <JustSayinProject {...ProjectList[1]} />
               </div>
-              <div
-                className="relative overflow-hidden rounded-xl border border-gray-200 
-              bg-gray-600 hover:bg-amber-700 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-amber-700 lg:col-span-2"
-              >
+              <ProjectCard span="2" hoverColor="bg-amber-700">
                 <SmallProject {...ProjectList[3]} />
-              </div>
-              <div
-                className="relative overflow-hidden rounded-xl border border-gray-200 
-              bg-gray-600 hover:bg-sky-600 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-sky-600 lg:col-span-2"
-              >
+              </ProjectCard>
+              <ProjectCard span="2" hoverColor="bg-sky-600">
                 <SmallProject {...ProjectList[4]} />
-              </div>
+              </ProjectCard>
             </div>
           </div>
         </div>
