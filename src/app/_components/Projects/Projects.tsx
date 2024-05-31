@@ -19,7 +19,6 @@ import ImageGPTContentImage from '@public/projects/ImageGPT/ChatPage.jpeg';
 import ImageGPTLogo from '@public/projects/ImageGPT/ImageGPT_Logo.svg';
 
 import LStoreContentImage from '@public/projects/LStore/LStore_Diagram.svg';
-import ProjectCard from './_components/ProjectCard';
 
 export type ProjectItem = {
   title: string;
@@ -103,12 +102,25 @@ export default function Projects() {
         <div className="mx-auto max-w-6xl px-6 text-gray-500">
           <div className="relative">
             <div className="relative z-10 grid grid-cols-1 gap-3 md:grid-cols-6">
-              <ProjectCard span="6" hoverColor="bg-cyan-900">
+              <div
+                className={`relative col-span-full overflow-hidden rounded-xl
+              bg-gray-600 pl-5 text-white transition-colors duration-300
+                ease-in-out hover:cursor-pointer hover:bg-cyan-900
+              dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-cyan-900
+                lg:col-span-6`}
+              >
                 <HackDavisProject {...ProjectList[0]} />
-              </ProjectCard>
-              <ProjectCard span="4" hoverColor="bg-slate-700">
+              </div>
+              <div
+                className={`relative col-span-full overflow-hidden rounded-xl
+              bg-gray-600 pl-5 text-white transition-colors duration-300
+                ease-in-out hover:cursor-pointer hover:bg-slate-700
+              dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-slate-700
+                lg:col-span-4`}
+              >
                 <LStoreProject {...ProjectList[2]} />
-              </ProjectCard>
+              </div>
+
               <div
                 className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 
                 bg-gray-800 hover:bg-rose-500 dark:border-gray-800 dark:bg-gray-900
@@ -116,12 +128,20 @@ export default function Projects() {
               >
                 <JustSayinProject {...ProjectList[1]} />
               </div>
-              <ProjectCard span="2" hoverColor="bg-amber-700">
+              <div
+                className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 
+                bg-gray-800 hover:bg-amber-700 dark:border-gray-800 dark:bg-gray-900
+                dark:hover:bg-amber-700 lg:col-span-2"
+              >
                 <SmallProject {...ProjectList[3]} />
-              </ProjectCard>
-              <ProjectCard span="2" hoverColor="bg-sky-600">
+              </div>
+              <div
+                className="relative col-span-full overflow-hidden rounded-xl border border-gray-200 
+                bg-gray-800 hover:bg-sky-600 dark:border-gray-800 dark:bg-gray-900
+                dark:hover:bg-sky-600 lg:col-span-2"
+              >
                 <SmallProject {...ProjectList[4]} />
-              </ProjectCard>
+              </div>
             </div>
           </div>
         </div>
