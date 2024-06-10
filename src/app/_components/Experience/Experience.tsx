@@ -14,6 +14,8 @@ import { motion } from 'framer-motion';
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 
+import { ArrowBigDown } from 'lucide-react';
+
 import {
   Card,
   CardHeader,
@@ -92,52 +94,58 @@ const cardBGMotion = {
 export default function Experience() {
   return (
     <main className="flex w-full flex-col">
-      <div className="flex w-full flex-col">
+      <div className="flex w-full items-center justify-between p-4">
         <h2 className="text-5xl font-semibold ">Experience</h2>
+        <h3 className="flex">
+          {' '}
+          <ArrowBigDown> </ArrowBigDown> Drag me!
+        </h3>
       </div>
-      <div className="flex w-full flex-col p-10">
-        {ExperienceProps.map((experience, index) => (
-          <motion.div
-            key={experience.company}
-            className={`w-96 ${index % 2 === 1 ? 'ml-auto' : 'mr-auto'}`}
-            drag
-            dragConstraints={{
-              top: -50,
-              left: -50,
-              right: 50,
-              bottom: 50,
-            }}
-          >
-            <Card className="bg-slate-400 hover:bg-slate-700 dark:bg-sky-950 dark:hover:bg-slate-700">
-              <motion.div
-                className="w-full rounded-lg bg-no-repeat"
-                initial="rest"
-                whileHover="hover"
-                variants={cardBGMotion}
-                style={{ backgroundImage: `url(${experience.bg.src})` }}
-              >
-                <CardHeader>
-                  <div className="flex justify-between">
-                    <CardTitle>{experience.company}</CardTitle>
-                    <Image
-                      src={experience.icon}
-                      alt={experience.company}
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-                  <CardDescription>{experience.position}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>{experience.description}</p>
-                </CardContent>
-                <CardFooter>
-                  <p>{experience.date}</p>
-                </CardFooter>
-              </motion.div>
-            </Card>
-          </motion.div>
-        ))}
+      <div className="">
+        <div className="flex w-full p-10 hover:cursor-pointer">
+          {ExperienceProps.map((experience, index) => (
+            <motion.div
+              key={experience.company}
+              className={`w-96 ${index % 2 === 1 ? 'ml-auto' : 'mr-auto'}`}
+              drag
+              dragConstraints={{
+                top: -50,
+                left: -50,
+                right: 50,
+                bottom: 50,
+              }}
+            >
+              <Card className="bg-slate-400 hover:bg-slate-700 dark:bg-sky-950 dark:hover:bg-slate-700">
+                <motion.div
+                  className="w-full rounded-lg bg-no-repeat"
+                  initial="rest"
+                  whileHover="hover"
+                  variants={cardBGMotion}
+                  style={{ backgroundImage: `url(${experience.bg.src})` }}
+                >
+                  <CardHeader>
+                    <div className="flex justify-between">
+                      <CardTitle>{experience.company}</CardTitle>
+                      <Image
+                        src={experience.icon}
+                        alt={experience.company}
+                        width={50}
+                        height={50}
+                      />
+                    </div>
+                    <CardDescription>{experience.position}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{experience.description}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <p>{experience.date}</p>
+                  </CardFooter>
+                </motion.div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </main>
   );

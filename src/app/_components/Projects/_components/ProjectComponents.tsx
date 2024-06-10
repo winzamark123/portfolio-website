@@ -77,7 +77,9 @@ export function LStoreProject(project: ProjectItem) {
             <ProjectLogo {...project} />
           </div>
           <LStoreProjectContent {...project} />
-          <LStoreProjectDisplay {...project} />
+          <div className="flex items-center">
+            <LStoreProjectDisplay {...project} />
+          </div>
         </div>
       </Link>
     </motion.main>

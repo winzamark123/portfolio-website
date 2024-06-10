@@ -158,12 +158,12 @@ export default function Projects() {
               </div>
               <div
                 className={`relative col-span-full overflow-hidden rounded-xl
-              bg-gray-600 pl-5 text-white transition-colors duration-300
-                ease-in-out hover:cursor-pointer hover:bg-cyan-900
-              dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-cyan-900
+              bg-zinc-950 pl-5 text-white transition-colors duration-300 ease-in-out
+                hover:cursor-pointer hover:bg-zinc-900 dark:border-gray-800
+              dark:bg-zinc-950 dark:hover:bg-zinc-900
                 lg:col-span-6`}
               >
-                <HackDavisProject {...ProjectList[5]} />
+                <LStoreProject {...ProjectList[5]} />
               </div>
             </div>
           </div>
