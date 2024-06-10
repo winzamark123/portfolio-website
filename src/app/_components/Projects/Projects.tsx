@@ -20,6 +20,8 @@ import ImageGPTLogo from '@public/projects/ImageGPT/ImageGPT_Logo.svg';
 
 import LStoreContentImage from '@public/projects/LStore/LStore_Diagram.svg';
 
+import ACC_LKA_ContentImage from '@public/projects/AccLkaSimulator/acc-simulator.png';
+
 export type ProjectItem = {
   title: string;
   type: string;
@@ -92,6 +94,18 @@ const ProjectList: ProjectItem[] = [
     logo: ImageGPTLogo,
     url: 'https://github.com/hdjekso/imageGPT',
   },
+  {
+    title: 'ACC-LKA-Simulator',
+    type: 'Physics Engine',
+    descriptionTitle: 'Adaptive Cruise Control Simulator',
+    description:
+      'The Adaptive Cruise Control (ACC) and \
+    Lane Keep Assistance (LKA) project is designed to simulate \
+    the behavior of modern vehicular control systems in a controlled environment. Our physics model aims to replicate the real-world dynamics of vehicle motion and control mechanisms, providing insights into the effectiveness of these systems in maintaining vehicle stability and safety',
+    github_repo: 'https://github.com/winzamark123/ACC-LKA-Simulation',
+    url: 'https://github.com/winzamark123/ACC-LKA-Simulation',
+    contentImage: ACC_LKA_ContentImage,
+  },
 ];
 
 export default function Projects() {
@@ -141,6 +155,15 @@ export default function Projects() {
                 dark:hover:bg-sky-600 lg:col-span-2"
               >
                 <SmallProject {...ProjectList[4]} />
+              </div>
+              <div
+                className={`relative col-span-full overflow-hidden rounded-xl
+              bg-zinc-950 pl-5 text-white transition-colors duration-300 ease-in-out
+                hover:cursor-pointer hover:bg-zinc-900 dark:border-gray-800
+              dark:bg-zinc-950 dark:hover:bg-zinc-900
+                lg:col-span-6`}
+              >
+                <LStoreProject {...ProjectList[5]} />
               </div>
             </div>
           </div>
