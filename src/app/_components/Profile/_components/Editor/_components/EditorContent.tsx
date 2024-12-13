@@ -65,19 +65,19 @@ const contentDatabases: contentItem[] = [
 function contentDisplay(title: string, contentType: contentItem[]) {
   return (
     <div className="flex flex-col gap-1">
-      <span>{title}</span>
-      <div className="flex items-center justify-center gap-5">
+      <span className="text-sm md:text-base">{title}</span>
+      <div className="flex flex-wrap items-center justify-center gap-3 md:gap-5">
         {contentType.map((item, index) => (
           <div key={index} className="group hover:text-emerald-600">
             <svg
-              className="w-15 h-10"
+              className="h-8 w-8 md:h-10 md:w-10"
               viewBox="0 0 24 24"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path d={item.icon.path} />
             </svg>
-            <span className="absolute ml-5 hidden w-max rounded-md bg-black px-2 py-2 text-sm text-white group-hover:block">
+            <span className="absolute ml-3 hidden w-max rounded-md bg-black px-1.5 py-1 text-xs text-white group-hover:block md:ml-5 md:px-2 md:py-2 md:text-sm">
               {item.description}
             </span>
           </div>
@@ -89,12 +89,12 @@ function contentDisplay(title: string, contentType: contentItem[]) {
 
 export default function EditorContent() {
   return (
-    <main className="flex h-full flex-col gap-3 bg-neutral-900 p-6">
-      <span className="">
+    <main className="flex h-full flex-col gap-2 bg-neutral-900 p-3 md:gap-3 md:p-6">
+      <span className="text-sm md:text-base">
         Hi my name is Win Cheng, Software Engineer. I am a full stack developer
         with experiences in the following:
       </span>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3 md:gap-4">
         <div className="">
           {contentDisplay('Frameworks:', contentFrameworks)}
         </div>

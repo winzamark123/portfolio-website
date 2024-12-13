@@ -1,20 +1,12 @@
 'use client';
 import Rhombus_logo from '@public/experiences/Rhombus.svg';
-import Rhombus_bg from '@public/experiences/Rhombus_back_logo.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
-import HackDavis_bg from '@public/experiences/Hackdavis_back_logo.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
-import Kebloom_bg from '@public/experiences/Kebloom_back_logo.svg';
-import TASA from '@public/experiences/Thai_American_Association.svg';
-import TASA_bg from '@public/experiences/Thai_logo.svg';
-import GDSC from '@public/experiences/GDSC.svg';
-import GDSC_bg from '@public/experiences/Google_back_logo.svg';
+import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
-
-import { ArrowBigDown } from 'lucide-react';
 
 import {
   Card,
@@ -31,118 +23,101 @@ type ExperienceProp = {
   description: string;
   date: string;
   icon: StaticImageData;
-  bg: StaticImageData;
+  url: string;
 };
 
 const ExperienceProps: ExperienceProp[] = [
   {
+    company: 'AggieWorks',
+    position: 'Software Engineer',
+    description:
+      'Led the development of a local business engagement platform \
+      for 35k+ students based in React, TypeScript, and Go, \
+      enabling students to discover deals, \
+      increasing engagement with local businesses',
+    date: 'Sep 2024 - Current',
+    icon: Rhombus_logo,
+    url: 'https://aggieworks.org/',
+  },
+  {
     company: 'Rhombus',
     position: 'Software Engineer Intern',
-    description: 'Incoming for Summer 2024',
-    date: 'Aug 2024 - Current',
+    description:
+      'Built a user interface for frontend web admin console to highlight \
+      camera visual environment through computer vision and machine learning \
+        analysis using Flask, OpenCV, React, and Three.js',
+    date: 'Jun 2024 - Sep 2024',
     icon: Rhombus_logo,
-    bg: Rhombus_bg,
+    url: 'https://www.rhombus.com/',
   },
   {
     company: 'HackDavis',
     position: 'Technical Director',
     description:
-      'Produced a website and judging app for a 1000+ person hackathon.',
+      'Deployed a website and judging app for a 1000+ person hackathon.',
     date: 'Sep 2023 - Current',
     icon: HackDavis_logo,
-    bg: HackDavis_bg,
+    url: 'https://2024.hackdavis.io/',
   },
   {
     company: 'Kebloom',
     position: 'Software Engineer Intern',
     description:
-      'Worked end-to-end on a mobile application and delivered to 30+ beta users.',
+      'Developed a mobile application using React Native, attracting over 300+ active early users as measured by a 30%',
     date: 'Jun 2023 - Aug 2023',
     icon: Kebloom,
-    bg: Kebloom_bg,
-  },
-  {
-    company: 'Google Developer Student Club',
-    position: 'Technical Lead',
-    description:
-      'Lead a team of 6, creating an image chat bot using OpenAI and Tesseract OCR.',
-    date: 'Jan 2023 - Jun 2023',
-    icon: GDSC,
-    bg: GDSC_bg,
-  },
-  {
-    company: 'TASA',
-    position: 'Web Developer',
-    description: 'Created a website for a 150+ person organization.',
-    date: 'Sep 2022 - Sep 2023',
-    icon: TASA,
-    bg: TASA_bg,
+    url: 'https://www.kebloom.com/',
   },
 ];
 
-const cardBGMotion = {
-  rest: {
-    backgroundSize: '0% 0%', // Hide the background image
-    backgroundPosition: '200% bottom', // Center the background image
-  },
-  hover: {
-    backgroundSize: '75% 75%', // Show the background image fully
-    backgroundPosition: '200% bottom', // Center the background image
-  },
-};
 
 export default function Experience() {
   return (
     <main className="flex w-full flex-col">
-      <div className="flex w-full items-center justify-between p-4">
-        <h2 className="text-5xl font-semibold ">Experience</h2>
-        <h3 className="flex">
-          {' '}
-          <ArrowBigDown> </ArrowBigDown> Drag me!
-        </h3>
+      <div className="flex w-full flex-col items-center justify-between gap-4 p-4 sm:flex-row">
+        <h2 className="text-3xl font-semibold sm:text-4xl md:text-5xl">
+          Experience
+        </h2>
       </div>
-      <div className="">
-        <div className="flex w-full p-10 hover:cursor-pointer">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10">
+        <div className="flex w-full flex-col gap-6 py-6 sm:py-8">
           {ExperienceProps.map((experience, index) => (
             <motion.div
               key={experience.company}
-              className={`w-96 ${index % 2 === 1 ? 'ml-auto' : 'mr-auto'}`}
-              drag
-              dragConstraints={{
-                top: -50,
-                left: -50,
-                right: 50,
-                bottom: 50,
-              }}
+              className={`w-full sm:w-[90%] md:w-[80%] lg:w-[500px] ${
+                index % 2 === 1 ? 'sm:ml-auto' : 'sm:mr-auto'
+              }`}
             >
+              <Link href={experience.url} target="_blank">
+
               <Card className="bg-slate-400 hover:bg-slate-700 dark:bg-sky-950 dark:hover:bg-slate-700">
-                <motion.div
-                  className="w-full rounded-lg bg-no-repeat"
-                  initial="rest"
-                  whileHover="hover"
-                  variants={cardBGMotion}
-                  style={{ backgroundImage: `url(${experience.bg.src})` }}
-                >
                   <CardHeader>
-                    <div className="flex justify-between">
-                      <CardTitle>{experience.company}</CardTitle>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg sm:text-xl md:text-2xl">
+                        {experience.company}
+                      </CardTitle>
                       <Image
                         src={experience.icon}
                         alt={experience.company}
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
+                        className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12"
                       />
                     </div>
-                    <CardDescription>{experience.position}</CardDescription>
+                    <CardDescription className="text-sm sm:text-base">
+                      {experience.position}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p>{experience.description}</p>
+                    <p className="text-sm sm:text-base">
+                      {experience.description}
+                    </p>
                   </CardContent>
                   <CardFooter>
-                    <p>{experience.date}</p>
+                    <p className="text-xs sm:text-sm">{experience.date}</p>
                   </CardFooter>
-                </motion.div>
               </Card>
+              </Link>
             </motion.div>
           ))}
         </div>

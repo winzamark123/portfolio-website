@@ -4,18 +4,20 @@ import { motion } from 'framer-motion';
 
 export default function Landing() {
   return (
-    <main className="flex h-full w-full flex-col">
+    <main className="flex w-full flex-col p-4">
       <div className="flex flex-col">
         <div className="flex flex-col">
-          <h1 className="text-7xl">Software</h1>
-          <h1 className="text-7xl">Engineer</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-7xl">Software</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-7xl">Engineer</h1>
         </div>
-        <p className="mt-10 flex justify-center">
+        <p className="mt-5 flex justify-center text-sm md:mt-8 md:text-base lg:mt-10">
           {'</'}Full-Stack Developer, CS Grad 2025{'>'}
         </p>
-        <h1 className="mt-32 flex justify-end text-7xl">WIN CHENG</h1>
+        <h1 className="mt-16 flex justify-end text-4xl md:mt-24 md:text-5xl lg:mt-32 lg:text-7xl">
+          WIN CHENG
+        </h1>
         <motion.div
-          className="flex w-full flex-col items-center justify-center"
+          className="mt-8 flex w-full flex-col items-center justify-center md:mt-12 lg:mt-16"
           animate={{
             y: [0, -10, 0],
           }}
@@ -28,7 +30,7 @@ export default function Landing() {
           }}
         >
           <ArrowBigDownDash size={50} className="m-auto" />
-          <p>SCROLL</p>
+          <p className="text-sm md:text-base">SCROLL</p>
         </motion.div>
       </div>
     </main>
