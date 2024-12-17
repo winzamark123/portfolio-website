@@ -6,7 +6,7 @@ import Tag from './_components/Tag';
 import New_Projects from './_components/New_Projects/New_Project';
 export default function Home() {
   return (
-    <main className="w-full overflow-hidden border border-white pt-8 sm:p-1/10">
+    <main className="w-full overflow-hidden pt-8 sm:p-1/10">
       <Landing />
       <div className="hidden sm:flex">
         <Profile />

@@ -27,6 +27,7 @@ type ExperienceProp = {
   date: string;
   icon: StaticImageData;
   url: string;
+  location: string;
 };
 
 const ExperienceProps: ExperienceProp[] = [
@@ -35,41 +36,44 @@ const ExperienceProps: ExperienceProp[] = [
     position: 'Software Engineer',
     description:
       'Led the development of a local business engagement platform \
-      for 35k+ students based in React, TypeScript, and Go, \
-      enabling students to discover deals, \
+      enabling 35k+ students to discover deals, \
       increasing engagement with local businesses',
     date: 'Sep 2024 - Current',
     icon: AggieWorks_logo,
     url: 'https://aggieworks.org/',
+    location: 'Davis, CA',
   },
   {
     company: 'Rhombus',
     position: 'Software Engineer Intern',
     description:
       'Built a user interface for frontend web admin console to highlight \
-      camera visual environment through computer vision and machine learning \
-        analysis using Flask, OpenCV, React, and Three.js',
+      camera visual environment through computer vision and machine learning',
     date: 'Jun 2024 - Sep 2024',
     icon: Rhombus_logo,
     url: 'https://www.rhombus.com/',
+    location: 'Sacramento, CA',
   },
   {
     company: 'HackDavis',
     position: 'Techincal Product Manager',
     description:
-      'Deployed a website and judging app for a 1000+ person hackathon.',
+      'Deployed a website and judging app for a 1000+ person hackathon. \
+      with 275k+ visitors at peak month',
     date: 'Sep 2023 - Current',
     icon: HackDavis_logo,
     url: 'https://2024.hackdavis.io/',
+    location: 'Davis, CA',
   },
   {
     company: 'Kebloom',
     position: 'Software Engineer Intern',
     description:
-      'Developed a mobile application using React Native, attracting over 300+ active early users as measured by a 30%',
+      'Developed a mobile application attracting over 300+ active early users',
     date: 'Jun 2023 - Aug 2023',
     icon: Kebloom,
     url: 'https://www.kebloom.com/',
+    location: 'San Francisco, CA',
   },
 ];
 
@@ -80,15 +84,10 @@ export default function Experience() {
       <div className="w-full pl-8 sm:px-6 md:px-8 lg:px-10">
         <TracingBeam className="px-4 sm:px-6 md:px-8 lg:px-10">
           <div className="flex w-full flex-col gap-6 py-6 sm:py-8">
-            {ExperienceProps.map((experience, index) => (
-              <motion.div
-                key={experience.company}
-                className={`w-full sm:w-[90%] md:w-[80%] lg:w-[500px] ${
-                  index % 2 === 1 ? 'sm:ml-auto' : 'sm:mr-auto'
-                }`}
-              >
+            {ExperienceProps.map((experience) => (
+              <motion.div key={experience.company} className={`w-full`}>
                 <Link href={experience.url} target="_blank">
-                  <Card className="bg-slate-400 hover:bg-slate-700 dark:bg-sky-950 dark:hover:bg-slate-700">
+                  <Card className="hover:bg-slate-200 dark:bg-sky-950 dark:hover:bg-slate-700">
                     <CardHeader>
                       <div className="flex items-center justify-between">
                         <CardTitle className="text-lg sm:text-xl md:text-2xl">
@@ -103,7 +102,7 @@ export default function Experience() {
                         />
                       </div>
                       <CardDescription className="text-sm sm:text-base">
-                        {experience.position}
+                        <i>{experience.position}</i>
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -112,7 +111,12 @@ export default function Experience() {
                       </p>
                     </CardContent>
                     <CardFooter>
-                      <p className="text-xs sm:text-sm">{experience.date}</p>
+                      <div className="flex w-full justify-between border">
+                        <p className="text-xs sm:text-sm">
+                          {experience.location}
+                        </p>
+                        <p className="text-xs sm:text-sm">{experience.date}</p>
+                      </div>
                     </CardFooter>
                   </Card>
                 </Link>
