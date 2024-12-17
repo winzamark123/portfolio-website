@@ -21,6 +21,7 @@ import ImageGPTLogo from '@public/projects/ImageGPT/ImageGPT_Logo.svg';
 import LStoreContentImage from '@public/projects/LStore/LStore_Diagram.svg';
 
 import ACC_LKA_ContentImage from '@public/projects/AccLkaSimulator/acc-simulator.png';
+import Component_Header from '../Component_Header';
 
 export type ProjectItem = {
   title: string;
@@ -111,7 +112,7 @@ const ProjectList: ProjectItem[] = [
 export default function Projects() {
   return (
     <main>
-      <h1>Projects</h1>
+      <Component_Header title="Projects" />
       <div className="py-16">
         <div className="mx-auto max-w-6xl px-6 text-gray-500">
           <div className="relative">
