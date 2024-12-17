@@ -14,7 +14,7 @@ export default function Home() {
       <div className="flex h-36 w-full">
         <Tag TagProp="</Code,Coffee,Repeat>" numberProp={1} />
       </div>
-      <div className="flex h-fit w-full border border-white py-8">
+      <div className="flex h-fit w-full py-8">
         <Experience />
       </div>
       <div className="flex h-fit w-full">

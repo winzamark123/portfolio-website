@@ -3,6 +3,7 @@ import Component_Header from '@/app/_components/Component_Header';
 import Rhombus_logo from '@public/experiences/Rhombus.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
+import AggieWorks_logo from '@public/experiences/aggieworks_logo.jpeg';
 import Link from 'next/link';
 
 import { motion } from 'framer-motion';
@@ -38,7 +39,7 @@ const ExperienceProps: ExperienceProp[] = [
       enabling students to discover deals, \
       increasing engagement with local businesses',
     date: 'Sep 2024 - Current',
-    icon: Rhombus_logo,
+    icon: AggieWorks_logo,
     url: 'https://aggieworks.org/',
   },
   {
@@ -74,7 +75,7 @@ const ExperienceProps: ExperienceProp[] = [
 
 export default function Experience() {
   return (
-    <main className="flex w-full flex-col border border-red-300">
+    <main className="flex w-full flex-col">
       <Component_Header title="Experience" />
       <div className="w-full pl-8 sm:px-6 md:px-8 lg:px-10">
         <TracingBeam className="px-4 sm:px-6 md:px-8 lg:px-10">
@@ -98,7 +99,7 @@ export default function Experience() {
                           alt={experience.company}
                           width={40}
                           height={40}
-                          className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12"
+                          className="h-8 w-8 rounded-full sm:h-10 sm:w-10 md:h-12 md:w-12"
                         />
                       </div>
                       <CardDescription className="text-sm sm:text-base">
