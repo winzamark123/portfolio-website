@@ -1,4 +1,4 @@
-import Projects from './_components/Projects/Projects';
+// import Projects from './_components/Projects/Projects';
 import Landing from './_components/Landing/Landing';
 import Profile from './_components/Profile/Profile';
 import Experience from './_components/Experience/Experience';
@@ -20,9 +20,9 @@ export default function Home() {
       <div className="flex h-fit w-full">
         <New_Projects />
       </div>
-      <div className="flex h-fit w-full">
+      {/* <div className="flex h-fit w-full">
         <Projects />
-      </div>
+      </div> */}
     </main>
   );
 }
