@@ -27,7 +27,7 @@ export default function EditorFooter() {
   return (
     <main className="flex h-full items-center justify-end gap-3 bg-neutral-800 p-6 text-xs font-extralight text-gray-500">
       {footerItems.map((item, index) => (
-        <div key={index} className="flex items-center ">
+        <div key={index} className="hidden items-center sm:flex">
           {item.icon}
           <span>{item.description}</span>
         </div>

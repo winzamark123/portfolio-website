@@ -30,7 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <Nav />
-            <div className="flex flex-col items-center justify-center">
+            <div className="max-w-screen flex flex-col items-center justify-center overflow-hidden">
               {children}
             </div>
             <Footer />

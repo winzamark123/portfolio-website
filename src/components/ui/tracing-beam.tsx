@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useTransform, useScroll, useSpring } from 'framer-motion';
-
 import { cn } from '@/lib/utils';
 
 export const TracingBeam = ({
@@ -14,7 +13,7 @@ export const TracingBeam = ({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'],
+    offset: ['start center', 'end start'],
   });
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -85,6 +84,7 @@ export const TracingBeam = ({
             d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
             fill="none"
             stroke="#9091A0"
+            strokeWidth="10"
             strokeOpacity="0.16"
             transition={{
               duration: 10,
@@ -94,7 +94,7 @@ export const TracingBeam = ({
             d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
             fill="none"
             stroke="url(#gradient)"
-            strokeWidth="1.25"
+            strokeWidth="10"
             className="motion-reduce:hidden"
             transition={{
               duration: 10,
@@ -109,10 +109,10 @@ export const TracingBeam = ({
               y1={y1} // set y1 for gradient
               y2={y2} // set y2 for gradient
             >
-              <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-              <stop stopColor="#18CCFC"></stop>
-              <stop offset="0.325" stopColor="#6344F5"></stop>
-              <stop offset="1" stopColor="#AE48FF" stopOpacity="0"></stop>
+              <stop stopColor="#22C55E" stopOpacity="0"></stop>
+              <stop stopColor="#22C55E"></stop>
+              <stop offset="0.325" stopColor="#22C55E"></stop>
+              <stop offset="1" stopColor="#22C55E" stopOpacity="0"></stop>
             </motion.linearGradient>
           </defs>
         </svg>
