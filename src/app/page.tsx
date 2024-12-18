@@ -3,7 +3,7 @@ import Landing from './_components/Landing/Landing';
 import Profile from './_components/Profile/Profile';
 import Experience from './_components/Experience/Experience';
 import Tag from './_components/Tag';
-import New_Projects from './_components/New_Projects/New_Project';
+import Project from './_components/Projects/Project';
 export default function Home() {
   return (
     <main className="w-full overflow-hidden pt-8 sm:p-1/10">
@@ -18,11 +18,8 @@ export default function Home() {
         <Experience />
       </div>
       <div className="flex h-fit w-full">
-        <New_Projects />
+        <Project />
       </div>
-      {/* <div className="flex h-fit w-full">
-        <Projects />
-      </div> */}
     </main>
   );
 }

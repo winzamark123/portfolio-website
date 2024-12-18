@@ -111,7 +111,7 @@ export default function Experience() {
                       </p>
                     </CardContent>
                     <CardFooter>
-                      <div className="flex w-full justify-between border">
+                      <div className="flex w-full justify-between ">
                         <p className="text-xs sm:text-sm">
                           {experience.location}
                         </p>
