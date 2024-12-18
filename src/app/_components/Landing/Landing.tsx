@@ -13,8 +13,8 @@ export default function Landing() {
         <p className="mt-5 flex justify-center text-sm md:mt-8 md:text-base lg:mt-10">
           {'</'}Full-Stack Developer, CS Grad 2025{'>'}
         </p>
-        <h1 className="mt-16 flex justify-end text-4xl md:mt-24 md:text-5xl lg:mt-32 lg:text-7xl">
-          WIN CHENG
+        <h1 className="mt-16 flex justify-end text-2xl md:mt-24 md:text-3xl lg:mt-32 lg:text-5xl">
+          TEERANADE (WIN) CHENG
         </h1>
         <motion.div
           className="mt-8 flex w-full flex-col items-center justify-center md:mt-12 lg:mt-16"

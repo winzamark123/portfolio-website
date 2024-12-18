@@ -31,17 +31,33 @@ const ProjectList: ProjectItem[] = [
     with clients. Focused on providing a platform for students. ',
     github_repo: 'https://github.com/winzamark123/caMOOra',
     url: 'https://camoora.io/',
-    contentImage_url: '/projects/Camoora/camoora_desktop.png',
-    tech_tags: ['Next.js', 'TailwindCSS', 'MongoDB', 'TYPESCRIPT'],
+    contentImage_url: '/projects/Camoora/ipad.png',
+    tech_tags: [
+      'TYPESCRIPT',
+      'Next.js',
+      'TailwindCSS',
+      'MongoDB',
+      'POSTGRESQL',
+      'tRPC',
+      'AWS S3',
+    ],
   },
   {
     title: 'JUSTSAYIN',
     description:
       'Mobile application displaying daily quotes from your favorite authors on your lock screen widget',
     github_repo: 'https://github.com/winzamark123/JustSayin',
-    url: '',
-    contentImage_url: '',
-    tech_tags: ['React Native', 'TYPESCRIPT'],
+    url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
+    contentImage_url: '/projects/JustSayin/iphone.png',
+    tech_tags: [
+      'React Native',
+      'SWIFT',
+      'TYPESCRIPT',
+      'FIREBASE',
+      'AWS',
+      'JEST',
+      'EXPO',
+    ],
   },
   {
     title: 'LSTORE',
@@ -51,8 +67,8 @@ const ProjectList: ProjectItem[] = [
     analytical workloads ran with concurrency using update-friendly lineage-based storage architecture',
     github_repo: 'https://github.com/winzamark123/LStore_Database',
     url: 'https://github.com/winzamark123/LStore_Database',
-    contentImage_url: '',
-    tech_tags: ['TYPESCRIPT', 'TYPESCRIPT'],
+    contentImage_url: '/projects/LStore/LStore_Diagram.svg',
+    tech_tags: ['PYTHON', 'SQL DB'],
   },
   {
     title: 'IMAGEGPT',
@@ -60,9 +76,9 @@ const ProjectList: ProjectItem[] = [
       'An AI Chatbot web application. \
     Providing users with the ability to upload images and receive text-based responses before GPT4 Multi-Modal',
     github_repo: 'https://github.com/hdjekso/imageGPT',
-    url: '',
-    contentImage_url: '',
-    tech_tags: ['Next.js', 'TailwindCSS', 'MongoDB', 'TYPESCRIPT'],
+    url: 'https://github.com/hdjekso/imageGPT',
+    contentImage_url: '/projects/ImageGPT/macbook.png',
+    tech_tags: ['REACT.JS', 'JAVASCRIPT', 'MongoDB', 'TYPESCRIPT'],
   },
   {
     title: 'ACC-LKA-Simulator',
@@ -72,22 +88,22 @@ const ProjectList: ProjectItem[] = [
     the behavior of modern vehicular control systems in a controlled environment. ',
     github_repo: 'https://github.com/winzamark123/ACC-LKA-Simulation',
     url: 'https://github.com/winzamark123/ACC-LKA-Simulation',
-    contentImage_url: '',
-    tech_tags: ['TYPESCRIPT', 'TYPESCRIPT'],
+    contentImage_url: '/projects/AccLkaSimulator/acc-simulator.png',
+    tech_tags: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'MONGODB'],
   },
 ];
 
-export default function New_Project() {
+export default function Project() {
   return (
     <main className="flex w-full flex-col">
       <Component_Header title="Projects" />
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="w-full px-4">
         <div className="grid grid-cols-1 gap-6">
           {ProjectList.map((project) => (
             <motion.div key={project.title} className="h-full">
               <Link href={project.url} target="_blank" className="h-full">
-                <Card className="flex h-full flex-col  hover:bg-slate-200 dark:bg-sky-950 dark:hover:bg-slate-700">
-                  <div className="flex h-full flex-col md:flex-row">
+                <Card className="flex h-full flex-col p-4 hover:bg-slate-200 dark:bg-sky-950 dark:hover:bg-slate-700">
+                  <div className="flex h-full flex-col lg:flex-row">
                     <div className="flex flex-1 flex-col">
                       <CardHeader>
                         <div className="flex items-center justify-between">
@@ -116,15 +132,15 @@ export default function New_Project() {
                           <Link
                             href={project.github_repo}
                             target="_blank"
-                            className="rounded-full bg-gray-200 p-2 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
+                            className="rounded-full bg-gray-800 p-2 hover:bg-gray-700"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              width="20"
-                              height="20"
+                              width="30"
+                              height="30"
                               viewBox="0 0 24 24"
                               fill="none"
-                              stroke="currentColor"
+                              stroke="white"
                               strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -135,18 +151,16 @@ export default function New_Project() {
                         </div>
                       </CardFooter>
                     </div>
-
-                    {project.contentImage_url && (
-                      <div className="md:w-1/2">
+                    <div className="relative h-[200px] lg:mt-0 lg:h-full lg:w-1/2">
+                      {project.contentImage_url && (
                         <Image
                           src={project.contentImage_url}
                           alt={project.title}
-                          width={500}
-                          height={500}
-                          className="h-full w-full rounded-r-lg object-cover"
+                          className="rounded-lg object-contain"
+                          fill
                         />
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </Card>
               </Link>
