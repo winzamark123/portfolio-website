@@ -35,7 +35,7 @@ const SocialProps: SocialProp[] = [
     icon: (
       <FilePenLine className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
     ),
-    url: 'https://docs.google.com/document/d/1WWNdooIk2YlCr49ZJPqcb0zrWu8jOCbPXeNpzd6-dMo/edit?usp=sharing',
+    url: '/Cheng_Teeranade.pdf',
     description: 'Resume',
   },
 ];
