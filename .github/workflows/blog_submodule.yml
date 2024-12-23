@@ -1,0 +1,25 @@
+name: Update Submodule
+
+on:
+  repository_dispatch:
+    types: [update-submodule]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Main Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Update Submodule
+        run: |
+          git submodule update --remote --merge
+          git add public/blog
+          git commit -m "Updated submodule to latest commit" || echo "No changes to commit"
+
+      - name: Push Changes
+        run: |
+          git push origin main
