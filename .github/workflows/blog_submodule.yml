@@ -1,4 +1,4 @@
-name: Update Submodule
+name: Update Submodule on Dispatch
 
 on:
   repository_dispatch:
@@ -26,4 +26,4 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git push https://github-actions:$GITHUB_TOKEN@github.com/winzamark123/portfolio-website.git main
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/winzamark123/portfolio-website.git main
