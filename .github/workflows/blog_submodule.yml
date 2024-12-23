@@ -16,7 +16,10 @@ jobs:
 
       - name: Update Submodule
         run: |
-          git submodule update --remote --merge
+          cd public/blog
+          git fetch origin
+          git reset --hard origin/main
+          cd ../..
           git add public/blog
           git commit -m "Updated submodule to latest commit" || echo "No changes to commit"
 
