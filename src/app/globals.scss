@@ -64,4 +64,16 @@
     @apply text-5xl font-extrabold;
   }
 
+  .custom-dashed{
+    background-image: linear-gradient(to right, black 50%, transparent 50%);
+    background-size: 20px 3px;
+    background-repeat: repeat-x;
+    height: 3px;
+    border: none;
+  }
+
+  .dark .custom-dashed {
+    background-image: linear-gradient(to right, white 50%, transparent 50%);
+  }
+
 }
