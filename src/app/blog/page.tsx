@@ -59,9 +59,9 @@ export default async function BlogPage() {
             ))}
           </div>
           <div
-            className="prose prose-h1:text-5xl dark:prose-h1:text-emerald-500 prose-h2:text-2xl 
-            prose-h3:text-xl prose-p:text-lg prose-a:text-blue-500 
-            prose-a:underline dark:prose-invert max-w-none"
+            className="prose max-w-none dark:prose-invert prose-h1:text-5xl 
+            prose-h2:text-2xl prose-h3:text-xl prose-p:text-lg 
+            prose-a:text-blue-500 prose-a:underline dark:prose-h1:text-emerald-500"
             dangerouslySetInnerHTML={{ __html: blog.content }}
           />
         </article>
