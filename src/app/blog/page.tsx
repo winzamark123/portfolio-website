@@ -41,19 +41,21 @@ export default async function BlogPage() {
   const sortedBlogs = blogs.sort((a, b) => {
     // Convert DD-MM-YYYY to YYYY-MM-DD for reliable parsing
     const parseDate = (dateStr: string) => {
-      const [day, month, year] = dateStr.split('-');
+      if (!dateStr || typeof dateStr !== 'string') {
+        console.warn('Invalid date format:', dateStr);
+        return new Date(0); // Return earliest possible date for invalid entries
+      }
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) {
+        console.warn('Invalid date format:', dateStr);
+        return new Date(0);
+      }
+      const [day, month, year] = parts;
       return new Date(`${year}-${month}-${day}`);
     };
 
     const dateA = parseDate(a.date);
     const dateB = parseDate(b.date);
-
-    // Check if dates are valid before comparing
-    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
-      console.warn('Invalid date found in blog posts:', a.date, b.date);
-      return 0;
-    }
-
     return dateB.getTime() - dateA.getTime();
   });
 
@@ -65,7 +67,14 @@ export default async function BlogPage() {
           {/* <h2 className="mb-2 text-2xl font-bold">{blog.title}</h2> */}
           <p className="mb-4 text-gray-500">
             {(() => {
-              const [day, month, year] = blog.date.split('-');
+              if (!blog.date || typeof blog.date !== 'string') {
+                return 'Date not available';
+              }
+              const parts = blog.date.split('-');
+              if (parts.length !== 3) {
+                return 'Invalid date format';
+              }
+              const [day, month, year] = parts;
               return new Date(`${year}-${month}-${day}`).toLocaleDateString();
             })()}
           </p>
