@@ -64,7 +64,10 @@ export default async function BlogPage() {
         <article key={index} className="mb-8 border-b border-gray-200 pb-8">
           {/* <h2 className="mb-2 text-2xl font-bold">{blog.title}</h2> */}
           <p className="mb-4 text-gray-500">
-            {new Date(blog.date).toLocaleDateString()}
+            {(() => {
+              const [day, month, year] = blog.date.split('-');
+              return new Date(`${year}-${month}-${day}`).toLocaleDateString();
+            })()}
           </p>
           <div className="mb-4 flex flex-wrap gap-2">
             {blog.tags?.map((tag, i) => (
