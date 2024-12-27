@@ -26,18 +26,36 @@ export default async function BlogPage() {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
+        // Extract slug by removing .md and converting spaces to hyphens
+        const slug = file.replace('.md', '').toLowerCase().replace(/\s+/g, '-');
+
         return {
           ...(data as { title: string; date: string; tags: string[] }),
           content: await marked(content),
-          slug: file.replace('.md', ''),
+          slug,
         };
       })
   );
 
-  // Sort blogs by date in descending order
-  const sortedBlogs = blogs.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  // Sort blogs by date in descending order (most recent first)
+  const sortedBlogs = blogs.sort((a, b) => {
+    // Convert DD-MM-YYYY to YYYY-MM-DD for reliable parsing
+    const parseDate = (dateStr: string) => {
+      const [day, month, year] = dateStr.split('-');
+      return new Date(`${year}-${month}-${day}`);
+    };
+
+    const dateA = parseDate(a.date);
+    const dateB = parseDate(b.date);
+
+    // Check if dates are valid before comparing
+    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+      console.warn('Invalid date found in blog posts:', a.date, b.date);
+      return 0;
+    }
+
+    return dateB.getTime() - dateA.getTime();
+  });
 
   // Render the blog page
   return (
