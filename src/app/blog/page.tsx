@@ -13,6 +13,7 @@ interface BlogPost {
 }
 
 export default async function BlogPage() {
+  console.log('Fetching blog posts...');
   // Path to the blog directory
   const blogDirectory = path.join(process.cwd(), 'public', 'blog');
   const files = fs.readdirSync(blogDirectory);
@@ -39,23 +40,23 @@ export default async function BlogPage() {
 
   // Sort blogs by date in descending order (most recent first)
   const sortedBlogs = blogs.sort((a, b) => {
-    // Convert DD-MM-YYYY to YYYY-MM-DD for reliable parsing
     const parseDate = (dateStr: string) => {
-      if (!dateStr || typeof dateStr !== 'string') {
-        console.warn('Invalid date format:', dateStr);
-        return new Date(0); // Return earliest possible date for invalid entries
+      if (!dateStr) {
+        console.warn('Missing date:', dateStr);
+        return new Date(0);
       }
-      const parts = dateStr.split('-');
-      if (parts.length !== 3) {
+      // Handle both YYYY-MM-DD and full ISO date strings
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
         console.warn('Invalid date format:', dateStr);
         return new Date(0);
       }
-      const [day, month, year] = parts;
-      return new Date(`${year}-${month}-${day}`);
+      return date;
     };
 
     const dateA = parseDate(a.date);
     const dateB = parseDate(b.date);
+
     return dateB.getTime() - dateA.getTime();
   });
 
@@ -66,17 +67,7 @@ export default async function BlogPage() {
         <article key={index} className="mb-8 border-b border-gray-200 pb-8">
           {/* <h2 className="mb-2 text-2xl font-bold">{blog.title}</h2> */}
           <p className="mb-4 text-gray-500">
-            {(() => {
-              if (!blog.date || typeof blog.date !== 'string') {
-                return 'Date not available';
-              }
-              const parts = blog.date.split('-');
-              if (parts.length !== 3) {
-                return 'Invalid date format';
-              }
-              const [day, month, year] = parts;
-              return new Date(`${year}-${month}-${day}`).toLocaleDateString();
-            })()}
+            {new Date(blog.date).toLocaleDateString()}
           </p>
           <div className="mb-4 flex flex-wrap gap-2">
             {blog.tags?.map((tag, i) => (
