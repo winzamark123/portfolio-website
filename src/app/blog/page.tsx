@@ -12,8 +12,16 @@ interface BlogPost {
   [key: string]: any; // For any additional frontmatter fields
 }
 
+// Add this function to convert Obsidian image syntax to HTML
+function convertObsidianImageLinks(content: string): string {
+  // Replace ![[filename]] with custom HTML that we can target later
+  return content.replace(/!\[\[(.*?)\]\]/g, (_, filename) => {
+    // Don't split the filename, keep it intact including extension
+    return `<obsidian-image src="blog/ImageDump/${filename}"></obsidian-image>`;
+  });
+}
+
 export default async function BlogPage() {
-  console.log('Fetching blog posts...');
   // Path to the blog directory
   const blogDirectory = path.join(process.cwd(), 'public', 'blog');
   const files = fs.readdirSync(blogDirectory);
@@ -27,12 +35,16 @@ export default async function BlogPage() {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
+        // Process the content to handle Obsidian image syntax
+        const processedContent = convertObsidianImageLinks(content);
+        const htmlContent = await marked(processedContent);
+
         // Extract slug by removing .md and converting spaces to hyphens
         const slug = file.replace('.md', '').toLowerCase().replace(/\s+/g, '-');
 
         return {
           ...(data as { title: string; date: string; tags: string[] }),
-          content: await marked(content),
+          content: htmlContent,
           slug,
         };
       })
@@ -81,9 +93,24 @@ export default async function BlogPage() {
           </div>
           <div
             className="prose max-w-none dark:prose-invert prose-h1:text-5xl 
-            prose-h2:text-2xl prose-h3:text-xl prose-p:text-lg 
-            prose-a:text-blue-500 prose-a:underline dark:prose-h1:text-emerald-500"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
+            prose-h2:text-2xl prose-h2:text-orange-500 prose-h3:text-xl 
+            prose-p:text-lg prose-a:text-blue-500 prose-a:underline
+            dark:prose-h1:text-emerald-500 dark:prose-h2:text-orange-500
+            "
+            dangerouslySetInnerHTML={{
+              __html: blog.content.replace(
+                /<obsidian-image src="([^"]+)"><\/obsidian-image>/g,
+                (_, src) => `
+                  <div class="relative w-full h-[400px] my-4">
+                    <img
+                      src="${src}"
+                      alt="Blog image"
+                      class="object-contain w-full h-full"
+                    />
+                  </div>
+                `
+              ),
+            }}
           />
         </article>
       ))}
