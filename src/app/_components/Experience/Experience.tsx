@@ -59,7 +59,7 @@ const ExperienceProps: ExperienceProp[] = [
     position: 'Techincal Product Manager',
     description:
       'Deployed a website and judging app for a 1000+ person hackathon. \
-      with 275k+ visitors at peak month',
+      with 275k+ visitors, 8300 unique visitors at peak month',
     date: 'Sep 2023 - Current',
     icon: HackDavis_logo,
     url: 'https://2024.hackdavis.io/',
@@ -107,7 +107,20 @@ export default function Experience() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm sm:text-base">
-                        {experience.description}
+                        {experience.description
+                          .split(/(\d+(?:\.\d+)?k?\+?)/)
+                          .map((part, index) =>
+                            /^\d+(?:\.\d+)?k?\+?$/.test(part) ? (
+                              <span
+                                key={index}
+                                className="text-lg font-bold text-orange-500"
+                              >
+                                {part}
+                              </span>
+                            ) : (
+                              part
+                            )
+                          )}
                       </p>
                     </CardContent>
                     <CardFooter>
