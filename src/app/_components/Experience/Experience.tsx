@@ -4,6 +4,7 @@ import Rhombus_logo from '@public/experiences/Rhombus.svg';
 import HackDavis_logo from '@public/experiences/HackDavis.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
 import AggieWorks_logo from '@public/experiences/aggieworks_logo.jpeg';
+import Bustem_logo from '@public/experiences/bustemIcon.avif';
 import Link from 'next/link';
 
 import { motion } from 'framer-motion';
@@ -32,13 +33,23 @@ type ExperienceProp = {
 
 const ExperienceProps: ExperienceProp[] = [
   {
+    company: 'Bustem',
+    position: 'Frontend Software Engineer',
+    description:
+      'Founding team at a startup building reinforcing brand protection for over 8000+ e-commerce brands',
+    date: 'Jan 2025 - Current',
+    icon: Bustem_logo,
+    url: 'https://bustem.co/',
+    location: 'San Francisco, CA',
+  },
+  {
     company: 'AggieWorks',
-    position: 'Software Engineer',
+    position: 'Full-Stack Software Engineer',
     description:
       'Led the development of a local business engagement platform \
       enabling 35k+ students to discover deals, \
       increasing engagement with local businesses',
-    date: 'Sep 2024 - Current',
+    date: 'Sep 2024 - Jan 2025',
     icon: AggieWorks_logo,
     url: 'https://aggieworks.org/',
     location: 'Davis, CA',

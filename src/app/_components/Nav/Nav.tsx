@@ -51,6 +51,8 @@ export default function Nav() {
         <Link
           key={index}
           href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group relative flex flex-col items-center"
         >
           <div className="hover:text-emerald-500">{social.icon}</div>
