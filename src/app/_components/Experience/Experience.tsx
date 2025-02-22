@@ -36,7 +36,7 @@ const ExperienceProps: ExperienceProp[] = [
     company: 'Bustem',
     position: 'Frontend Software Engineer',
     description:
-      'Founding team at a startup building reinforcing brand protection for over 8000+ e-commerce brands',
+      'Founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands',
     date: 'Jan 2025 - Current',
     icon: Bustem_logo,
     url: 'https://bustem.co/',
