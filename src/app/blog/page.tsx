@@ -95,6 +95,7 @@ export default async function BlogPage() {
             className="prose max-w-none dark:prose-invert prose-h1:text-5xl 
             prose-h2:text-2xl prose-h2:text-orange-500 prose-h3:text-xl 
             prose-p:text-lg prose-a:text-blue-500 prose-a:underline
+            prose-strong:text-[#89DDEC] prose-em:text-[#EF89A5]
             dark:prose-h1:text-emerald-500 dark:prose-h2:text-orange-500
             "
             dangerouslySetInnerHTML={{
