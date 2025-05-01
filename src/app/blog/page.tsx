@@ -77,7 +77,7 @@ export default async function BlogPage() {
     <main className="container flex flex-col items-center justify-center px-1/10 py-8">
       {sortedBlogs.map((blog, index) => (
         <article key={index} className="mb-8 border-b border-gray-200 pb-8">
-          {/* <h2 className="mb-2 text-2xl font-bold">{blog.title}</h2> */}
+          {/* <h2 className="mb-2 text-xl font-bold">{blog.title}</h2> */}
           <p className="mb-4 text-gray-500">
             {new Date(blog.date).toLocaleDateString()}
           </p>
@@ -85,16 +85,16 @@ export default async function BlogPage() {
             {blog.tags?.map((tag, i) => (
               <span
                 key={i}
-                className="rounded bg-gray-200 px-2 py-1 text-sm dark:bg-gray-800"
+                className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-800"
               >
                 #{tag}
               </span>
             ))}
           </div>
           <div
-            className="prose max-w-none dark:prose-invert prose-h1:text-5xl 
-            prose-h2:text-2xl prose-h2:text-orange-500 prose-h3:text-xl 
-            prose-p:text-lg prose-a:text-blue-500 prose-a:underline
+            className="prose max-w-none dark:prose-invert prose-h1:text-4xl 
+            prose-h2:text-xl prose-h2:text-orange-500 prose-h3:text-lg 
+            prose-p:text-base prose-a:text-blue-500 prose-a:underline
             prose-strong:text-[#89DDEC] prose-em:text-[#EF89A5]
             dark:prose-h1:text-emerald-500 dark:prose-h2:text-orange-500
             "
