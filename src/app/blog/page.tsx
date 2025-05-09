@@ -21,6 +21,12 @@ function convertObsidianImageLinks(content: string): string {
   });
 }
 
+// Add this function to style quoted text
+function styleQuotedText(html: string): string {
+  // Match text inside double quotes and wrap it in a span with a custom class
+  return html.replace(/"([^"]+)"/g, '<span class="quoted-text">"$1"</span>');
+}
+
 export default async function BlogPage() {
   // Path to the blog directory
   const blogDirectory = path.join(process.cwd(), 'public', 'blog');
@@ -39,12 +45,15 @@ export default async function BlogPage() {
         const processedContent = convertObsidianImageLinks(content);
         const htmlContent = await marked(processedContent);
 
+        // Style quoted text
+        const styledContent = styleQuotedText(htmlContent);
+
         // Extract slug by removing .md and converting spaces to hyphens
         const slug = file.replace('.md', '').toLowerCase().replace(/\s+/g, '-');
 
         return {
           ...(data as { title: string; date: string; tags: string[] }),
-          content: htmlContent,
+          content: styledContent,
           slug,
         };
       })
@@ -97,6 +106,7 @@ export default async function BlogPage() {
             prose-p:text-base prose-a:text-blue-500 prose-a:underline
             prose-strong:text-[#89DDEC] prose-em:text-[#EF89A5]
             dark:prose-h1:text-emerald-500 dark:prose-h2:text-orange-500
+            [&_.quoted-text]:font-medium [&_.quoted-text]:italic [&_.quoted-text]:text-[#FF6B6B]
             "
             dangerouslySetInnerHTML={{
               __html: blog.content.replace(
