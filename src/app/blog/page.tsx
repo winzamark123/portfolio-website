@@ -23,8 +23,23 @@ function convertObsidianImageLinks(content: string): string {
 
 // Add this function to style quoted text
 function styleQuotedText(html: string): string {
-  // Match text inside double quotes and wrap it in a span with a custom class
-  return html.replace(/"([^"]+)"/g, '<span class="quoted-text">"$1"</span>');
+  // This regex uses a negative lookahead to avoid matching quotes within HTML tags
+  // It will only match standalone quotes in text content
+  return html.replace(/("([^"]+)")/g, (match, fullQuote, _) => {
+    // Check if this quote is inside an HTML tag attribute
+    // Count < and > characters before this position
+    const beforeMatch = html.substring(0, html.indexOf(match));
+    const openTags = (beforeMatch.match(/</g) || []).length;
+    const closeTags = (beforeMatch.match(/>/g) || []).length;
+
+    // If we have equal numbers of < and >, we're outside of tags
+    if (openTags === closeTags) {
+      return `<span class="quoted-text">${fullQuote}</span>`;
+    }
+
+    // Otherwise, we're inside a tag, so return the original
+    return match;
+  });
 }
 
 export default async function BlogPage() {
@@ -43,9 +58,11 @@ export default async function BlogPage() {
 
         // Process the content to handle Obsidian image syntax
         const processedContent = convertObsidianImageLinks(content);
+
+        // First convert markdown to HTML
         const htmlContent = await marked(processedContent);
 
-        // Style quoted text
+        // Then apply quote styling to the HTML (after markdown has been processed)
         const styledContent = styleQuotedText(htmlContent);
 
         // Extract slug by removing .md and converting spaces to hyphens
