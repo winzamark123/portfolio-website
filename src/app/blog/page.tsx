@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 
@@ -85,7 +85,7 @@ export default async function BlogPage() {
       }
       // Handle both YYYY-MM-DD and full ISO date strings
       const date = new Date(dateStr);
-      if (isNaN(date.getTime())) {
+      if (Number.isNaN(date.getTime())) {
         console.warn('Invalid date format:', dateStr);
         return new Date(0);
       }

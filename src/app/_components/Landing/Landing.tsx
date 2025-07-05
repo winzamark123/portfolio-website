@@ -10,9 +10,9 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl lg:text-7xl">Software</h1>
           <h1 className="text-4xl md:text-5xl lg:text-7xl">Engineer</h1>
         </div>
-        <p className="mt-5 flex justify-center text-sm md:mt-8 md:text-base lg:mt-10">
+        {/* <p className="mt-5 flex justify-center text-sm md:mt-8 md:text-base lg:mt-10">
           {'</'}Full-Stack Developer, CS Grad 2025{'>'}
-        </p>
+        </p> */}
         <h1 className="mt-16 flex justify-end text-2xl md:mt-24 md:text-3xl lg:mt-32 lg:text-5xl">
           TEERANADE (WIN) CHENG
         </h1>
@@ -24,7 +24,7 @@ export default function Landing() {
           transition={{
             y: {
               duration: 1.5,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               repeatType: 'easeInOut',
             },
           }}

@@ -5,6 +5,7 @@ import HackDavis_logo from '@public/experiences/HackDavis.svg';
 import Kebloom from '@public/experiences/Kebloom.svg';
 import AggieWorks_logo from '@public/experiences/aggieworks_logo.jpeg';
 import Bustem_logo from '@public/experiences/bustemIcon.avif';
+import JigsawStack_logo from '@public/experiences/jigsawstack_logo.png';
 import Link from 'next/link';
 
 import { motion } from 'framer-motion';
@@ -32,6 +33,16 @@ type ExperienceProp = {
 };
 
 const ExperienceProps: ExperienceProp[] = [
+  {
+    company: 'JigsawStack',
+    position: 'Founding Engineer',
+    description:
+      'Building small langauge models (SLMs) for developer use cases',
+    date: 'Jun 2025 - Current',
+    icon: JigsawStack_logo,
+    url: 'https://jigsawstack.com/',
+    location: 'San Francisco, CA',
+  },
   {
     company: 'Bustem',
     position: 'Frontend Software Engineer',
@@ -120,10 +131,10 @@ export default function Experience() {
                       <p className="text-sm sm:text-base">
                         {experience.description
                           .split(/(\d+(?:\.\d+)?k?\+?)/)
-                          .map((part, index) =>
+                          .map((part) =>
                             /^\d+(?:\.\d+)?k?\+?$/.test(part) ? (
                               <span
-                                key={index}
+                                key={part}
                                 className="text-lg font-bold text-orange-500"
                               >
                                 {part}
