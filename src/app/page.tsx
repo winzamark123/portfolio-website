@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
+import { Suspense } from 'react';
 import HomeClient from './_components/home-client';
 
 export interface BlogPost {
@@ -53,5 +54,9 @@ async function getBlogPosts(): Promise<BlogPost[]> {
 export default async function Home() {
   const blogs = await getBlogPosts();
 
-  return <HomeClient blogs={blogs} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeClient blogs={blogs} />;
+    </Suspense>
+  );
 }
