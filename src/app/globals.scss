@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 34 20% 95%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;
@@ -57,14 +57,18 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'JetBrains Mono', monospace;
+    font-family:
+      Geist Mono,
+      monospace,
+      -apple-system,
+      BlinkMacSystemFont;
   }
 
-  h1{
+  h1 {
     @apply text-5xl font-extrabold;
   }
 
-  .custom-dashed{
+  .custom-dashed {
     background-image: linear-gradient(to right, black 50%, transparent 50%);
     background-size: 20px 3px;
     background-repeat: repeat-x;
@@ -75,5 +79,4 @@
   .dark .custom-dashed {
     background-image: linear-gradient(to right, white 50%, transparent 50%);
   }
-
 }

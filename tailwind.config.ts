@@ -18,6 +18,9 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        lora: ['var(--font-lora)'],
+      },
       padding: {
         '1/10': '10%',
         '1/20': '5%',
