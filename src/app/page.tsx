@@ -1,8 +1,14 @@
 'use client';
 // import Projects from './_components/Projects/Projects';
 import Link from 'next/link';
-import { SocialProps, NavItems, ExperienceProps } from './_components/const';
-import { useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import {
+  SocialProps,
+  NavItems,
+  ExperienceProps,
+  ProjectList,
+} from './_components/const';
+import { useState, useEffect } from 'react';
 
 const content = {
   title: "hey, i'm Win",
@@ -10,7 +16,19 @@ const content = {
 };
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('experience');
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const tabFromUrl = searchParams.get('tab') || 'experience';
+  const [activeTab, setActiveTab] = useState(tabFromUrl);
+
+  useEffect(() => {
+    setActiveTab(tabFromUrl);
+  }, [tabFromUrl]);
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    router.push(`/?tab=${tab}`);
+  };
 
   return (
     <main className="flex h-screen max-h-screen w-screen items-center overflow-hidden">
@@ -18,14 +36,11 @@ export default function Home() {
         {landing()}
       </div>
       <div className="flex w-1/2 flex-col items-center gap-4 px-10 py-32">
-        {works_nav(activeTab, setActiveTab)}
+        {works_nav(activeTab, handleTabChange)}
         <div className="max-h-96 overflow-y-auto">
           {activeTab === 'experience' && experience()}
+          {activeTab === 'projects' && projects()}
         </div>
-
-        {/* {activeTab === 'projects' && projects()}
-        {activeTab === 'contact' && contact()}
-        {activeTab === 'blog' && blog()} */}
       </div>
     </main>
   );
@@ -81,14 +96,13 @@ const works_nav = (activeTab: string, setActiveTab: (tab: string) => void) => {
 
 const experience = () => {
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       {ExperienceProps.map((experience) => (
         <div key={experience.company} className="flex flex-col gap-2">
           <h2 className="font-lora text-xl font-bold">{experience.company}</h2>
           <div className="flex flex-col">
             <p className="text-sm">{experience.position}</p>
             <p className="text-sm">{experience.description}</p>
-            {/* <p className="text-sm">{experience.date}</p> */}
             <p className="text-sm">{experience.location}</p>
           </div>
         </div>
@@ -99,10 +113,15 @@ const experience = () => {
 
 const projects = () => {
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="flex flex-wrap gap-4">
       {ProjectList.map((project) => (
-        <div key={project.title} className="flex flex-col gap-2">
-          <h2 className="font-lora text-xl font-bold">{project.title}</h2>
+        <div
+          key={project.title}
+          className="flex w-32 flex-col gap-2 rounded-md border p-4"
+        >
+          <h2 className="font-lora text-lg font-bold">{project.title}</h2>
+          {/* <p className="text-sm">{project.description}</p> */}
+          {/* <p className="text-sm">{project.tech_tags.join(', ')}</p> */}
         </div>
       ))}
     </div>

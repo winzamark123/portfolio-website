@@ -122,7 +122,7 @@ export const ExperienceProps = [
 
 export const ProjectList = [
   {
-    title: 'Open Source Deep Research Framework',
+    title: 'OS Deep Research Framework',
     description:
       'An open source deep research framework for LLMs. \
     Fully customizable, modular, and easy to use. ',
@@ -172,37 +172,5 @@ export const ProjectList = [
       'JEST',
       'EXPO',
     ],
-  },
-  {
-    title: 'LSTORE',
-    description:
-      'Implemented a Lineage-based Data Store (LStore) \
-    which combines real-time processing of transactional and \
-    analytical workloads ran with concurrency using update-friendly lineage-based storage architecture',
-    github_repo: 'https://github.com/winzamark123/LStore_Database',
-    url: 'https://github.com/winzamark123/LStore_Database',
-    contentImage_url: '/projects/LStore/LStore_Diagram.svg',
-    tech_tags: ['PYTHON', 'SQL DB'],
-  },
-  {
-    title: 'IMAGEGPT',
-    description:
-      'An AI Chatbot web application. \
-    Providing users with the ability to upload images and receive text-based responses before GPT4 Multi-Modal',
-    github_repo: 'https://github.com/hdjekso/imageGPT',
-    url: 'https://github.com/hdjekso/imageGPT',
-    contentImage_url: '/projects/ImageGPT/macbook.png',
-    tech_tags: ['REACT.JS', 'JAVASCRIPT', 'MongoDB', 'TYPESCRIPT'],
-  },
-  {
-    title: 'ACC-LKA-Simulator',
-    description:
-      'The Adaptive Cruise Control (ACC) and \
-    Lane Keep Assistance (LKA) project is designed to simulate \
-    the behavior of modern vehicular control systems in a controlled environment. ',
-    github_repo: 'https://github.com/winzamark123/ACC-LKA-Simulation',
-    url: 'https://github.com/winzamark123/ACC-LKA-Simulation',
-    contentImage_url: '/projects/AccLkaSimulator/acc-simulator.png',
-    tech_tags: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'MONGODB'],
   },
 ];
