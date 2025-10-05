@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { ModeToggle } from './_components/ModeToggle';
-import { Github, Linkedin, Mail, FilePenLine, Twitter } from 'lucide-react';
-import { SocialProps} from '../const';
+import { SocialProps } from '../const';
 
 export default function Nav() {
   return (

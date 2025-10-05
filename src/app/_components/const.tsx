@@ -56,9 +56,9 @@ export const NavItems = [
 export const ExperienceProps = [
   {
     company: 'JigsawStack',
-    position: 'Founding Engineer',
+    position: 'founding engineer',
     description:
-      'Building small langauge models (SLMs) for developer use cases',
+      'building small langauge models (SLMs) for developer use cases',
     date: 'Jun 2025 - Current',
     // icon: JigsawStack_logo,
     url: 'https://jigsawstack.com/',
@@ -66,9 +66,9 @@ export const ExperienceProps = [
   },
   {
     company: 'Bustem',
-    position: 'Frontend Software Engineer',
+    position: 'frontend software engineer',
     description:
-      'Founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands',
+      'founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands',
     date: 'Jan 2025 - Current',
     // icon: Bustem_logo,
     url: 'https://bustem.com/',
@@ -76,9 +76,9 @@ export const ExperienceProps = [
   },
   {
     company: 'AggieWorks',
-    position: 'Full-Stack Software Engineer',
+    position: 'full-stack software engineer',
     description:
-      'Led the development of a local business engagement platform \
+      'led the development of a local business engagement platform \
       enabling 35k+ students to discover deals, \
       increasing engagement with local businesses',
     date: 'Sep 2024 - Jan 2025',
@@ -88,9 +88,9 @@ export const ExperienceProps = [
   },
   {
     company: 'Rhombus',
-    position: 'Software Engineer Intern',
+    position: 'software engineer intern',
     description:
-      'Built a user interface for frontend web admin console to highlight \
+      'built a user interface for frontend web admin console to highlight \
       camera visual environment through computer vision and machine learning',
     date: 'Jun 2024 - Sep 2024',
     // icon: Rhombus_logo,
@@ -99,9 +99,9 @@ export const ExperienceProps = [
   },
   {
     company: 'HackDavis',
-    position: 'Techincal Product Manager',
+    position: 'techincal product manager',
     description:
-      'Deployed a website and judging app for a 1000+ person hackathon. \
+      'deployed a website and judging app for a 1000+ person hackathon. \
       with 275k+ visitors, 8300 unique visitors at peak month',
     date: 'Sep 2023 - Current',
     // icon: HackDavis_logo,
@@ -110,9 +110,9 @@ export const ExperienceProps = [
   },
   {
     company: 'Kebloom',
-    position: 'Software Engineer Intern',
+    position: 'software engineer intern',
     description:
-      'Developed a mobile application attracting over 300+ active early users',
+      'developed a mobile application attracting over 300+ active early users',
     date: 'Jun 2023 - Aug 2023',
     // icon: Kebloom,
     url: 'https://www.kebloom.com/',
@@ -124,34 +124,24 @@ export const ProjectList = [
   {
     title: 'OS Deep Research Framework',
     description:
-      'An open source deep research framework for LLMs. \
-    Fully customizable, modular, and easy to use. ',
+      'an open source deep research framework for LLMs. \
+    fully customizable, modular, and easy to use. ',
     github_repo: 'https://github.com/JigsawStack/deep-research',
-    contentImage_url: '/projects/Camoora/ipad.png',
-    tech_tags: [
-      'TYPESCRIPT',
-      'Next.js',
-      'TailwindCSS',
-      'MongoDB',
-      'POSTGRESQL',
-      'tRPC',
-      'AWS S3',
-    ],
+    tech_tags: ['typescript', 'ai sdk'],
   },
   {
     title: 'caMOOra',
     description:
-      'A website marketplcae which matches student-photographers. \
-    with clients. Focused on providing a platform for students. ',
+      'a website marketplace which matches student-photographers. \
+    with clients. focused on providing a platform for students. ',
     github_repo: 'https://github.com/winzamark123/caMOOra',
     url: 'https://camoora.io/',
-    contentImage_url: '/projects/Camoora/ipad.png',
     tech_tags: [
-      'TYPESCRIPT',
-      'Next.js',
-      'TailwindCSS',
-      'MongoDB',
-      'POSTGRESQL',
+      'typescript',
+      'next.js',
+      'tailwindcss',
+      'mongodb',
+      'postgresql',
       'tRPC',
       'AWS S3',
     ],
@@ -159,18 +149,17 @@ export const ProjectList = [
   {
     title: 'JUSTSAYIN',
     description:
-      'Mobile application displaying daily quotes from your favorite authors on your lock screen widget',
+      'mobile application displaying daily quotes from your favorite authors on your lock screen widget',
     github_repo: 'https://github.com/winzamark123/JustSayin',
-    url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
-    contentImage_url: '/projects/JustSayin/iphone.png',
+    apple_url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
     tech_tags: [
-      'React Native',
-      'SWIFT',
-      'TYPESCRIPT',
-      'FIREBASE',
-      'AWS',
-      'JEST',
-      'EXPO',
+      'react native',
+      'swift',
+      'typescript',
+      'firebase',
+      'aws',
+      'jest',
+      'expo',
     ],
   },
 ];

@@ -1,6 +1,3 @@
-import Nav from './_components/Nav/Nav';
-import Footer from './_components/Footer/Footer';
-
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import { Lora } from 'next/font/google';
