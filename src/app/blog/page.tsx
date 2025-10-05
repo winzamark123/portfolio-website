@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
-import { marked } from 'marked';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import Image from 'next/image';
+import type { MDXComponents } from 'mdx/types';
+import DocsRoot from '@/components/blog/DocsRoot';
 
 interface BlogPost {
   title: string;
@@ -12,33 +15,47 @@ interface BlogPost {
   [key: string]: any; // For any additional frontmatter fields
 }
 
-// Add this function to convert Obsidian image syntax to HTML
+// Custom components for MDX
+const components: MDXComponents = {
+  h1: (props) => (
+    <h1
+      {...props}
+      className="text-4xl font-bold text-emerald-500 dark:text-emerald-500"
+    />
+  ),
+  h2: (props) => (
+    <h2 {...props} className="text-xl text-orange-500 dark:text-orange-500" />
+  ),
+  h3: (props) => <h3 {...props} className="text-lg font-semibold" />,
+  p: (props) => <p {...props} className="my-4 text-base" />,
+  a: (props) => (
+    <a
+      {...props}
+      className="text-blue-500 underline hover:text-blue-600"
+      target="_blank"
+      rel="noopener noreferrer"
+    />
+  ),
+  strong: (props) => <strong {...props} className="font-bold text-[#89DDEC]" />,
+  em: (props) => <em {...props} className="italic text-[#EF89A5]" />,
+  img: (props) => (
+    <div className="relative my-4 h-[400px] w-full">
+      <Image
+        src={props.src || ''}
+        alt={props.alt || 'Blog image'}
+        fill
+        className="object-contain"
+      />
+    </div>
+  ),
+  // Add your custom React components here
+  DocsRoot,
+};
+
+// Convert Obsidian image syntax to MDX format
 function convertObsidianImageLinks(content: string): string {
-  // Replace ![[filename]] with custom HTML that we can target later
   return content.replace(/!\[\[(.*?)\]\]/g, (_, filename) => {
-    // Don't split the filename, keep it intact including extension
-    return `<obsidian-image src="blog/ImageDump/${filename}"></obsidian-image>`;
-  });
-}
-
-// Add this function to style quoted text
-function styleQuotedText(html: string): string {
-  // This regex uses a negative lookahead to avoid matching quotes within HTML tags
-  // It will only match standalone quotes in text content
-  return html.replace(/("([^"]+)")/g, (match, fullQuote, _) => {
-    // Check if this quote is inside an HTML tag attribute
-    // Count < and > characters before this position
-    const beforeMatch = html.substring(0, html.indexOf(match));
-    const openTags = (beforeMatch.match(/</g) || []).length;
-    const closeTags = (beforeMatch.match(/>/g) || []).length;
-
-    // If we have equal numbers of < and >, we're outside of tags
-    if (openTags === closeTags) {
-      return `<span class="quoted-text">${fullQuote}</span>`;
-    }
-
-    // Otherwise, we're inside a tag, so return the original
-    return match;
+    return `![${filename}](/blog/ImageDump/${filename})`;
   });
 }
 
@@ -47,10 +64,10 @@ export default async function BlogPage() {
   const blogDirectory = path.join(process.cwd(), 'public', 'blog');
   const files = fs.readdirSync(blogDirectory);
 
-  // Read and process all Markdown files
+  // Read and process all MDX files
   const blogs: BlogPost[] = await Promise.all(
     files
-      .filter((file) => file.endsWith('.md'))
+      .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
       .map(async (file) => {
         const filePath = path.join(blogDirectory, file);
         const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -59,18 +76,15 @@ export default async function BlogPage() {
         // Process the content to handle Obsidian image syntax
         const processedContent = convertObsidianImageLinks(content);
 
-        // First convert markdown to HTML
-        const htmlContent = await marked(processedContent);
-
-        // Then apply quote styling to the HTML (after markdown has been processed)
-        const styledContent = styleQuotedText(htmlContent);
-
-        // Extract slug by removing .md and converting spaces to hyphens
-        const slug = file.replace('.md', '').toLowerCase().replace(/\s+/g, '-');
+        // Extract slug by removing extension and converting spaces to hyphens
+        const slug = file
+          .replace(/\.(mdx|md)$/, '')
+          .toLowerCase()
+          .replace(/\s+/g, '-');
 
         return {
           ...(data as { title: string; date: string; tags: string[] }),
-          content: styledContent,
+          content: processedContent,
           slug,
         };
       })
@@ -103,7 +117,6 @@ export default async function BlogPage() {
     <main className="container flex flex-col items-center justify-center px-1/10 py-8">
       {sortedBlogs.map((blog, index) => (
         <article key={index} className="mb-8 border-b border-gray-200 pb-8">
-          {/* <h2 className="mb-2 text-xl font-bold">{blog.title}</h2> */}
           <p className="mb-4 text-gray-500">
             {new Date(blog.date).toLocaleDateString()}
           </p>
@@ -117,29 +130,9 @@ export default async function BlogPage() {
               </span>
             ))}
           </div>
-          <div
-            className="prose max-w-none dark:prose-invert prose-h1:text-4xl 
-            prose-h2:text-xl prose-h2:text-orange-500 prose-h3:text-lg 
-            prose-p:text-base prose-a:text-blue-500 prose-a:underline
-            prose-strong:text-[#89DDEC] prose-em:text-[#EF89A5]
-            dark:prose-h1:text-emerald-500 dark:prose-h2:text-orange-500
-            [&_.quoted-text]:font-medium [&_.quoted-text]:italic [&_.quoted-text]:text-[#FF6B6B]
-            "
-            dangerouslySetInnerHTML={{
-              __html: blog.content.replace(
-                /<obsidian-image src="([^"]+)"><\/obsidian-image>/g,
-                (_, src) => `
-                  <div class="relative w-full h-[400px] my-4">
-                    <img
-                      src="${src}"
-                      alt="Blog image"
-                      class="object-contain w-full h-full"
-                    />
-                  </div>
-                `
-              ),
-            }}
-          />
+          <div className="prose max-w-none dark:prose-invert">
+            <MDXRemote source={blog.content} components={components} />
+          </div>
         </article>
       ))}
     </main>

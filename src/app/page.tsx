@@ -1,129 +1,57 @@
-'use client';
-// import Projects from './_components/Projects/Projects';
-import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
-import {
-  SocialProps,
-  NavItems,
-  ExperienceProps,
-  ProjectList,
-} from './_components/const';
-import { useState, useEffect } from 'react';
+import fs from 'node:fs';
+import path from 'node:path';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+import HomeClient from './_components/home-client';
 
-const content = {
-  title: "hey, i'm Win",
-  description: "i'm a full-stack engineer based in San Francisco",
-};
-
-export default function Home() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const tabFromUrl = searchParams.get('tab') || 'experience';
-  const [activeTab, setActiveTab] = useState(tabFromUrl);
-
-  useEffect(() => {
-    setActiveTab(tabFromUrl);
-  }, [tabFromUrl]);
-
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-    router.push(`/?tab=${tab}`);
-  };
-
-  return (
-    <main className="flex h-screen max-h-screen w-screen items-center overflow-hidden">
-      <div className="flex h-full w-1/2 items-center justify-center p-10 sm:p-1/10">
-        {landing()}
-      </div>
-      <div className="flex w-1/2 flex-col items-center gap-4 px-10 py-32">
-        {works_nav(activeTab, handleTabChange)}
-        <div className="max-h-96 overflow-y-auto">
-          {activeTab === 'experience' && experience()}
-          {activeTab === 'projects' && projects()}
-        </div>
-      </div>
-    </main>
-  );
+export interface BlogPost {
+  title: string;
+  slug: string;
+  date: string;
+  tags: string[];
+  content: any;
 }
 
-const landing = () => {
-  return (
-    <div className="flex w-fit flex-col gap-4 overflow-hidden sm:-mt-10">
-      <div className="">
-        <h1 className="text-4xl">{content.title}</h1>
-        <p className="text-sm">{content.description}</p>
-      </div>
-      {social()}
-    </div>
-  );
-};
+async function getBlogPosts(): Promise<BlogPost[]> {
+  const blogDirectory = path.join(process.cwd(), 'public', 'blog');
+  const files = fs.readdirSync(blogDirectory);
 
-const social = () => {
-  return (
-    <div className="flex items-center gap-4">
-      {SocialProps.map((social, index) => (
-        <Link
-          key={index}
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative flex flex-col items-center"
-        >
-          <div className="hover:text-emerald-500">{social.icon}</div>
-        </Link>
-      ))}
-    </div>
-  );
-};
+  const blogsPromises = files
+    .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
+    .map(async (file) => {
+      const filePath = path.join(blogDirectory, file);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const { data, content } = matter(fileContent);
 
-const works_nav = (activeTab: string, setActiveTab: (tab: string) => void) => {
-  return (
-    <div className="flex flex-row gap-8">
-      {NavItems.map((item, index) => (
-        <button
-          key={index}
-          onClick={() => setActiveTab(item.id)}
-          className={`hover:underline hover:underline-offset-[3px] ${
-            activeTab === item.id ? 'underline underline-offset-[3px]' : ''
-          }`}
-        >
-          {item.label}
-        </button>
-      ))}
-    </div>
-  );
-};
+      const slug = file
+        .replace(/\.(mdx|md)$/, '')
+        .toLowerCase()
+        .replace(/\s+/g, '-');
 
-const experience = () => {
-  return (
-    <div className="flex w-full flex-col gap-4">
-      {ExperienceProps.map((experience) => (
-        <div key={experience.company} className="flex flex-col gap-2">
-          <h2 className="font-lora text-xl font-bold">{experience.company}</h2>
-          <div className="flex flex-col">
-            <p className="text-sm">{experience.position}</p>
-            <p className="text-sm">{experience.description}</p>
-            <p className="text-sm">{experience.location}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+      // Serialize the MDX content
+      const mdxSource = await serialize(content);
 
-const projects = () => {
-  return (
-    <div className="flex flex-wrap gap-4">
-      {ProjectList.map((project) => (
-        <div
-          key={project.title}
-          className="flex w-32 flex-col gap-2 rounded-md border p-4"
-        >
-          <h2 className="font-lora text-lg font-bold">{project.title}</h2>
-          {/* <p className="text-sm">{project.description}</p> */}
-          {/* <p className="text-sm">{project.tech_tags.join(', ')}</p> */}
-        </div>
-      ))}
-    </div>
-  );
-};
+      return {
+        title: data.title || 'Untitled',
+        slug,
+        date: data.date || '',
+        tags: data.tags || [],
+        content: mdxSource,
+      };
+    });
+
+  const blogs = await Promise.all(blogsPromises);
+
+  // Sort blogs by date in descending order
+  return blogs.sort((a, b) => {
+    const dateA = new Date(a.date || 0);
+    const dateB = new Date(b.date || 0);
+    return dateB.getTime() - dateA.getTime();
+  });
+}
+
+export default async function Home() {
+  const blogs = await getBlogPosts();
+
+  return <HomeClient blogs={blogs} />;
+}

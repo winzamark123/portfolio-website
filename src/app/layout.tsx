@@ -32,7 +32,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={lora.variable}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
