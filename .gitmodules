@@ -1,6 +1,0 @@
-[submodule "public/blog"]
-	path = public/blog
-	url = https://github.com/winzamark123/portfolio-blog.git
-[submodule "public/public/blog"]
-	path = public/public/blog
-	url = https://github.com/winzamark123/portfolio-blog.git
