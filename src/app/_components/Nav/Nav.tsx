@@ -1,44 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { ModeToggle } from './_components/ModeToggle';
-import { Github, Linkedin, Mail, FilePenLine } from 'lucide-react';
-
-type SocialProp = {
-  icon: React.ReactNode;
-  url: string;
-  description: string;
-};
-
-const SocialProps: SocialProp[] = [
-  {
-    icon: (
-      <Github className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
-    ),
-    url: 'https://github.com/winzamark123',
-    description: 'Github',
-  },
-  {
-    icon: (
-      <Linkedin className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
-    ),
-    url: 'https://www.linkedin.com/in/teeranade-cheng/',
-    description: 'LinkedIn',
-  },
-  {
-    icon: (
-      <Mail className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
-    ),
-    url: 'mailto:teeranadecheng@gmail.com',
-    description: 'Mail',
-  },
-  {
-    icon: (
-      <FilePenLine className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
-    ),
-    url: 'https://drive.google.com/drive/folders/1GgfgmE1ILgwvrgGc5d81xA4FyihqIFUn?usp=sharing',
-    description: 'Resume',
-  },
-];
+import { SocialProps } from '../const';
 
 export default function Nav() {
   return (

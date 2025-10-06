@@ -1,27 +1,62 @@
-// import Projects from './_components/Projects/Projects';
-import Landing from './_components/Landing/Landing';
-import Profile from './_components/Profile/Profile';
-import Experience from './_components/Experience/Experience';
-import Tag from './_components/Tag';
-import Project from './_components/Projects/Project';
-import Blog_Tag from './_components/Blog_Tag/Blog_Tag';
-export default function Home() {
+import fs from 'node:fs';
+import path from 'node:path';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+import { Suspense } from 'react';
+import HomeClient from './_components/home-client';
+
+export interface BlogPost {
+  title: string;
+  slug: string;
+  date: string;
+  tags: string[];
+  content: any;
+}
+
+async function getBlogPosts(): Promise<BlogPost[]> {
+  const blogDirectory = path.join(process.cwd(), 'public', 'blog');
+  const files = fs.readdirSync(blogDirectory);
+
+  const blogsPromises = files
+    .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
+    .map(async (file) => {
+      const filePath = path.join(blogDirectory, file);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const { data, content } = matter(fileContent);
+
+      const slug = file
+        .replace(/\.(mdx|md)$/, '')
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+
+      // Serialize the MDX content
+      const mdxSource = await serialize(content);
+
+      return {
+        title: data.title || 'Untitled',
+        slug,
+        date: data.date || '',
+        tags: data.tags || [],
+        content: mdxSource,
+      };
+    });
+
+  const blogs = await Promise.all(blogsPromises);
+
+  // Sort blogs by date in descending order
+  return blogs.sort((a, b) => {
+    const dateA = new Date(a.date || 0);
+    const dateB = new Date(b.date || 0);
+    return dateB.getTime() - dateA.getTime();
+  });
+}
+
+export default async function Home() {
+  const blogs = await getBlogPosts();
+
   return (
-    <main className="w-full overflow-hidden pt-8 sm:p-1/10">
-      <Blog_Tag />
-      <Landing />
-      <div className="hidden sm:flex">
-        <Profile />
-      </div>
-      <div className="flex h-36 w-full">
-        <Tag TagProp="</Code,Coffee,Repeat>" numberProp={1} />
-      </div>
-      <div className="flex h-fit w-full py-8">
-        <Experience />
-      </div>
-      <div className="flex h-fit w-full">
-        <Project />
-      </div>
-    </main>
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeClient blogs={blogs} />;
+    </Suspense>
   );
 }

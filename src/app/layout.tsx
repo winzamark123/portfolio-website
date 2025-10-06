@@ -1,9 +1,13 @@
-import Nav from './_components/Nav/Nav';
-import Footer from './_components/Footer/Footer';
-
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
+import { Lora } from 'next/font/google';
 import './globals.scss';
+
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-lora',
+  display: 'swap',
+});
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -22,18 +26,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head>
           <link rel="icon" href="/ResumeIcon.ico" />
         </head>
-        <body>
+        <body className={lora.variable}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
-            <Nav />
             <div className="max-w-screen flex flex-col items-center justify-center overflow-hidden">
               {children}
             </div>
-            <Footer />
           </ThemeProvider>
         </body>
       </html>
