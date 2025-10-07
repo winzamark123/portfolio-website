@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
 import { BlogPost } from '../page';
+import { Spinner } from '@/components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 
 const content = {
@@ -60,15 +61,15 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   };
 
   return (
-    <main className="flex h-screen max-h-screen w-screen items-center overflow-hidden">
-      <div className="flex h-full w-1/2 items-center justify-center p-10 sm:p-1/10">
+    <main className="flex h-screen max-h-screen w-screen flex-col items-center overflow-hidden md:flex-row">
+      <div className="flex w-full items-center justify-center p-6 pt-20 md:h-full md:w-1/2 md:p-10">
         {landing()}
       </div>
-      <div className="flex w-1/2 flex-col items-center gap-4 px-10 py-32">
+      <div className="flex w-full flex-col items-center gap-4 overflow-y-auto px-6 pb-6 md:w-1/2 md:overflow-visible md:px-10 md:py-32 ">
         {works_nav(activeTab, handleTabChange)}
-        <div className="max-h-96 w-full overflow-y-scroll">
+        <div className="mt-2 sm:mt-0 max-h-[65vh] w-full overflow-y-scroll sm:max-h-96">
           {activeTab === 'experience' && experience()}
-          {activeTab === 'projects' && projects()}
+          {activeTab === 'projects' && <Projects />}
           {activeTab === 'blog' &&
             Blog(blogs, selectedBlog, handleSelectBlog, handleBackToList)}
         </div>
@@ -79,9 +80,9 @@ export default function HomeClient({ blogs }: HomeClientProps) {
 
 const landing = () => {
   return (
-    <div className="flex w-fit flex-col gap-4 overflow-hidden sm:-mt-10">
+    <div className="flex w-fit flex-col gap-4 overflow-hidden">
       <div className="flex flex-col gap-2">
-        <h1 className="text-4xl">{content.title}</h1>
+        <h1 className="text-3xl">{content.title}</h1>
         <p className="text-sm">{content.description}</p>
       </div>
       {social()}
@@ -109,12 +110,12 @@ const social = () => {
 
 const works_nav = (activeTab: string, setActiveTab: (tab: string) => void) => {
   return (
-    <div className="flex flex-row gap-8">
+    <div className="flex flex-row gap-4 md:gap-8">
       {NavItems.map((item, index) => (
         <button
           key={index}
           onClick={() => setActiveTab(item.id)}
-          className={`hover:underline hover:underline-offset-[3px] ${
+          className={`text-sm hover:underline hover:underline-offset-[3px] ${
             activeTab === item.id ? 'underline underline-offset-[3px]' : ''
           }`}
         >
@@ -132,7 +133,7 @@ const experience = () => {
         <div key={experience.company} className="flex flex-col gap-2">
           <h2 className="text-md font-lora font-bold">{experience.company}</h2>
           <div className="flex w-full flex-col">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
               <p className="text-sm italic">{experience.position}</p>
               <p className="text-xs">{experience.location}</p>
             </div>
@@ -145,19 +146,28 @@ const experience = () => {
   );
 };
 
-const projects = () => {
+const Projects = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
-    <div className="flex flex-col gap-4 ">
+    <div className="flex flex-col gap-4">
+      {!imageLoaded && (
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
+      )}
       <img
         src="https://ghchart.rshah.org/winzamark123"
         alt="Win's Github chart"
+        className="w-full py-2"
+        onLoad={() => setImageLoaded(true)}
+        style={{ display: imageLoaded ? 'block' : 'none' }}
       />
 
       {/* <div className="grid grid-cols-1 sm:grid-cols-2"> */}
       <div className="flex flex-wrap">
         {ProjectList.map((project) => (
-          <div key={project.title} className="flex flex-col gap-2 p-4">
-            <div className="flex items-center gap-4">
+          <div key={project.title} className="flex flex-col gap-2 p-2 md:p-4">
+            <div className="flex items-center gap-2 md:gap-4">
               <h2 className="text-md font-lora font-bold">{project.title}</h2>
               <div className="flex gap-2">
                 {project.github_repo && (
@@ -206,9 +216,9 @@ const Blog = (
           ← back to all posts
         </button>
         <article className="prose prose-sm max-w-none dark:prose-invert">
-          <h1 className="mb-2 font-lora text-2xl font-bold">
+          <h2 className="mb-2 font-lora text-xl font-bold">
             {selectedBlog.title}
-          </h1>
+          </h2>
           <p className="mb-4 text-xs text-gray-500">
             {new Date(selectedBlog.date).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -239,7 +249,7 @@ const Blog = (
         <button
           key={blog.slug}
           onClick={() => handleSelectBlog(blog)}
-          className="flex flex-col gap-2  border-2 border-black p-4 text-left hover:border-emerald-500"
+          className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
         >
           <h2 className="text-md font-lora font-bold">{blog.title}</h2>
           <p className="text-xs text-gray-500">
