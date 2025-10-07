@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
 import { BlogPost } from '../page';
-import { Spinner } from '@/components/ui/spinner';
+import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 
 const content = {
