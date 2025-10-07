@@ -67,7 +67,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
       </div>
       <div className="flex w-full flex-col items-center gap-4 overflow-y-auto px-6 pb-6 md:w-1/2 md:overflow-visible md:px-10 md:py-32 ">
         {works_nav(activeTab, handleTabChange)}
-        <div className="mt-2 sm:mt-0 max-h-[65vh] w-full overflow-y-scroll sm:max-h-96">
+        <div className="mt-2 max-h-[65vh] w-full overflow-y-scroll sm:mt-0 sm:max-h-96">
           {activeTab === 'experience' && experience()}
           {activeTab === 'projects' && <Projects />}
           {activeTab === 'blog' &&
