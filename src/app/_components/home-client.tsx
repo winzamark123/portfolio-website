@@ -5,7 +5,8 @@ import { SocialProps, NavItems, ExperienceProps, ProjectList } from './const';
 import { useState, useEffect } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
-import { BlogPost } from '../page';
+import type { BlogPost } from '../page';
+import Image from 'next/image';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 
@@ -93,9 +94,9 @@ const landing = () => {
 const social = () => {
   return (
     <div className="flex items-center gap-4">
-      {SocialProps.map((social, index) => (
+      {SocialProps.map((social) => (
         <Link
-          key={index}
+          key={social.url}
           href={social.url}
           target="_blank"
           rel="noopener noreferrer"
@@ -111,9 +112,10 @@ const social = () => {
 const works_nav = (activeTab: string, setActiveTab: (tab: string) => void) => {
   return (
     <div className="flex flex-row gap-4 md:gap-8">
-      {NavItems.map((item, index) => (
+      {NavItems.map((item) => (
         <button
-          key={index}
+          key={item.id}
+          type="button"
           onClick={() => setActiveTab(item.id)}
           className={`text-sm hover:underline hover:underline-offset-[3px] ${
             activeTab === item.id ? 'underline underline-offset-[3px]' : ''
@@ -155,10 +157,12 @@ const Projects = () => {
           <Spinner />
         </div>
       )}
-      <img
+      <Image
         src="https://ghchart.rshah.org/winzamark123"
         alt="Win's Github chart"
         className="w-full py-2"
+        width={800}
+        height={200}
         onLoad={() => setImageLoaded(true)}
         style={{ display: imageLoaded ? 'block' : 'none' }}
       />
@@ -210,6 +214,7 @@ const Blog = (
     return (
       <div className="w-full">
         <button
+          type="button"
           onClick={handleBackToList}
           className="mb-4 text-xs hover:underline"
         >
@@ -227,9 +232,9 @@ const Blog = (
             })}
           </p>
           <div className="mb-4 flex flex-wrap gap-2">
-            {selectedBlog.tags?.map((tag, i) => (
+            {selectedBlog.tags?.map((tag) => (
               <span
-                key={i}
+                key={tag}
                 className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-800"
               >
                 #{tag}
@@ -248,6 +253,7 @@ const Blog = (
       {blogs.map((blog) => (
         <button
           key={blog.slug}
+          type="button"
           onClick={() => handleSelectBlog(blog)}
           className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
         >
