@@ -126,7 +126,7 @@ export const ProjectList = [
     description:
       'bringing AI to your favorite whiteboard',
     github_repo: 'https://github.com/winzamark123/open-canvas',
-    url: 'https://open-canvas.vercel.app/',
+    url: 'https://www.opencanvas.studio/',
     tech_tags: ['typescript', 'ai sdk', 'monorepo', 'excalidraw'],
   },
   {
