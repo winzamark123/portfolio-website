@@ -122,6 +122,14 @@ export const ExperienceProps = [
 
 export const ProjectList = [
   {
+    title: 'Open Canvas',
+    description:
+      'bringing AI to your favorite whiteboard',
+    github_repo: 'https://github.com/winzamark123/open-canvas',
+    url: 'https://open-canvas.vercel.app/',
+    tech_tags: ['typescript', 'ai sdk', 'monorepo', 'excalidraw'],
+  },
+  {
     title: 'OS Deep Research Framework',
     description:
       'an open source deep research framework for LLMs. \
