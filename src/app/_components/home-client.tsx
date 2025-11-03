@@ -157,7 +157,7 @@ const Projects = () => {
           <Spinner />
         </div>
       )}
-      <Image
+      <img
         src="https://ghchart.rshah.org/winzamark123"
         alt="Win's Github chart"
         className="w-full py-2"
