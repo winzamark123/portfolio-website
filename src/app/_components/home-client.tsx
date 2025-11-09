@@ -62,7 +62,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
 
   return (
     <main className="flex h-screen max-h-screen w-screen flex-col items-center overflow-hidden md:flex-row">
-      <div className="flex w-full items-center justify-center p-6 pt-20 md:h-full md:w-1/2 border">
+      <div className="flex w-full items-center justify-center border p-6 pt-20 md:h-full md:w-1/2">
         {landing()}
       </div>
       <div className="flex w-full flex-col items-center gap-4 overflow-y-auto px-6 pb-6 md:w-1/2 md:overflow-visible md:px-10 md:py-32 ">
@@ -82,7 +82,7 @@ const landing = () => {
   return (
     <div className="flex w-fit flex-col gap-4 overflow-hidden">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-lora">{content.title}</h1>
+        <h1 className="font-lora text-3xl">{content.title}</h1>
         <p className="text-sm">{content.description}</p>
       </div>
       {social()}
