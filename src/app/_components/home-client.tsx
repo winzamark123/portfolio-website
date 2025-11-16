@@ -25,6 +25,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   const postSlugFromUrl = searchParams.get('post');
   const [activeTab, setActiveTab] = useState(tabFromUrl);
   const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     setActiveTab(tabFromUrl);
@@ -73,6 +74,25 @@ export default function HomeClient({ blogs }: HomeClientProps) {
           {activeTab === 'blog' &&
             Blog(blogs, selectedBlog, handleSelectBlog, handleBackToList)}
         </div>
+
+        {activeTab === 'projects' && (
+          <div className="flex w-full flex-col">
+            {!imageLoaded && (
+              <div className="flex justify-center">
+                <Spinner />
+              </div>
+            )}
+            <img
+              src="https://ghchart.rshah.org/winzamark123"
+              alt="Win's Github chart"
+              className="w-full py-2"
+              width={800}
+              height={200}
+              onLoad={() => setImageLoaded(true)}
+              style={{ display: imageLoaded ? 'block' : 'none' }}
+            />
+          </div>
+        )}
       </div>
     </main>
   );
@@ -148,24 +168,8 @@ const experience = () => {
 };
 
 const Projects = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <div className="flex flex-col gap-4">
-      {!imageLoaded && (
-        <div className="flex justify-center">
-          <Spinner />
-        </div>
-      )}
-      <img
-        src="https://ghchart.rshah.org/winzamark123"
-        alt="Win's Github chart"
-        className="w-full py-2"
-        width={800}
-        height={200}
-        onLoad={() => setImageLoaded(true)}
-        style={{ display: imageLoaded ? 'block' : 'none' }}
-      />
-
       {/* <div className="grid grid-cols-1 sm:grid-cols-2"> */}
       <div className="flex flex-wrap">
         {ProjectList.map((project) => (
