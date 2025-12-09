@@ -32,7 +32,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           forcedTheme="light"
           disableTransitionOnChange
         >
-          <div className="max-w-screen flex flex-col items-center justify-center overflow-hidden">
+          <div className="max-w-screen flex flex-col items-center justify-center">
             {children}
           </div>
         </ThemeProvider>

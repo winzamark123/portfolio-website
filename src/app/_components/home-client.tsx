@@ -1,5 +1,7 @@
 'use client';
+import { MagazineLayout } from '@/components/ui/magazine-layout';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { SocialProps, NavItems, ExperienceProps, ProjectList } from './const';
 import { useState, useEffect } from 'react';
@@ -8,6 +10,15 @@ import { useMDXComponents } from '@/mdx-components';
 import type { BlogPost } from '../page';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const fadeVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const fadeTransition = { duration: 0.2, ease: 'easeInOut' };
 
 const content = {
   title: "hey, i'm Win",
@@ -62,37 +73,62 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   };
 
   return (
-    <main className="flex h-screen max-h-screen w-screen flex-col items-center overflow-hidden md:flex-row">
-      <div className="flex w-full items-center justify-center border p-6 pt-20 md:h-full md:w-1/2">
+    <main className="flex h-full max-w-7xl flex-col items-center pb-10 ">
+      <div className="flex w-full items-start justify-start pt-20">
         {landing()}
       </div>
-      <div className="flex w-full flex-col items-center gap-4 overflow-y-auto px-6 pb-6 md:w-1/2 md:overflow-visible md:px-10 md:py-32 ">
+      <div className="flex w-full flex-col items-center gap-4">
         {works_nav(activeTab, handleTabChange)}
-        <div className="mt-2 max-h-[65vh] w-full overflow-y-scroll sm:mt-0 sm:max-h-96">
-          {activeTab === 'experience' && experience()}
-          {activeTab === 'projects' && <Projects />}
-          {activeTab === 'blog' &&
-            Blog(blogs, selectedBlog, handleSelectBlog, handleBackToList)}
-        </div>
-
-        {activeTab === 'projects' && (
-          <div className="flex w-full flex-col">
-            {!imageLoaded && (
-              <div className="flex justify-center">
-                <Spinner />
-              </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            variants={fadeVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={fadeTransition}
+          >
+            {activeTab === 'experience' && experience()}
+            {activeTab === 'projects' && <Projects />}
+            {activeTab === 'blog' && (
+              <Blog
+                blogs={blogs}
+                selectedBlog={selectedBlog}
+                handleSelectBlog={handleSelectBlog}
+                handleBackToList={handleBackToList}
+              />
             )}
-            <img
-              src="https://ghchart.rshah.org/winzamark123"
-              alt="Win's Github chart"
-              className="w-full py-2"
-              width={800}
-              height={200}
-              onLoad={() => setImageLoaded(true)}
-              style={{ display: imageLoaded ? 'block' : 'none' }}
-            />
-          </div>
-        )}
+          </motion.div>
+        </AnimatePresence>
+
+        <AnimatePresence mode="wait">
+          {activeTab === 'projects' && (
+            <motion.div
+              key="github-chart"
+              variants={fadeVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={fadeTransition}
+              className="flex w-full flex-col"
+            >
+              {!imageLoaded && (
+                <div className="flex justify-center">
+                  <Spinner />
+                </div>
+              )}
+              <Image
+                src="https://ghchart.rshah.org/winzamark123"
+                alt="Win's Github chart"
+                className="w-full py-2"
+                width={800}
+                height={200}
+                onLoad={() => setImageLoaded(true)}
+                style={{ display: imageLoaded ? 'block' : 'none' }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );
@@ -106,6 +142,7 @@ const landing = () => {
         <p className="text-sm">{content.description}</p>
       </div>
       {social()}
+      <div className="h-1 w-2/3 bg-foreground/80" />
     </div>
   );
 };
@@ -130,7 +167,7 @@ const social = () => {
 
 const works_nav = (activeTab: string, setActiveTab: (tab: string) => void) => {
   return (
-    <div className="flex flex-row gap-4 md:gap-8">
+    <div className="flex flex-row gap-4 py-4 md:gap-8">
       {NavItems.map((item) => (
         <button
           key={item.id}
@@ -169,107 +206,130 @@ const experience = () => {
 
 const Projects = () => {
   return (
-    <div className="flex flex-col gap-4">
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2"> */}
-      <div className="flex flex-wrap">
-        {ProjectList.map((project) => (
-          <div key={project.title} className="flex flex-col gap-2 p-2 md:p-4">
-            <div className="flex items-center gap-2 md:gap-4">
-              <h2 className="text-md font-lora font-bold">{project.title}</h2>
-              <div className="flex gap-2">
-                {project.github_repo && (
-                  <Link href={project.github_repo} target="_blank">
-                    <Github className="h-4 w-4" />
-                  </Link>
-                )}
-                {project.apple_url && (
-                  <Link href={project.apple_url} target="_blank">
-                    <Apple className="h-4 w-4" />
-                  </Link>
-                )}
-                {project.url && (
-                  <Link href={project.url} target="_blank">
-                    <Link2 className="h-4 w-4" />
-                  </Link>
-                )}
-              </div>
+    <MagazineLayout columns={3} gap="lg">
+      {ProjectList.map((project) => (
+        <div
+          key={project.title}
+          className="mb-6 flex break-inside-avoid flex-col"
+        >
+          <div className="flex items-center gap-2 md:gap-4">
+            <h2 className="font-lora text-lg font-bold">{project.title}</h2>
+            <div className="flex gap-2">
+              {project.github_repo && (
+                <Link href={project.github_repo} target="_blank">
+                  <Github className="h-4 w-4" />
+                </Link>
+              )}
+              {project.apple_url && (
+                <Link href={project.apple_url} target="_blank">
+                  <Apple className="h-4 w-4" />
+                </Link>
+              )}
+              {project.url && (
+                <Link href={project.url} target="_blank">
+                  <Link2 className="h-4 w-4" />
+                </Link>
+              )}
             </div>
-            <p className="text-sm">{project.description}</p>
-
-            {/* <p className="text-sm">{project.tech_tags.join(', ')}</p> */}
           </div>
-        ))}
-      </div>
-    </div>
+          <p className="text-justify text-sm leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+      ))}
+    </MagazineLayout>
   );
 };
 
-const Blog = (
-  blogs: BlogPost[],
-  selectedBlog: BlogPost | null,
-  handleSelectBlog: (blog: BlogPost) => void,
-  handleBackToList: () => void
-) => {
+interface BlogProps {
+  blogs: BlogPost[];
+  selectedBlog: BlogPost | null;
+  handleSelectBlog: (blog: BlogPost) => void;
+  handleBackToList: () => void;
+}
+
+const Blog = ({
+  blogs,
+  selectedBlog,
+  handleSelectBlog,
+  handleBackToList,
+}: BlogProps) => {
   const mdxComponents = useMDXComponents({});
 
-  // If a blog is selected, show its content
-  if (selectedBlog) {
-    return (
-      <div className="w-full">
-        <button
-          type="button"
-          onClick={handleBackToList}
-          className="mb-4 text-xs hover:underline"
-        >
-          ← back to all posts
-        </button>
-        <article className="prose prose-sm max-w-none dark:prose-invert">
-          <h2 className="mb-2 font-lora text-xl font-bold">
-            {selectedBlog.title}
-          </h2>
-          <p className="mb-4 text-xs text-gray-500">
-            {new Date(selectedBlog.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-          <div className="mb-4 flex flex-wrap gap-2">
-            {selectedBlog.tags?.map((tag) => (
-              <span
-                key={tag}
-                className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-800"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-          <MDXRemote {...selectedBlog.content} components={mdxComponents} />
-        </article>
-      </div>
-    );
-  }
-
-  // Otherwise, show the list of blogs
   return (
-    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-      {blogs.map((blog) => (
-        <button
-          key={blog.slug}
-          type="button"
-          onClick={() => handleSelectBlog(blog)}
-          className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
+    <AnimatePresence mode="wait">
+      {selectedBlog ? (
+        <motion.div
+          key={selectedBlog.slug}
+          variants={fadeVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={fadeTransition}
+          className="w-full"
         >
-          <h2 className="text-md font-lora font-bold">{blog.title}</h2>
-          <p className="text-xs text-gray-500">
-            {new Date(blog.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-        </button>
-      ))}
-    </div>
+          <button
+            type="button"
+            onClick={handleBackToList}
+            className="mb-4 text-xs hover:underline"
+          >
+            ← back to all posts
+          </button>
+          <article className="prose prose-sm max-w-none dark:prose-invert">
+            <h2 className="mb-2 font-lora text-xl font-bold">
+              {selectedBlog.title}
+            </h2>
+            <p className="mb-4 text-gray-500">
+              {new Date(selectedBlog.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <div className="mb-4 flex flex-wrap gap-2">
+              {selectedBlog.tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded bg-gray-200 px-2 py-1 dark:bg-gray-800"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+            <MagazineLayout columns={3} gap="lg">
+              <MDXRemote {...selectedBlog.content} components={mdxComponents} />
+            </MagazineLayout>
+          </article>
+        </motion.div>
+      ) : (
+        <motion.div
+          key="blog-list"
+          variants={fadeVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={fadeTransition}
+          className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2"
+        >
+          {blogs.map((blog) => (
+            <button
+              key={blog.slug}
+              type="button"
+              onClick={() => handleSelectBlog(blog)}
+              className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
+            >
+              <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
+              <p className="text-gray-500">
+                {new Date(blog.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </p>
+            </button>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
