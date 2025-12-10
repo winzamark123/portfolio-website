@@ -5,6 +5,12 @@ import {
   MagazineBlock,
   MagazineHeading,
 } from '@/components/ui/magazine-layout';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -33,5 +39,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MagazineLayout,
     MagazineBlock,
     MagazineHeading,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
   };
 }
