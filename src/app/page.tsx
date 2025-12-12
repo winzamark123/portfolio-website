@@ -5,6 +5,8 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { Suspense } from 'react';
 import HomeClient from './_components/home-client';
 
+export const dynamic = 'force-dynamic';
+
 export interface BlogPost {
   title: string;
   slug: string;
