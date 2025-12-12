@@ -93,7 +93,12 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
         )}
         {...props}
       >
-        <div className={cn('relative w-full border border-red-500', aspectRatioClasses[aspectRatio])}>
+        <div
+          className={cn(
+            'relative w-full border border-red-500',
+            aspectRatioClasses[aspectRatio]
+          )}
+        >
           <Image src={src} alt={alt} fill className="object-contain" />
         </div>
         {caption && (
@@ -145,8 +150,7 @@ const MagazineBlock = React.forwardRef<HTMLDivElement, MagazineBlockProps>(
 );
 MagazineBlock.displayName = 'MagazineBlock';
 
-interface MagazineHeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {
+interface MagazineHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: 'h1' | 'h2' | 'h3' | 'h4';
   spanColumns?: boolean;
 }
