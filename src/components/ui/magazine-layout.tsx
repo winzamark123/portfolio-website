@@ -94,10 +94,7 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
         {...props}
       >
         <div
-          className={cn(
-            'relative w-full border border-red-500',
-            aspectRatioClasses[aspectRatio]
-          )}
+          className={cn('relative w-full ', aspectRatioClasses[aspectRatio])}
         >
           <Image src={src} alt={alt} fill className="object-contain" />
         </div>
