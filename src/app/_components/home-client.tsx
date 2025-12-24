@@ -73,7 +73,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   };
 
   return (
-    <main className="flex h-full max-w-7xl flex-col items-center pb-10 ">
+    <main className="flex h-full w-full max-w-7xl flex-col items-center pb-10">
       <div className="flex w-full items-start justify-start pt-20">
         {landing()}
       </div>
@@ -87,6 +87,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
             animate="animate"
             exit="exit"
             transition={fadeTransition}
+            className="w-full"
           >
             {activeTab === 'experience' && experience()}
             {activeTab === 'projects' && <Projects />}
@@ -296,7 +297,7 @@ const Blog = ({
                 </span>
               ))}
             </div>
-            <MagazineLayout columns={3} gap="lg">
+            <MagazineLayout columns={2} gap="lg">
               <MDXRemote {...selectedBlog.content} components={mdxComponents} />
             </MagazineLayout>
           </article>
@@ -309,7 +310,7 @@ const Blog = ({
           animate="animate"
           exit="exit"
           transition={fadeTransition}
-          className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2"
+          className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
           {blogs.map((blog) => (
             <button

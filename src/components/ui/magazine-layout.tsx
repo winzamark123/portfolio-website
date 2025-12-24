@@ -43,7 +43,7 @@ interface MagazineImageProps extends React.HTMLAttributes<HTMLElement> {
   src: string;
   alt: string;
   float?: 'left' | 'right' | 'none';
-  spanColumns?: 1 | 2 | 'all';
+  spanColumns?: string; // CSS width value like '50%', '400px', '80%' - omit for column-span:all
   caption?: string;
   aspectRatio?: 'video' | 'square' | '4/3' | '3/2';
 }
@@ -55,7 +55,7 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
       src,
       alt,
       float = 'none',
-      spanColumns = 1,
+      spanColumns,
       caption,
       aspectRatio = 'video',
       ...props
@@ -66,12 +66,6 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
       left: 'float-left mr-6',
       right: 'float-right ml-6',
       none: 'mb-4',
-    };
-
-    const spanClasses = {
-      1: '',
-      2: '[column-span:all] max-w-[66%]',
-      all: '[column-span:all]',
     };
 
     const aspectRatioClasses = {
@@ -85,10 +79,9 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
       <figure
         ref={ref}
         className={cn(
-          'w-full [break-inside:avoid]',
+          '[break-inside:avoid]',
           floatClasses[float],
-          spanClasses[spanColumns],
-          spanColumns === 'all' && 'my-6',
+          spanColumns ? `w-[${spanColumns}]` : 'my-6 w-full [column-span:all]',
           className
         )}
         {...props}
@@ -110,22 +103,16 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
 MagazineImage.displayName = 'MagazineImage';
 
 interface MagazineBlockProps extends React.HTMLAttributes<HTMLDivElement> {
-  spanColumns?: 1 | 2 | 'all';
+  spanColumns?: string; // CSS width value like '50%', '400px', '80%' - omit for column-span:all
   float?: 'left' | 'right' | 'none';
 }
 
 const MagazineBlock = React.forwardRef<HTMLDivElement, MagazineBlockProps>(
-  ({ className, spanColumns = 1, float = 'none', children, ...props }, ref) => {
+  ({ className, spanColumns, float = 'none', children, ...props }, ref) => {
     const floatClasses = {
       left: 'float-left mr-6 mb-4',
       right: 'float-right ml-6 mb-4',
       none: 'mb-4',
-    };
-
-    const spanClasses = {
-      1: '',
-      2: '[column-span:all] max-w-[66%]',
-      all: '[column-span:all]',
     };
 
     return (
@@ -134,8 +121,7 @@ const MagazineBlock = React.forwardRef<HTMLDivElement, MagazineBlockProps>(
         className={cn(
           '[break-inside:avoid]',
           floatClasses[float],
-          spanClasses[spanColumns],
-          spanColumns === 'all' && 'my-6',
+          spanColumns ? `w-[${spanColumns}]` : 'my-6 [column-span:all]',
           className
         )}
         {...props}
