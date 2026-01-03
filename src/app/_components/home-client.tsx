@@ -42,12 +42,12 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     setActiveTab(tabFromUrl);
 
     // If on blog tab and post slug is in URL, select that blog
-    if (tabFromUrl === 'blog' && postSlugFromUrl) {
+    if (tabFromUrl === 'blogs' && postSlugFromUrl) {
       const blog = blogs.find((b) => b.slug === postSlugFromUrl);
       if (blog) {
         setSelectedBlog(blog);
       }
-    } else if (tabFromUrl !== 'blog') {
+    } else if (tabFromUrl !== 'blogs') {
       // Reset selected blog when changing to other tabs
       setSelectedBlog(null);
     } else if (!postSlugFromUrl) {
@@ -64,17 +64,17 @@ export default function HomeClient({ blogs }: HomeClientProps) {
 
   const handleSelectBlog = (blog: BlogPost) => {
     setSelectedBlog(blog);
-    router.push(`/?tab=blog&post=${blog.slug}`);
+    router.push(`/?tab=blogs&post=${blog.slug}`);
   };
 
   const handleBackToList = () => {
     setSelectedBlog(null);
-    router.push('/?tab=blog');
+    router.push('/?tab=blogs');
   };
 
   return (
-    <main className="flex h-full w-full max-w-7xl flex-col items-center pb-10">
-      <div className="flex w-full items-start justify-start pt-20">
+    <main className="flex h-full w-full max-w-7xl flex-col items-center p-4 pb-10">
+      <div className="flex w-full items-start justify-start pt-14">
         {landing()}
       </div>
       <div className="flex w-full flex-col items-center gap-4">
@@ -91,7 +91,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
           >
             {activeTab === 'experience' && experience()}
             {activeTab === 'projects' && <Projects />}
-            {activeTab === 'blog' && (
+            {activeTab === 'blogs' && (
               <Blog
                 blogs={blogs}
                 selectedBlog={selectedBlog}
@@ -242,6 +242,30 @@ const Projects = () => {
   );
 };
 
+const InferenceDefinition = () => {
+  return (
+    <div className="flex w-full">
+      <div className="w-fit">
+        <h2 className="font-lora text-2xl italic">inference</h2>
+        <div className="flex items-center gap-4 text-sm">
+          <span>/ˈin-fə-rən(t)s/</span>
+          <span className="italic">Noun</span>
+        </div>
+        <div className="mt-4 flex flex-col gap-2 rounded border-gray-300">
+          <ol className="list-inside list-decimal space-y-1 text-sm">
+            <li>a conclusion reached on the basis of evidence and reasoning</li>
+            <li>the process of deriving logical conclusions</li>
+          </ol>
+          <span className="text-sm font-bold italic">
+            this section showcases my inference over the years. how i "infer"
+            the world
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 interface BlogProps {
   blogs: BlogPost[];
   selectedBlog: BlogPost | null;
@@ -297,7 +321,7 @@ const Blog = ({
                 </span>
               ))}
             </div>
-            <MagazineLayout columns={2} gap="lg">
+            <MagazineLayout columns={selectedBlog.columns} gap="lg">
               <MDXRemote {...selectedBlog.content} components={mdxComponents} />
             </MagazineLayout>
           </article>
@@ -310,25 +334,28 @@ const Blog = ({
           animate="animate"
           exit="exit"
           transition={fadeTransition}
-          className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          className="flex w-full flex-col gap-6"
         >
-          {blogs.map((blog) => (
-            <button
-              key={blog.slug}
-              type="button"
-              onClick={() => handleSelectBlog(blog)}
-              className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
-            >
-              <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
-              <p className="text-gray-500">
-                {new Date(blog.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
-            </button>
-          ))}
+          <InferenceDefinition />
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {blogs.map((blog) => (
+              <button
+                key={blog.slug}
+                type="button"
+                onClick={() => handleSelectBlog(blog)}
+                className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
+              >
+                <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
+                <p className="text-gray-500">
+                  {new Date(blog.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </p>
+              </button>
+            ))}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

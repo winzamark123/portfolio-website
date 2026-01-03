@@ -48,8 +48,8 @@ export const NavItems = [
     label: 'projects',
   },
   {
-    id: 'blog',
-    label: 'blog',
+    id: 'blogs',
+    label: 'blogs',
   },
 ];
 

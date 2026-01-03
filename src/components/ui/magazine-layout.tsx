@@ -10,9 +10,9 @@ interface MagazineLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 const MagazineLayout = React.forwardRef<HTMLDivElement, MagazineLayoutProps>(
   ({ className, columns = 3, gap = 'md', children, ...props }, ref) => {
     const columnClasses = {
-      2: '[column-count:2]',
-      3: '[column-count:3]',
-      4: '[column-count:4]',
+      2: '[column-count:1] sm:[column-count:2]',
+      3: '[column-count:1] sm:[column-count:2] md:[column-count:3]',
+      4: '[column-count:1] sm:[column-count:2] md:[column-count:3] lg:[column-count:4]',
     };
 
     const gapClasses = {

@@ -12,6 +12,7 @@ export interface BlogPost {
   slug: string;
   date: string;
   tags: string[];
+  columns: 2 | 3 | 4;
   content: any;
 }
 
@@ -39,6 +40,7 @@ async function getBlogPosts(): Promise<BlogPost[]> {
         slug,
         date: data.date || '',
         tags: data.tags || [],
+        columns: data.columns || 2,
         content: mdxSource,
       };
     });
