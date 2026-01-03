@@ -51,6 +51,10 @@ export const NavItems = [
     id: 'blogs',
     label: 'blogs',
   },
+  {
+    id: 'nuggets',
+    label: 'nuggets',
+  },
 ];
 
 export const ExperienceProps = [
@@ -117,6 +121,125 @@ export const ExperienceProps = [
     // icon: Kebloom,
     url: 'https://www.kebloom.com/',
     location: 'San Francisco, CA',
+  },
+];
+
+export const NuggetList = [
+  {
+    quote:
+      'The ironic tragedy, that life has to be lived forward but only makes sense in reverse',
+  },
+  {
+    quote:
+      'A man has a 1000 problems until he has a health problem, then he has 1 problem',
+  },
+  {
+    quote:
+      "Sayre's law - Academic politics are so vicious because the stakes are so small",
+  },
+  {
+    quote:
+      'Choose the path that you will regret least, because in life there will always be regret.',
+  },
+  {
+    quote:
+      'To get something you never had, you have to do something you never did.',
+  },
+  {
+    quote:
+      "Better to know that you're bad for a season than pretend you're good for a lifetime.",
+  },
+  {
+    quote: "It's only delusional until it works",
+  },
+  {
+    quote: 'Motivation gets you started habit is what keeps you going',
+  },
+  {
+    quote:
+      'Every guy should have a girl that laughs at his dumbness and enjoys his ego',
+    author: 'Yaya Feb 2025',
+  },
+  {
+    quote: "It's easy to connect the dots backwards",
+  },
+  {
+    quote:
+      "You don't want to read the same book again if you're gonna get the same result",
+    author: 'Yaya March 2025',
+  },
+  {
+    quote: 'Tenacity shines the most brightly under the shadow of desperation',
+  },
+  {
+    quote: '吃得苦中苦，方為人上人',
+  },
+  {
+    quote:
+      "To find peace, you don't find a calmer ocean but you build a stronger boat",
+    author: 'Chin May 2025',
+  },
+  {
+    quote:
+      "It's not about where you're at. It's about what you're doing about where you're at",
+  },
+  {
+    quote:
+      'Growth takes place when you are challenged not when you are comfortable.',
+  },
+  {
+    quote:
+      'We are what we repeatedly do. Excellence then, is not an act but a habit.',
+    author: 'Aristotle',
+  },
+  {
+    quote: 'Rejections are just redirections to better things.',
+  },
+  {
+    quote:
+      'Life is a series of rooms and who we get stuck in those rooms with adds up to what our lives are.',
+  },
+  {
+    quote:
+      'Everything in your life is a dice roll but you just gotta stack the dice in your favor',
+    author: 'Mark Rober',
+  },
+  {
+    quote:
+      "If your friends don't have goals, your goal should be to get new friends",
+    author: 'Alex H.',
+  },
+  {
+    quote: "You don't respect the idea you respect the title",
+    author: 'Harsha 2025',
+  },
+  {
+    quote:
+      'Age is no guarantee of efficiency, and youth is no guarantee of innovation',
+    author: 'James Bond Skyfall',
+  },
+  {
+    quote: 'Some people are so poor, all they have is money',
+    author: 'John D. Rockefeller',
+  },
+  {
+    quote: 'If you can sell nothing you can sell anything',
+  },
+  {
+    quote: 'How can the body survive when the heart and the brain is gone',
+    author: 'Yaya Oct 2025',
+  },
+  {
+    quote: "Betrayal doesn't come from people it comes from circumstances",
+    author: 'Murim manga',
+  },
+  {
+    quote: 'Ask for forgiveness not permission',
+    author: 'Stranger Things',
+  },
+  {
+    quote:
+      'People come from the same trunk branch out differently. They diverge',
   },
 ];
 

@@ -3,7 +3,13 @@ import { MagazineLayout } from '@/components/ui/magazine-layout';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { SocialProps, NavItems, ExperienceProps, ProjectList } from './const';
+import {
+  SocialProps,
+  NavItems,
+  ExperienceProps,
+  ProjectList,
+  NuggetList,
+} from './const';
 import { useState, useEffect } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
@@ -99,6 +105,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                 handleBackToList={handleBackToList}
               />
             )}
+            {activeTab === 'nuggets' && <Nuggets />}
           </motion.div>
         </AnimatePresence>
 
@@ -236,6 +243,26 @@ const Projects = () => {
           <p className="text-justify text-sm leading-relaxed">
             {project.description}
           </p>
+        </div>
+      ))}
+    </MagazineLayout>
+  );
+};
+
+const Nuggets = () => {
+  return (
+    <MagazineLayout columns={4} gap="lg">
+      {NuggetList.map((nugget) => (
+        <div
+          key={nugget.quote}
+          className="mb-6 flex break-inside-avoid flex-col"
+        >
+          <p className="text-sm leading-relaxed">{nugget.quote}</p>
+          {nugget.author && (
+            <p className="mt-2 self-end text-sm font-bold italic">
+              - {nugget.author}
+            </p>
+          )}
         </div>
       ))}
     </MagazineLayout>
