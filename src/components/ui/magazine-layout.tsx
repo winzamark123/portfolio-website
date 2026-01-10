@@ -133,7 +133,8 @@ const MagazineBlock = React.forwardRef<HTMLDivElement, MagazineBlockProps>(
 );
 MagazineBlock.displayName = 'MagazineBlock';
 
-interface MagazineHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface MagazineHeadingProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: 'h1' | 'h2' | 'h3' | 'h4';
   spanColumns?: boolean;
 }
