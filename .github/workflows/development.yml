@@ -18,21 +18,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: "21.1.0"
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
       - name: Linting check
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Build Next.js app
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-        run: npm run build
+        run: pnpm run build
 
       - name: Success
         run: echo " ~Build successful~ "
