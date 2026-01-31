@@ -1,5 +1,6 @@
 'use client';
 import { MagazineLayout } from '@/components/ui/magazine-layout';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
@@ -61,13 +62,13 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     }
   }, [tabFromUrl, postSlugFromUrl, blogs]);
 
-  const handleTabChange = (tab: string) => {
+  const handleTabChange = ({ tab }: { tab: string }) => {
     setActiveTab(tab);
     setSelectedBlog(null);
     router.push(`/?tab=${tab}`);
   };
 
-  const handleSelectBlog = (blog: BlogPost) => {
+  const handleSelectBlog = ({ blog }: { blog: BlogPost }) => {
     setSelectedBlog(blog);
     router.push(`/?tab=blogs&post=${blog.slug}`);
   };
@@ -77,13 +78,17 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     router.push('/?tab=blogs');
   };
 
+  const handleReturnHome = () => {
+    handleTabChange({ tab: 'experience' });
+  };
+
   return (
     <main className="flex h-full w-full max-w-7xl flex-col items-center p-4 pb-10">
       <div className="flex w-full items-start justify-start pt-14">
-        {landing()}
+        {landing({ onReturnHome: handleReturnHome })}
       </div>
       <div className="flex w-full flex-col items-center gap-4">
-        {works_nav(activeTab, handleTabChange)}
+        {works_nav({ activeTab, onTabChange: handleTabChange })}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -124,13 +129,13 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                   <Spinner />
                 </div>
               )}
-              <img
+              <Image
                 src="https://ghchart.rshah.org/winzamark123"
                 alt="Win's Github chart"
                 className="w-full py-2"
                 width={800}
                 height={200}
-                onLoad={() => setImageLoaded(true)}
+                onLoadingComplete={() => setImageLoaded(true)}
                 style={{ display: imageLoaded ? 'block' : 'none' }}
               />
             </motion.div>
@@ -141,11 +146,19 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   );
 }
 
-const landing = () => {
+const landing = ({ onReturnHome }: { onReturnHome: () => void }) => {
   return (
     <div className="flex w-fit flex-col gap-4 overflow-hidden">
       <div className="flex flex-col gap-2">
-        <h1 className="font-lora text-3xl">{content.title}</h1>
+        <h1 className="font-lora text-3xl">
+          <button
+            type="button"
+            onClick={onReturnHome}
+            className="text-left hover:underline hover:underline-offset-[3px]"
+          >
+            {content.title}
+          </button>
+        </h1>
         <p className="text-sm">{content.description}</p>
       </div>
       {social()}
@@ -172,14 +185,20 @@ const social = () => {
   );
 };
 
-const works_nav = (activeTab: string, setActiveTab: (tab: string) => void) => {
+const works_nav = ({
+  activeTab,
+  onTabChange,
+}: {
+  activeTab: string;
+  onTabChange: ({ tab }: { tab: string }) => void;
+}) => {
   return (
     <div className="flex flex-row gap-4 py-4 md:gap-8">
       {NavItems.map((item) => (
         <button
           key={item.id}
           type="button"
-          onClick={() => setActiveTab(item.id)}
+          onClick={() => onTabChange({ tab: item.id })}
           className={`text-sm hover:underline hover:underline-offset-[3px] ${
             activeTab === item.id ? 'underline underline-offset-[3px]' : ''
           }`}
@@ -295,7 +314,7 @@ const InferenceDefinition = () => {
 interface BlogProps {
   blogs: BlogPost[];
   selectedBlog: BlogPost | null;
-  handleSelectBlog: (blog: BlogPost) => void;
+  handleSelectBlog: ({ blog }: { blog: BlogPost }) => void;
   handleBackToList: () => void;
 }
 
@@ -368,7 +387,7 @@ const Blog = ({
               <button
                 key={blog.slug}
                 type="button"
-                onClick={() => handleSelectBlog(blog)}
+                onClick={() => handleSelectBlog({ blog })}
                 className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
               >
                 <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
