@@ -1,7 +1,6 @@
 'use client';
 import { MagazineLayout } from '@/components/ui/magazine-layout';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   SocialProps,
@@ -125,7 +124,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                   <Spinner />
                 </div>
               )}
-              <Image
+              <img
                 src="https://ghchart.rshah.org/winzamark123"
                 alt="Win's Github chart"
                 className="w-full py-2"

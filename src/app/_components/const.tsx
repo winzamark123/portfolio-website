@@ -124,6 +124,43 @@ export const ExperienceProps = [
   },
 ];
 
+export const ProjectList = [
+  {
+    title: 'decaf',
+    description: 'your filtered dose of daily news.',
+    github_repo: 'https://github.com/winzamark123/decaf',
+    url: 'https://www.decafo.co/',
+  },
+  {
+    title: 'open canvas',
+    description:
+      'bringing AI to your favorite whiteboard. An infinite canvas that allows you to generate code, text, and images with the help of AI. It supports a variety of tools and features to help you brainstorm and create.',
+    github_repo: 'https://github.com/winzamark123/open-canvas',
+    url: 'https://www.opencanvas.studio/',
+  },
+  {
+    title: 'os deep research',
+    description:
+      'an open source deep research framework for LLMs. fully customizable, modular, and easy to use. It allows you to run deep research tasks on any topic, generating comprehensive reports and insights using the latest AI models.',
+    github_repo: 'https://github.com/JigsawStack/deep-research',
+    tech_tags: ['typescript', 'ai sdk'],
+  },
+  {
+    title: 'caMOOra',
+    description:
+      'a website marketplace which matches student-photographers with clients. focused on providing a platform for students to showcase their work and get hired. It features a robust booking system, portfolio management, and secure payments.',
+    github_repo: 'https://github.com/winzamark123/caMOOra',
+    url: 'https://camoora.io/',
+  },
+  {
+    title: 'justsayin',
+    description:
+      "mobile application displaying daily quotes from your favorite authors on your lock screen widget. Start your day with inspiration and wisdom from the world's greatest minds, delivered right to your phone.",
+    github_repo: 'https://github.com/winzamark123/JustSayin',
+    apple_url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
+  },
+];
+
 export const NuggetList = [
   {
     quote:
@@ -241,41 +278,9 @@ export const NuggetList = [
     quote:
       'People come from the same trunk branch out differently. They diverge',
   },
-];
-
-export const ProjectList = [
   {
-    title: 'decaf',
-    description: 'your filtered dose of daily news.',
-    github_repo: 'https://github.com/winzamark123/decaf',
-    url: 'https://www.decafo.co/',
-  },
-  {
-    title: 'open canvas',
-    description:
-      'bringing AI to your favorite whiteboard. An infinite canvas that allows you to generate code, text, and images with the help of AI. It supports a variety of tools and features to help you brainstorm and create.',
-    github_repo: 'https://github.com/winzamark123/open-canvas',
-    url: 'https://www.opencanvas.studio/',
-  },
-  {
-    title: 'os deep research',
-    description:
-      'an open source deep research framework for LLMs. fully customizable, modular, and easy to use. It allows you to run deep research tasks on any topic, generating comprehensive reports and insights using the latest AI models.',
-    github_repo: 'https://github.com/JigsawStack/deep-research',
-    tech_tags: ['typescript', 'ai sdk'],
-  },
-  {
-    title: 'caMOOra',
-    description:
-      'a website marketplace which matches student-photographers with clients. focused on providing a platform for students to showcase their work and get hired. It features a robust booking system, portfolio management, and secure payments.',
-    github_repo: 'https://github.com/winzamark123/caMOOra',
-    url: 'https://camoora.io/',
-  },
-  {
-    title: 'justsayin',
-    description:
-      "mobile application displaying daily quotes from your favorite authors on your lock screen widget. Start your day with inspiration and wisdom from the world's greatest minds, delivered right to your phone.",
-    github_repo: 'https://github.com/winzamark123/JustSayin',
-    apple_url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
+    quote:
+      'if thinking were the puzzles, writing is putting the pieces together',
+    author: 'Dan Koe',
   },
 ];
