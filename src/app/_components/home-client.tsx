@@ -17,6 +17,7 @@ import type { BlogPost } from '../page';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 const fadeVariants = {
   initial: { opacity: 0 },
@@ -25,6 +26,22 @@ const fadeVariants = {
 };
 
 const fadeTransition = { duration: 0.2, ease: 'easeInOut' };
+
+type ViewMode = 'human' | 'machine';
+type MachineStatus = 'loading' | 'ready' | 'error';
+
+const viewModes: { value: ViewMode; label: string }[] = [
+  { value: 'human', label: 'human' },
+  { value: 'machine', label: 'machine' },
+];
+
+const viewVariants = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+};
+
+const viewTransition = { duration: 0.25, ease: 'easeInOut' };
 
 const content = {
   title: "hey, i'm Win",
@@ -43,6 +60,37 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   const [activeTab, setActiveTab] = useState(tabFromUrl);
   const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>('human');
+  const [machineContent, setMachineContent] = useState('');
+  const [machineStatus, setMachineStatus] = useState<MachineStatus>('loading');
+
+  useEffect(() => {
+    const loadMachineContent = async () => {
+      setMachineStatus('loading');
+      try {
+        const response = await fetch('/llms.txt');
+        if (!response.ok) {
+          setMachineStatus('error');
+          return;
+        }
+
+        const text = await response.text();
+        const trimmed = text.trim();
+
+        if (trimmed.length === 0) {
+          setMachineStatus('error');
+          return;
+        }
+
+        setMachineContent(trimmed);
+        setMachineStatus('ready');
+      } catch {
+        setMachineStatus('error');
+      }
+    };
+
+    loadMachineContent();
+  }, []);
 
   useEffect(() => {
     setActiveTab(tabFromUrl);
@@ -82,65 +130,122 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     handleTabChange({ tab: 'experience' });
   };
 
+  const handleSwitchToHuman = () => {
+    setViewMode('human');
+  };
+
+  const handleSwitchToMachine = () => {
+    setViewMode('machine');
+  };
+
   return (
-    <main className="flex h-full w-full max-w-7xl flex-col items-center p-4 pb-10">
-      <div className="flex w-full items-start justify-start pt-14">
-        {landing({ onReturnHome: handleReturnHome })}
-      </div>
-      <div className="flex w-full flex-col items-center gap-4">
-        {works_nav({ activeTab, onTabChange: handleTabChange })}
-        <AnimatePresence mode="wait">
+    <main className="flex h-full w-full max-w-7xl flex-col items-center p-4 pb-24">
+      <AnimatePresence mode="wait">
+        {viewMode === 'human' ? (
           <motion.div
-            key={activeTab}
-            variants={fadeVariants}
+            key="human"
+            variants={viewVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            transition={fadeTransition}
-            className="w-full"
+            transition={viewTransition}
+            className="flex w-full flex-col items-center"
           >
-            {activeTab === 'experience' && experience()}
-            {activeTab === 'projects' && <Projects />}
-            {activeTab === 'blogs' && (
-              <Blog
-                blogs={blogs}
-                selectedBlog={selectedBlog}
-                handleSelectBlog={handleSelectBlog}
-                handleBackToList={handleBackToList}
-              />
-            )}
-            {activeTab === 'nuggets' && <Nuggets />}
-          </motion.div>
-        </AnimatePresence>
+            <div className="flex w-full items-start justify-start pt-14">
+              {landing({ onReturnHome: handleReturnHome })}
+            </div>
+            <div className="flex w-full flex-col items-center gap-4">
+              {works_nav({ activeTab, onTabChange: handleTabChange })}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  variants={fadeVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={fadeTransition}
+                  className="w-full"
+                >
+                  {activeTab === 'experience' && experience()}
+                  {activeTab === 'projects' && <Projects />}
+                  {activeTab === 'blogs' && (
+                    <Blog
+                      blogs={blogs}
+                      selectedBlog={selectedBlog}
+                      handleSelectBlog={handleSelectBlog}
+                      handleBackToList={handleBackToList}
+                    />
+                  )}
+                  {activeTab === 'nuggets' && <Nuggets />}
+                </motion.div>
+              </AnimatePresence>
 
-        <AnimatePresence mode="wait">
-          {activeTab === 'projects' && (
-            <motion.div
-              key="github-chart"
-              variants={fadeVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={fadeTransition}
-              className="flex w-full flex-col"
+              <AnimatePresence mode="wait">
+                {activeTab === 'projects' && (
+                  <motion.div
+                    key="github-chart"
+                    variants={fadeVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={fadeTransition}
+                    className="flex w-full flex-col"
+                  >
+                    {!imageLoaded && (
+                      <div className="flex justify-center">
+                        <Spinner />
+                      </div>
+                    )}
+                    <Image
+                      src="https://ghchart.rshah.org/winzamark123"
+                      alt="Win's Github chart"
+                      className="w-full py-2"
+                      width={800}
+                      height={200}
+                      onLoadingComplete={() => setImageLoaded(true)}
+                      style={{ display: imageLoaded ? 'block' : 'none' }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="machine"
+            variants={viewVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={viewTransition}
+            className="flex w-full justify-center pt-14"
+          >
+            <MachineView content={machineContent} status={machineStatus} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
+        <ToggleGroup
+          type="single"
+          value={viewMode}
+          aria-label="view mode"
+          className="rounded-full border border-foreground/15 bg-background/80 shadow-sm backdrop-blur"
+        >
+          {viewModes.map(({ value, label }) => (
+            <ToggleGroupItem
+              key={value}
+              value={value}
+              size="sm"
+              variant="default"
+              onClick={
+                value === 'human' ? handleSwitchToHuman : handleSwitchToMachine
+              }
+              className="rounded-full text-xs uppercase tracking-[0.2em] text-foreground/70 data-[state=on]:bg-foreground data-[state=on]:text-background"
             >
-              {!imageLoaded && (
-                <div className="flex justify-center">
-                  <Spinner />
-                </div>
-              )}
-              <Image
-                src="https://ghchart.rshah.org/winzamark123"
-                alt="Win's Github chart"
-                className="w-full py-2"
-                width={800}
-                height={200}
-                onLoadingComplete={() => setImageLoaded(true)}
-                style={{ display: imageLoaded ? 'block' : 'none' }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+              {label}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       </div>
     </main>
   );
@@ -308,6 +413,39 @@ const InferenceDefinition = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+interface MachineViewProps {
+  content: string;
+  status: MachineStatus;
+}
+
+const MachineView = ({ content, status }: MachineViewProps) => {
+  const isReady = status === 'ready';
+  const isLoading = status === 'loading';
+  const isError = status === 'error';
+
+  return (
+    <section className="w-full max-w-5xl font-mono">
+      <div className="space-y-3">
+        {isLoading && (
+          <p className="text-sm leading-relaxed text-foreground/70">
+            loading machine view...
+          </p>
+        )}
+        {isError && (
+          <p className="text-sm leading-relaxed text-foreground/70">
+            unable to load /llms.txt
+          </p>
+        )}
+        {isReady && (
+          <pre className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
+            {content}
+          </pre>
+        )}
+      </div>
+    </section>
   );
 };
 

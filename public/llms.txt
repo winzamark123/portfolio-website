@@ -1,0 +1,125 @@
+**About**
+- name: Win Cheng
+- hero: hey, i'm Win
+- title: full-stack engineer based in San Francisco
+- site: portfolio
+- description: Portfolio of Win Cheng, a software engineer based in San Francisco.
+
+**Social**
+- Github: https://github.com/winzamark123
+- LinkedIn: https://www.linkedin.com/in/teeranade-cheng/
+- Mail: mailto:teeranadecheng@gmail.com
+- Resume: https://drive.google.com/drive/folders/1GgfgmE1ILgwvrgGc5d81xA4FyihqIFUn?usp=sharing
+- Twitter: https://x.com/winzamark12
+
+
+**Inference**
+inference
+/ˈin-fə-rən(t)s/ Noun
+1. a conclusion reached on the basis of evidence and reasoning
+2. the process of deriving logical conclusions
+this section showcases my inference over the years. how i 'infer' the world
+
+**Experience**
+- Agora -- founding engineer (Nov 2025 - Current, San Francisco, CA). building AI observability for enterprises to monitor and manage their AI systems. https://www.agora.so/
+- JigsawStack -- founding engineer (Mar 2025 - Nov 2025, San Francisco, CA). building small langauge models (SLMs) for developer use cases. https://jigsawstack.com/
+- Bustem -- frontend software engineer (Jan 2025 - Mar 2025, San Francisco, CA). founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands. https://bustem.com/
+- AggieWorks -- full-stack software engineer (Sep 2024 - Jan 2025, Davis, CA). led the development of a local business engagement platform enabling 35k+ students to discover deals, increasing engagement with local businesses. https://aggieworks.org/
+- Rhombus -- software engineer intern (Jun 2024 - Sep 2024, Sacramento, CA). built a user interface for frontend web admin console to highlight camera visual environment through computer vision and machine learning. https://www.rhombus.com/
+- HackDavis -- techincal product manager (Sep 2023 - Current, Davis, CA). deployed a website and judging app for a 1000+ person hackathon. with 275k+ visitors, 8300 unique visitors at peak month. https://2024.hackdavis.io/
+- Kebloom -- software engineer intern (Jun 2023 - Aug 2023, San Francisco, CA). developed a mobile application attracting over 300+ active early users. https://www.kebloom.com/
+
+**Projects**
+- decaf -- your filtered dose of daily news. site: https://www.decafo.co/ github: https://github.com/winzamark123/decaf
+- open canvas -- bringing AI to your favorite whiteboard. An infinite canvas that allows you to generate code, text, and images with the help of AI. It supports a variety of tools and features to help you brainstorm and create. site: https://www.opencanvas.studio/ github: https://github.com/winzamark123/open-canvas
+- os deep research -- an open source deep research framework for LLMs. fully customizable, modular, and easy to use. It allows you to run deep research tasks on any topic, generating comprehensive reports and insights using the latest AI models. github: https://github.com/JigsawStack/deep-research tech: typescript, ai sdk
+- caMOOra -- a website marketplace which matches student-photographers with clients. focused on providing a platform for students to showcase their work and get hired. It features a robust booking system, portfolio management, and secure payments. site: https://camoora.io/ github: https://github.com/winzamark123/caMOOra
+- justsayin -- mobile application displaying daily quotes from your favorite authors on your lock screen widget. Start your day with inspiration and wisdom from the world's greatest minds, delivered right to your phone. app store: https://apps.apple.com/us/app/justsayinapp/id6502377306 github: https://github.com/winzamark123/JustSayin
+
+**Blogs**
+Blog: Decision Tree in Life
+Date: 2026-01-14
+Tags: life, reflections
+url: https://www.wincheng.fyi/?tab=blogs&post=14-01-2026-decisions_tree_in_life
+
+Blog: Note to self for 2026
+Date: 2026-01-09
+Tags: life, reflections, resolutions
+url: https://www.wincheng.fyi/?tab=blogs&post=09-01-2026-note_to_self_for_2026
+
+Blog: Branches of Life
+Date: 2025-12-31
+Tags: life
+url: https://www.wincheng.fyi/?tab=blogs&post=22-12-2025-branches_of_life
+
+Blog: Do it for the Lore
+Date: 2025-12-07
+Tags: founders
+url: https://www.wincheng.fyi/?tab=blogs&post=07-12-2025-lore
+
+Blog: Bad Advices
+Date: 2025-09-05
+Tags: life
+url: https://www.wincheng.fyi/?tab=blogs&post=09-05-2025-bad_advices
+
+Blog: Products that Lasts
+Date: 2025-05-07
+Tags: my takes on tech
+url: https://www.wincheng.fyi/?tab=blogs&post=05-07-2025-products_that_last
+
+Blog: First Paycheck
+Date: 2025-02-24
+Tags: life updates
+url: https://www.wincheng.fyi/?tab=blogs&post=24-02-2025-first_paycheck
+
+Blog: Start of 2025
+Date: 2025-01-10
+Tags: new year new goals
+url: https://www.wincheng.fyi/?tab=blogs&post=10-01-2025-start_of_2025
+
+Blog: Reading and Writing
+Date: 2024-12-27
+Tags: reading, writing, paul_graham
+url: https://www.wincheng.fyi/?tab=blogs&post=27-12-2024-reading_and_writing
+
+Blog: Pilot
+Date: 2024-12-24
+Tags: life, blog_init, paul_graham
+url: https://www.wincheng.fyi/?tab=blogs&post=24-12-2024-pilot
+
+Blog: Blog Infrastructure
+Date: 2024-12-24
+Tags: coding
+url: https://www.wincheng.fyi/?tab=blogs&post=24-12-2024-blog_infrastructure
+
+**Nuggets**
+- The ironic tragedy, that life has to be lived forward but only makes sense in reverse
+- A man has a 1000 problems until he has a health problem, then he has 1 problem
+- Sayre's law - Academic politics are so vicious because the stakes are so small
+- Choose the path that you will regret least, because in life there will always be regret.
+- To get something you never had, you have to do something you never did.
+- Better to know that you're bad for a season than pretend you're good for a lifetime.
+- It's only delusional until it works
+- Motivation gets you started habit is what keeps you going
+- Every guy should have a girl that laughs at his dumbness and enjoys his ego -- Yaya Feb 2025
+- It's easy to connect the dots backwards
+- You don't want to read the same book again if you're gonna get the same result -- Yaya March 2025
+- Tenacity shines the most brightly under the shadow of desperation
+- 吃得苦中苦，方為人上人
+- To find peace, you don't find a calmer ocean but you build a stronger boat -- Chin May 2025
+- It's not about where you're at. It's about what you're doing about where you're at
+- Growth takes place when you are challenged not when you are comfortable.
+- We are what we repeatedly do. Excellence then, is not an act but a habit. -- Aristotle
+- Rejections are just redirections to better things.
+- Life is a series of rooms and who we get stuck in those rooms with adds up to what our lives are.
+- Everything in your life is a dice roll but you just gotta stack the dice in your favor -- Mark Rober
+- If your friends don't have goals, your goal should be to get new friends -- Alex H.
+- You don't respect the idea you respect the title -- Harsha 2025
+- Age is no guarantee of efficiency, and youth is no guarantee of innovation -- James Bond Skyfall
+- Some people are so poor, all they have is money -- John D. Rockefeller
+- If you can sell nothing you can sell anything
+- How can the body survive when the heart and the brain is gone -- Yaya Oct 2025
+- Betrayal doesn't come from people it comes from circumstances -- Murim manga
+- Ask for forgiveness not permission -- Stranger Things
+- People come from the same trunk branch out differently. They diverge
+- if thinking were the puzzles, writing is putting the pieces together -- Dan Koe

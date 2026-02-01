@@ -59,12 +59,20 @@ export const NavItems = [
 
 export const ExperienceProps = [
   {
+    company: 'Agora',
+    position: 'founding engineer',
+    description:
+      'building AI observability for enterprises to monitor and manage their AI systems',
+    date: 'Nov 2025 - Current',
+    url: 'https://www.agora.so/',
+    location: 'San Francisco, CA',
+  },
+  {
     company: 'JigsawStack',
     position: 'founding engineer',
     description:
       'building small langauge models (SLMs) for developer use cases',
-    date: 'Jun 2025 - Current',
-    // icon: JigsawStack_logo,
+    date: 'Mar 2025 - Nov 2025',
     url: 'https://jigsawstack.com/',
     location: 'San Francisco, CA',
   },
@@ -73,8 +81,7 @@ export const ExperienceProps = [
     position: 'frontend software engineer',
     description:
       'founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands',
-    date: 'Jan 2025 - Current',
-    // icon: Bustem_logo,
+    date: 'Jan 2025 - Mar 2025',
     url: 'https://bustem.com/',
     location: 'San Francisco, CA',
   },
@@ -86,7 +93,6 @@ export const ExperienceProps = [
       enabling 35k+ students to discover deals, \
       increasing engagement with local businesses',
     date: 'Sep 2024 - Jan 2025',
-    // icon: AggieWorks_logo,
     url: 'https://aggieworks.org/',
     location: 'Davis, CA',
   },
@@ -97,7 +103,6 @@ export const ExperienceProps = [
       'built a user interface for frontend web admin console to highlight \
       camera visual environment through computer vision and machine learning',
     date: 'Jun 2024 - Sep 2024',
-    // icon: Rhombus_logo,
     url: 'https://www.rhombus.com/',
     location: 'Sacramento, CA',
   },
@@ -108,7 +113,6 @@ export const ExperienceProps = [
       'deployed a website and judging app for a 1000+ person hackathon. \
       with 275k+ visitors, 8300 unique visitors at peak month',
     date: 'Sep 2023 - Current',
-    // icon: HackDavis_logo,
     url: 'https://2024.hackdavis.io/',
     location: 'Davis, CA',
   },
@@ -118,7 +122,6 @@ export const ExperienceProps = [
     description:
       'developed a mobile application attracting over 300+ active early users',
     date: 'Jun 2023 - Aug 2023',
-    // icon: Kebloom,
     url: 'https://www.kebloom.com/',
     location: 'San Francisco, CA',
   },
