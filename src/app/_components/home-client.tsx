@@ -10,14 +10,14 @@ import {
   ProjectList,
   NuggetList,
 } from './const';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
 import type { BlogPost } from '../page';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { Switch } from '@/components/ui/switch';
 
 const fadeVariants = {
   initial: { opacity: 0 },
@@ -29,11 +29,6 @@ const fadeTransition = { duration: 0.2, ease: 'easeInOut' };
 
 type ViewMode = 'human' | 'machine';
 type MachineStatus = 'loading' | 'ready' | 'error';
-
-const viewModes: { value: ViewMode; label: string }[] = [
-  { value: 'human', label: 'human' },
-  { value: 'machine', label: 'machine' },
-];
 
 const viewVariants = {
   initial: { opacity: 0, y: 8 },
@@ -63,6 +58,10 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('human');
   const [machineContent, setMachineContent] = useState('');
   const [machineStatus, setMachineStatus] = useState<MachineStatus>('loading');
+  const isMachine = viewMode === 'machine';
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [humanHeight, setHumanHeight] = useState(0);
+  const [machineHeight, setMachineHeight] = useState(0);
 
   useEffect(() => {
     const loadMachineContent = async () => {
@@ -110,6 +109,32 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     }
   }, [tabFromUrl, postSlugFromUrl, blogs]);
 
+  useLayoutEffect(() => {
+    if (!contentRef.current) {
+      return;
+    }
+
+    const height = Math.ceil(contentRef.current.getBoundingClientRect().height);
+
+    if (viewMode === 'human' && height !== humanHeight) {
+      setHumanHeight(height);
+      return;
+    }
+
+    if (viewMode === 'machine' && height !== machineHeight) {
+      setMachineHeight(height);
+    }
+  }, [
+    activeTab,
+    humanHeight,
+    imageLoaded,
+    machineContent,
+    machineHeight,
+    machineStatus,
+    selectedBlog,
+    viewMode,
+  ]);
+
   const handleTabChange = ({ tab }: { tab: string }) => {
     setActiveTab(tab);
     setSelectedBlog(null);
@@ -130,122 +155,128 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     handleTabChange({ tab: 'experience' });
   };
 
-  const handleSwitchToHuman = () => {
-    setViewMode('human');
-  };
-
-  const handleSwitchToMachine = () => {
-    setViewMode('machine');
-  };
-
   return (
     <main className="flex h-full w-full max-w-7xl flex-col items-center p-4 pb-24">
-      <AnimatePresence mode="wait">
-        {viewMode === 'human' ? (
-          <motion.div
-            key="human"
-            variants={viewVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={viewTransition}
-            className="flex w-full flex-col items-center"
-          >
-            <div className="flex w-full items-start justify-start pt-14">
-              {landing({ onReturnHome: handleReturnHome })}
-            </div>
-            <div className="flex w-full flex-col items-center gap-4">
-              {works_nav({ activeTab, onTabChange: handleTabChange })}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTab}
-                  variants={fadeVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={fadeTransition}
-                  className="w-full"
-                >
-                  {activeTab === 'experience' && experience()}
-                  {activeTab === 'projects' && <Projects />}
-                  {activeTab === 'blogs' && (
-                    <Blog
-                      blogs={blogs}
-                      selectedBlog={selectedBlog}
-                      handleSelectBlog={handleSelectBlog}
-                      handleBackToList={handleBackToList}
-                    />
-                  )}
-                  {activeTab === 'nuggets' && <Nuggets />}
-                </motion.div>
-              </AnimatePresence>
-
-              <AnimatePresence mode="wait">
-                {activeTab === 'projects' && (
+      <div
+        ref={contentRef}
+        className="w-full"
+        style={{ minHeight: Math.max(humanHeight, machineHeight) || undefined }}
+      >
+        <AnimatePresence mode="wait">
+          {viewMode === 'human' ? (
+            <motion.div
+              key="human"
+              variants={viewVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={viewTransition}
+              className="flex w-full flex-col items-center"
+            >
+              <div className="flex w-full items-start justify-start pt-14">
+                {landing({ onReturnHome: handleReturnHome })}
+              </div>
+              <div className="flex w-full flex-col items-center gap-4">
+                {works_nav({ activeTab, onTabChange: handleTabChange })}
+                <AnimatePresence mode="wait">
                   <motion.div
-                    key="github-chart"
+                    key={activeTab}
                     variants={fadeVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
                     transition={fadeTransition}
-                    className="flex w-full flex-col"
+                    className="w-full"
                   >
-                    {!imageLoaded && (
-                      <div className="flex justify-center">
-                        <Spinner />
-                      </div>
+                    {activeTab === 'experience' && experience()}
+                    {activeTab === 'projects' && <Projects />}
+                    {activeTab === 'blogs' && (
+                      <Blog
+                        blogs={blogs}
+                        selectedBlog={selectedBlog}
+                        handleSelectBlog={handleSelectBlog}
+                        handleBackToList={handleBackToList}
+                      />
                     )}
-                    <Image
-                      src="https://ghchart.rshah.org/winzamark123"
-                      alt="Win's Github chart"
-                      className="w-full py-2"
-                      width={800}
-                      height={200}
-                      onLoadingComplete={() => setImageLoaded(true)}
-                      style={{ display: imageLoaded ? 'block' : 'none' }}
-                    />
+                    {activeTab === 'nuggets' && <Nuggets />}
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="machine"
-            variants={viewVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={viewTransition}
-            className="flex w-full justify-center pt-14"
-          >
-            <MachineView content={machineContent} status={machineStatus} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
-        <ToggleGroup
-          type="single"
-          value={viewMode}
-          aria-label="view mode"
-          className="rounded-full border border-foreground/15 bg-background/80 shadow-sm backdrop-blur"
-        >
-          {viewModes.map(({ value, label }) => (
-            <ToggleGroupItem
-              key={value}
-              value={value}
-              size="sm"
-              variant="default"
-              onClick={
-                value === 'human' ? handleSwitchToHuman : handleSwitchToMachine
-              }
-              className="rounded-full text-xs uppercase tracking-[0.2em] text-foreground/70 data-[state=on]:bg-foreground data-[state=on]:text-background"
+                </AnimatePresence>
+
+                <AnimatePresence mode="wait">
+                  {activeTab === 'projects' && (
+                    <motion.div
+                      key="github-chart"
+                      variants={fadeVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={fadeTransition}
+                      className="flex w-full flex-col"
+                    >
+                      {!imageLoaded && (
+                        <div className="flex justify-center">
+                          <Spinner />
+                        </div>
+                      )}
+                      <Image
+                        src="https://ghchart.rshah.org/winzamark123"
+                        alt="Win's Github chart"
+                        className="w-full py-2"
+                        width={800}
+                        height={200}
+                        onLoadingComplete={() => setImageLoaded(true)}
+                        style={{ display: imageLoaded ? 'block' : 'none' }}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="machine"
+              variants={viewVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={viewTransition}
+              className="flex w-full justify-center pt-14"
             >
-              {label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+              <MachineView content={machineContent} status={machineStatus} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
+        <div className="flex items-center gap-3 border border-foreground/15 bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
+          <button
+            type="button"
+            onClick={() => setViewMode('human')}
+            aria-pressed={!isMachine}
+            className={`text-[11px] uppercase tracking-[0.2em] transition-colors ${
+              isMachine ? 'text-foreground/50' : 'text-foreground'
+            }`}
+          >
+            human
+          </button>
+          <Switch
+            checked={isMachine}
+            onCheckedChange={(checked: boolean) =>
+              setViewMode(checked ? 'machine' : 'human')
+            }
+            aria-label="toggle machine view"
+          />
+          <button
+            type="button"
+            onClick={() => setViewMode('machine')}
+            aria-pressed={isMachine}
+            className={`text-[11px] uppercase tracking-[0.2em] transition-colors ${
+              isMachine ? 'text-foreground' : 'text-foreground/50'
+            }`}
+          >
+            machine
+          </button>
+        </div>
       </div>
     </main>
   );
