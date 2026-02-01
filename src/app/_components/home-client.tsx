@@ -10,7 +10,7 @@ import {
   ProjectList,
   NuggetList,
 } from './const';
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
 import type { BlogPost } from '../page';
@@ -59,9 +59,6 @@ export default function HomeClient({ blogs }: HomeClientProps) {
   const [machineContent, setMachineContent] = useState('');
   const [machineStatus, setMachineStatus] = useState<MachineStatus>('loading');
   const isMachine = viewMode === 'machine';
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const [humanHeight, setHumanHeight] = useState(0);
-  const [machineHeight, setMachineHeight] = useState(0);
 
   useEffect(() => {
     const loadMachineContent = async () => {
@@ -109,32 +106,6 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     }
   }, [tabFromUrl, postSlugFromUrl, blogs]);
 
-  useLayoutEffect(() => {
-    if (!contentRef.current) {
-      return;
-    }
-
-    const height = Math.ceil(contentRef.current.getBoundingClientRect().height);
-
-    if (viewMode === 'human' && height !== humanHeight) {
-      setHumanHeight(height);
-      return;
-    }
-
-    if (viewMode === 'machine' && height !== machineHeight) {
-      setMachineHeight(height);
-    }
-  }, [
-    activeTab,
-    humanHeight,
-    imageLoaded,
-    machineContent,
-    machineHeight,
-    machineStatus,
-    selectedBlog,
-    viewMode,
-  ]);
-
   const handleTabChange = ({ tab }: { tab: string }) => {
     setActiveTab(tab);
     setSelectedBlog(null);
@@ -157,11 +128,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
 
   return (
     <main className="flex h-full w-full max-w-7xl flex-col items-center p-4 pb-24">
-      <div
-        ref={contentRef}
-        className="w-full"
-        style={{ minHeight: Math.max(humanHeight, machineHeight) || undefined }}
-      >
+      <div className="w-full">
         <AnimatePresence mode="wait">
           {viewMode === 'human' ? (
             <motion.div
