@@ -35,7 +35,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em className="italic text-[#EF89A5]">{children}</em>,
     img: (props) => (
-      <img {...props} className="mix-blend-multiply dark:mix-blend-normal" />
+      <img
+        {...props}
+        className="mix-blend-multiply dark:mix-blend-normal"
+        alt={props.alt}
+      />
     ),
     ...components,
     MagazineImage,
