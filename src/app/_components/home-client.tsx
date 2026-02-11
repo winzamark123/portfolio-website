@@ -504,7 +504,10 @@ const Blog = ({
             </div>
             <MagazineLayout columns={selectedBlog.columns} gap="lg">
               <Suspense fallback={<Spinner />}>
-                <LazyMDXRemote {...selectedBlog.content} components={mdxComponents} />
+                <LazyMDXRemote
+                  {...selectedBlog.content}
+                  components={mdxComponents}
+                />
               </Suspense>
             </MagazineLayout>
           </article>
