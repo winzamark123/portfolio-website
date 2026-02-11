@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface MagazineLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -42,55 +41,22 @@ MagazineLayout.displayName = 'MagazineLayout';
 interface MagazineImageProps extends React.HTMLAttributes<HTMLElement> {
   src: string;
   alt: string;
-  float?: 'left' | 'right' | 'none';
-  spanColumns?: string; // CSS width value like '50%', '400px', '80%' - omit for column-span:all
   caption?: string;
-  aspectRatio?: 'video' | 'square' | '4/3' | '3/2';
 }
 
 const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
-  (
-    {
-      className,
-      src,
-      alt,
-      float = 'none',
-      spanColumns,
-      caption,
-      aspectRatio = 'video',
-      ...props
-    },
-    ref
-  ) => {
-    const floatClasses = {
-      left: 'float-left mr-6',
-      right: 'float-right ml-6',
-      none: 'mb-4',
-    };
-
-    const aspectRatioClasses = {
-      video: 'aspect-video',
-      square: 'aspect-square',
-      '4/3': 'aspect-[4/3]',
-      '3/2': 'aspect-[3/2]',
-    };
-
+  ({ className, src, alt, caption, ...props }, ref) => {
     return (
       <figure
         ref={ref}
-        className={cn(
-          '[break-inside:avoid]',
-          floatClasses[float],
-          spanColumns ? `w-[${spanColumns}]` : 'my-6 w-full [column-span:all]',
-          className
-        )}
+        className={cn('w-full [break-inside:avoid]', className)}
         {...props}
       >
-        <div
-          className={cn('relative w-full ', aspectRatioClasses[aspectRatio])}
-        >
-          <Image src={src} alt={alt} fill className="object-contain" />
-        </div>
+        <img
+          src={src}
+          alt={alt}
+          className="w-full object-contain mix-blend-multiply dark:mix-blend-normal"
+        />
         {caption && (
           <figcaption className="text-sm italic text-muted-foreground">
             {caption}

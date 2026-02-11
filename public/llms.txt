@@ -27,325 +27,6 @@
 - caMOOra -- a website marketplace which matches student-photographers with clients. focused on providing a platform for students to showcase their work and get hired. It features a robust booking system, portfolio management, and secure payments. site: https://camoora.io/ github: https://github.com/winzamark123/caMOOra
 - justsayin -- mobile application displaying daily quotes from your favorite authors on your lock screen widget. Start your day with inspiration and wisdom from the world's greatest minds, delivered right to your phone. app store: https://apps.apple.com/us/app/justsayinapp/id6502377306 github: https://github.com/winzamark123/JustSayin
 
-**Blogs**
-inference
-/ˈin-fə-rən(t)s/ Noun
-1. a conclusion reached on the basis of evidence and reasoning
-2. the process of deriving logical conclusions
-this section showcases my inference over the years. how i 'infer' the world
-
-Blog: Decision Tree in Life
-Date: 2026-01-14
-Tags: life, reflections
-Content:
-One of the most under appreciate skills in my life is the ability to make decisions. This is something I've always thought about but never truly dived into. A skill i've assumed to only grows as more experience and intuition builds up over the years.
-
-Something that became adamant to me though this skill of 'deciding' is not limited to the choices itself but also includes the timing of when you pick those decisions.
-
-Bob picks a city to live in when he started his career. SF with its abundance of talent and center of the tech industry. While Bill chose to stay in Thailand, with its rich culture and comfortable lifestyle. 5 years later, Bob sold his company at a valuation of 9 figures while Bill still works for CP.
-
-Now succeess can differ depending on people and these two choices are good choices, neither are bad, But a type A person (like most people) in SF might prefer to hit it big before heading back home to relax -- i also fall into this bucket as well.
-
-What i suspect and am trying to infer is that some decisions really depends on the timing of your life and the younger you are the bigger the risk appetite and the more important it is to pick a decision that has the ability to compound over the years.
-
-what kind of decisions compounds over the years? there are a couple of examples that come to mind.
-- **skills**
-  - if your choices are optimize for learning, there will alwawys bne a path to earning money. a cool example to this is how Steve Jobs was into caligraphy -- a seemingly useless skill that turned out to be one of the most impactful philosophy that shapes how Apple operates today.
-- **relationships**
-  - a healthy and stable relationship will lessen your worries and push you towards moving to the right direction. i cant beleive how much time and brain capacity is wasted thinking about forming human connections. Whenever I talk to many of my friends who are still single (or in a rough relationship) the only things they think about is how to find a companion. Maybe there is a survivor bias in these people causing people who think about these things all the time to fail in finding proper loving relationship.
-  - dont waste half your time and half your brain chasing, once you are ready the time will come and when it does, love them tightly
-  - another big reason to care about these relationships are so that you don't have any regrets when charging towards your goals. you can accelerate and tunnel vision yourself knowing that the people behind you got your back.
-- **perspective**
-  - traveling has got to be one of the best tools to compound this. every single time i've traveled to a different country, visited a new place my perspective has expanded. traveling also gives you the ability to become a different person which can make you shift our of your comfort zone. now whether traveling with another person will do that or not, this is something i would like to experience with Yaya this year.
-- **health**
-  - healthier more in shape people are more confident, and more confident people are likely to open themselves up to new opportunities.
-  - physically you also get to do things when you are much healthier that is just an internal fact -- hiiking, skiinng, swimming etc, the healthier you are the more options you have in life.
-- **clarity (the ability to make good decisions)**
-  - this is probably the most important yet least thought about. the ability to make decisions. its like in a video game when you can see in the future of what your decisions will lead to. buying this set of armor or leveling up this set of power. its surprising because im always someone who tries to make the best choices in the game. sometimes when i know the choices lead to a bad ending i restart and reset to the checkpoint. Yet, i've never thought about it much in real life. Partly could be due to the fact that there is no checkpoint in life, and maybe thats the reason why the mindset shifts to YOLO but it should be the opposite, i should sit a reflect on why these decisions are made and what were the outcomes of those decisions.
-  - now here is where i think people get things wrong. they judge decisions based on the output not the input. this is effectively saying that all in with 72s and hitting the nuts is always the best choice, when optimally its incorrect. what we need to do in judging right or wrong decisions is based entirely on the input.
-  - now what categorize as a good inputs of decisions, what criterias should i use to judge what is a good decision?
-  - here are some brainstorms:
-    - potential upsdie? but no that would mean that buying a lottery ticket is a good decision. but taking bets on investments are good decisions so whyh is buying a lottery ticket not?
-
-Blog: Note to self for 2026
-Date: 2026-01-09
-Tags: life, reflections, resolutions
-Content:
-This is a note to self for the year of 26. This year is the year of the horse. People say this is a year of action. A horse runs, it gallops and races. This is not a year of overthinking but a year of abundant action.
-
-I am currently on the plane 2 am in SF. Instead of sleeping I think a better time of my use is to think critically and plan what I truly want in 2026. It's hard to see what specific future lies ahead but it might be easier to pick up past trends of my past dots. As they say, 'it is easier to connect the dots backward'
-
-**Let's see.. in 2025 I've,**
-- Worked at an illegal startup, the founder was a guy who founded tabs chocolate. Incredible guy, but it wasn't what I truly wanted to do. Felt like agency work when I want more tech.
-- Graduated, brought both yaya and my parents to the US for the first time. We went to Las Vegas, watched some shows, gambled, got an WSOP card. Showed them some incredible places but not enough.
-- Joined an AI start up in SF. Also another incredible founder from Singapore, one of the best team and mentors I've ever had. I still talk to one of my co-worker, an AI engineer that I truly love and respect. We are pitching YC together
-- Brought yaya over to SF. She's studying Masters in Design, a major she loves and life has been incredible with her. We got an apartment near Japantown and designing our room, picking furniture, lights, etc. What was to me an empty, barish, apartment has become a home that I look forward to going back even when I'm on vacation.
-- Got an influx of inbound recruiters and made a radical decision to switch company after 6 months. The pay is better, the founders are young, smart, and truly hardworking. I still debate a lot whether this is the right move. After many conversations, faith and doubts. I've decided to stick with it. There's things to learn everywhere, why not do it at a place where they pay well.
-
-That brings us to the start of this year. 2025 was an incredible year of grind and work. It was one of the most propelling year for my career and I can't help but wonder if 2026 would be the same. Should it be? While this has been an incredibly fulfilling year, I can't help but notice that I've also sacrificed some other aspects of things that life could be.
-
-**So let's do a checklist.**
-
-**What I'm happy with**
-- Relationship
-- Family
-
-**What I want to focus on**
-- Health
-- Financial freedom
-- Living life fully
-
-**A Unicorn Year**
-Horses doesn't just gallop and run. Only tunneled vision trained horses do, and I will never be a track horse. Funny, my girlfriend is born on the year of the horse and that means bad luck this year, but she believes that she's a unicorn and I believe this year is the same. A unicorn year. They are free. They explore. I think this year this is what I want to focus on. Of course, the grind is still there, I'll work my ass off, but on the right things. This is a year where I explore new hobbies, cities, and maybe career opportunities where I least expect.
-
-I want to keep resolutions into another inference. There's a matter of reflecting on old resolutions as well. But this year I want to try sticking to a phrase.
-
----
-Let's make this year a year where I 'live the shit out of life'. Enjoy every moment, good or bad. A year where we push the pedals, where we enjoy taking turns and corners, where accidents are joked about, and a year where I am truly present to where I am.
-
-Blog: Branches of Life
-Date: 2025-12-31
-Tags: life
-Content:
-Coming soon.
-
-Blog: Do it for the Lore
-Date: 2025-12-07
-Tags: founders
-Content:
-2025 was one of the most accelerating year for me. I've
-- [x] Moved to a new city
-- [x] Worked at 3 startups
-- [x] Achieved my financial goal set at the start of the year
-- [x] Moved in with a very special person in my life
-- [x] Realized how special this person is to me
-
-**Pondering before 2026**
-These are just but a few things that i'm reflecting on now, and i'm sure i'll be updating this list as for the foreseeable future. Now there are also many things that i've come to realize and i think 2026 will be a year of clarity. Here are some things i'm still pondering as of the moment.
-- At what point can you say that you have enough experience to start a company? Does that truly matter at all? In this current day where anyone can prompt claude for coding and more 10x, 100xs engineers emerge, is my skill as a SWE diminishing or amplifying?
-- Sequential to that, which path should i take to maximize my efforts? Do i go down the deep mind-boggling path of trying to understand ai? or should i instead focus on things that are somewhat perpendicular? and which fields are truly perpendicular to ai?
-- Note: an interesting field I think that is somewhat tangent to ai is marketing. People think that marketing is fully creative but i think it runs deeper than that. Marketing is understanding the psychology of humans in groups, it combines both creativeness and psychology, predicting on how a person / group might respond to a piece of creativeness created by the company. This i believe, is not yet able to be automated by ai, and rightfully so, humans are not yet able to fully understand trends, and that might be the bet companies like Cluely are trying to take. (Virality as a product). But who knows? when ai was first released we thought that creative works like digital art, videos, and designs wouldn't be the first to be automated and yet here we are with Midjourney, Sora, and loveable. Arguably, the most affect market was the coding market out of all.
-
-Do simple things. Simple things are efficient, they are not a product of being stagnant and lazy but a proof of multiple iterations of cycle. We should always keep things simpler than we feel like it should. There is elegance in simplicity, whether thats your set up, code, or relationship. I guess Santa was right, less is more.
-
-It's funny because I've always followed this rule in my relationship, keeping things as lean and simple as possible and that has worked great for me. Yet I've never stopped, planned, and iterate on my day to day life efficiency.
-
-Maybe I'm doing that now.
-
-A lot of my blogs are rambles and updates of my life. This isn't particularly useful for anyone but me. Although there is a milestone where hopefully someone find clarity in reading these blogs, the more prominent goal for me is to improve my skills of putting thoughts into word. And what better way to do this than writing? As I've mentioned in previous blogs, writing is the simplest form of communication, so I've thought of trying to master this. Maybe it should rather be a series instead, a journal or a script for my short form stories.
-
-Although meeting my current bosses (2 incredible founders), I've realized my use of vocabularies is subpar, along with my hindered attention span due to social media. To improve on both, I've decided to read more, not those short form tweets or video, actual long form content where i can really slow down the pace of what im doing and enjoy the moment.
-
-**Ask for forgiveness not permission**
-A big lesson I learned transitioning from School to Work. We are ultimately responsible for our own success, so be proactive in the approach of what you do and what you want. Dont hinder or slow down your pace by asking for permission, nobody owes anyone anything. This is an important reminder i find myself alluding back to whenever i am trying to decide on anything.
-
-An interesting paradigm shift that I've been pondering on is the idea of 'Doing it for the lore.' Experiencing life as something that you would be proud to tell your children about. 'Your dad to be a bartender, he used to work at a sperm racing company, he went on this crazy backpacking trip across Himalayas, tried to start a company, etc.'
-
-I think thats something that I want to achieve. Ofcourse, this comes with financial stability, but having somewhat achieved that (I still have to work but the pay is comfy), I think the next step is to focus on the things that you yourself will tell others about, your lore.
-
-Image: Traditional Japanese kissaten storefront (src: /projects/decaf_1.png)
-
-**Polar Founders**
-As I've gained more experience in the startup world of SF, an emerging trait I often see from founders are how polar they are on their opinions. Naval says it best on [here](https://x.com/naval/status/1996684253334327660) And it seems like this is a quality I lack--**Conviction**.
-
-Blog: Bad Advices
-Date: 2025-09-05
-Tags: life
-Content:
-There are many good advices out there as much as there are great quotes. But I've come to realize that these advices are particularly bad given the different contexts they are given. And I don't mean context of advice but rather context of life as well.
-
-The other day somebody told me.
-_'Win, in a relationship you shouldn't say I love you all the time. It will make the relationship stale and then it won't last'_, this stuck with me for some time since me and my girlfriend use these words indefinitely almost endlessly.
-
-- But why shouldn't you say I love you all the time shouldn't we express our affection to those that we care?
-- But I don't see my parents saying it all the time and their relationship is great so does that mean I shouldn't say it?
-
-Now we can debate whether we should always say I love you to our loved ones. But the point of this post is to understand that some advices might just not apply to you. People have different experiences and they are also at different stages of their lives.
-
-It would be the same to tell a beginner developer to learn VIM motions rather than learn a coding language since that will help them in the long run. Not only does this advice not make sense. But there are also so many factors to consider that the advice becomes poison rather than medicine.
-
-**Qualifications of Advices**
-
-So what makes a good advice? Or rather what advice should you listen to.
-
-**Does this person have the qualification to give you this advice?**
-
-This is probably the simplest form to gauge advice and one that a lot of people use. But people are often quick to judge and care more about money, status, and age which clouds their judgement.
-
-So how do we determine if an advice is useful? I think this is how my subconscious brain rate a legitimate advice.
-
-**Context of Experience**
-
-**Is the person who gave you advice in the position you want to be in terms of this advice?**
-
-I think this might be the most important indicator of all. If you have to make a north star metric of what qualifies as a good advice, ask yourself if the person you are taking advice from is someone you would want to be in that situation.
-
-And I'm not saying measure their position in things like, wealth, power, status. Although these things are often what we compare other people to. I meant are you taking love advice from friends that are single? Are you taking money advice from people that are broke, etc.
-
-**Context of Situation**
-
-**Is the situation of the advice applies to the same situation?**
-
-Many things constitute this. Some obvious ones to list are:
-- Time
-- Group settings
-- Wealth level
-
-For instance the reason why we might not take an advice from a grandparent is not because of their age. It's actually contradictory since age comes with experiences which leads to wisdom. But why we might not take it is because the advice couldn't be applied to the current times. They effectively have 0 experience in technology compared to modern day kids.
-
-Orthogonally, an advice from someone who works in big tech and engages with corporate politics would only hinder those that are working in a tight knit group as a startup. These advices are only applicable to the similar situation they present themselves in.
-
-**Life Nuggets**
-
-My girlfriend and I have this discord text channel labeled `#life-nuggets` . It's a series of timeless quotes we post on the channel whenever we find them. Marked with timestamps and author.
-
-Timeless advices presented in quotes often feels so awesome to me. Being able to give advice that is applicable to life in general is hard. But perhaps the ones we selected all catered to what we feel might make a 'good life' and that in itself is another conversation.
-
-Blog: Products that Lasts
-Date: 2025-05-07
-Tags: my takes on tech
-Content:
-This day and age, AI makes building product from 0 -> 1 relatively easy. Any products can be easily replaced by a product that does something better. So what's the MOAT?
-
-Products that utilizes networks effect.
-
-That is why incumbents like LinkedIN, Tiktok, Instagram, and Facebook are so hard to beat. For humans it is hard to migrate off a network you already love.
-
-**Network Effects**
-
-There are many cases and examples of network effects. Most commons are the typical social media platforms we know and love. In this blog, I want to explore the network effects that are not so obvious.
-
-**School of Electric Vehicles**
-
-Our current road is dominated by cars driven by humans. With some exceptions of Autonomous driving such as Tesla and Waymo. And this is expected, our technology is not yet at the point where autonomous cars are safe and reliable. There are still many liabilities and risks that comes from a non-human driven car. But this will shift in the near future. Not just the technology of car safety and infrastructure will rise, but as more autonomous cars are deployed on the road, the liabilities will soon shift towards humans being negligent in driving.
-
-What is interesting here is the network effect of the school of electric vehicles. Much like a school of fish (school - refers to a group of fish), swimming together. The more electric vehicles are on the road, the more the network effect will be.
-
-When cars are driven synchronously, it reduces traffic, accidents, and increases efficiency of traveling between destinations. A autonomous electric vehicle shifting in from a lane or merging into the highway, joins the network of electric vehicles and becomes part of the network.
-
-This is an interesting network effect that is not so obvious. And I can definitely see it being a huge bet to take for the future.
-
-**GPUs**
-- I've realized building products that lasts
-
-Blog: First Paycheck
-Date: 2025-02-24
-Tags: life updates
-Content:
-**What's something you've changed your mind on in the past year?**
-
-It's been a couple weeks since I started my first job. It's a Software Engineer Position at a startup. I hate to admit this, but my experience here led me to believe that it doesn't require a huge amount of technical skill to build a product with paying users. Especially for your early adopters, users pay for a product they _believe_ works.
-
-And this is where I was fooled. As I trust that most developers also commonly fall into this trap. The trap of building a perfect product so that not only the users will trust us but we ourselves can trust the product in which we are building and selling to them. The perfect UI, UX, backend architecture, system scaling etc.
-
-Developers often try to take the path of an **Inventor** since that is what engineers do, we invent, scale, and inspire not only ourselves but other people to the allusion of futures.
-
-But I think in a startup instead of taking the path of an **Inventor** we should in a way also take up the role of a **Magician**. Users will pay for a product they _believe_ will work. And in the early stages of a startup where you don't have the funding nor the time to spend on creating the future, sometimes a mix of illusion will help tip over the edge.
-
-- Maybe from the perspective of a normal users this all looks the same. The product acts as intended and thus _beliefs_ are solidified.
-- Maybe that means that we developers should try to fool ourselves. I know this is often hard since we understand how the product works as a whole, and it's hard to sell something that we know is inherently faulty.
-
-Ultimately, my goal this year is to build a product that users will pay to use. And sometimes that means fooling myself into believing in a _work-in-progress user-validated solutions_ rather than begging for users to try out a fully built solution that no one has a problem to.
-
-Blog: Start of 2025
-Date: 2025-01-10
-Tags: new year new goals
-Content:
-**New Year New Resolutions**
-
-To me, resolutions have to be impactful and measurable. This avoids the goals like 'I want to get healthier' or 'I want be a better listener' and make me set clear, actionable, ACCOUNTABLE goals.
-
-Last year's I achieved 2 of my 3 resolutions. That included:
-- [x] Build a real world product that people would use
-- [x] Join more groups and learn better leadership skills
-- [ ] Choke Yimin out in BJJ
-
-I haven't seen Yimin at the BJJ Gym since the new years...
-
-Anyway, New year, new resolutions! Here's what I thought of:
-- [x] Get a tech job! (Six Figures)
-- [ ] Get someone to pay me $1+ from a product I built myself
-- [ ] Write a consistent blog for 2025
-
-**First Interview**
-
-Starting off the year strong, I interviewed at 2 start ups based in SF! In 2024 I had an interview rate of 100% (meaning I passed 100% of my interviews. Albeit that I only got 3 interviews XD).
-This year I'm not so sure. My interview question was implementing every possible way of TicTacToe (similar to [this](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)). I bombed it. Did not understand the problem at all nor did I get any proper solution out. T^T. It's ok, chin up, and I now know what needs to be fixing.
-Second interview went well. There wasn't any technical question yet but the founder asked me questions about resume, my history of building, technical struggles etc. He was trying to get a feel, if I was a great fit for the company or not. I was fairly confident, since I did build these things and I've always enjoyed talking about the technical complexity and areas of tech.
-2024 was a year of Resume Optimization, 2025 will be the year of acing the interviews and MAKE THAT BREAD. I can already feel it, 2025 is going to be a great year. Happy new years!
-
-Blog: Reading and Writing
-Date: 2024-12-27
-Tags: reading, writing, paul_graham
-Content:
-The more I read [Paul Graham's essays](https://paulgraham.com/articles.html), the more I realize that one's ability to **write** corresponds with their ability to **think**. To be able to express and explain your feelings, mindset, or line of thought, a person needs to be able think concisely and clearly, even more-so when the only form of expression comes through words read through a paper/website.
-
-This reminds of the scene in Billions from Taylor Mason
-
-'I understand how hard it is to have things inside you that you can't communicate, I can't imagine how hard it must be to know HOW to say them and still NOT be allowed to' - Taylor Mason
-
-Writing is the most refined form of thinking, **conversely** reading is the most refined form of learning. No wonder they say all successful people read a ton.
-
-Blog: Pilot
-Date: 2024-12-24
-Tags: life, blog_init, paul_graham
-Content:
-Going into 2025, one of my new year resolution is to become a better writer. Inspired by Paul Graham's essay on [Write and Write Nots](https://paulgraham.com/writes.html), I am challenging myself to become a better writer and thus a better thinker. I don't expect much traction from these blogs as these are just some notes to self, but if you are reading this, hopefully you might get some small nuggets of stories, knowledge, and inspiration.
-
-Happy Christmas Eve!
-
-**Coding Wise**
-
-Setting up this blog was a hassle. It took me around 2 - 3 days of pure GPT + some background knowledge of Devops. I'll write a longer post explaining how and what I did to integrate note writing from **obsidian** to my current published website on **vercel**.
-
-Blog: Blog Infrastructure
-Date: 2024-12-24
-Tags: coding
-Content:
-This idea of a blog started when I stumbled upon [Network Chuck's video](https://www.youtube.com/watch?v=dnE7c0ELEH8&ab_channel=NetworkChuck). It was a start to finish on how he set up a blog site using **obsidian**, **HUGO**, and **HOSTINGER**.
-
-Inspired by this, I tried setting up my own.
-
-**What Sets My Setup Apart?**
-Unlike many **'setting up Obsidian blog tutorials'**, including Network Chuck's, I didn't start from scratch. My blog needed to integrate seamlessly with an already deployed website, requiring custom solutions rather than plug-and-play APIs or plugins. This additional complexity presented both challenges and opportunities.
-
-Could this be the foundation for a SaaS product? Possibly :3
-
-**Key Features**
-- **Integration with an Existing Website**
-  My blog merges directly into my portfolio website rather than operating as a standalone site.
-- **Customizable Themes and Aesthetics**
-  Fonts, headings, padding, and overall design are fully customizable to align with the site's branding.
-- **Rich Content Support**
-  The blog accommodates images, drawings, and other media types seamlessly.
-- **Minimum User Input**
-  I want the workflow of writing to deploying to be as frictionless as possible. Ofcourse I can
-
-**Infrastructure: Automation at Its Core**
-Here's how the infrastructure is set up:
-1. **Obsidian** is connected to a GitHub repository called **portfolio-blog**.
-2. After finishing a blog post in Obsidian, I commit, sync, and push the changes to the repository.
-3. This triggers a **GitHub Action**, which sends a POST request webhook to my **portfolio-website** repository.
-4. The portfolio repository processes the webhook, verifies the changes, and deploys the updated blog to the production website.
-
-With this setup, most of the workflow is automated, requiring minimal user intervention. GitHub Actions handle the heavy lifting, ensuring the process is smooth and efficient.
-
-Image: 24-12-2024 Blog_Infrastructure 2024-12-30 13.40.23.excalidraw
-Image: Pasted image 20250104113300.png
-
-**Workflow: Writing and Publishing Made Simple**
-Thanks to this infrastructure, writing and publishing blog posts is a seamless process. Here's how it works:
-1. **Create a New File**
-   Start a new markdown file in Obsidian under the designated blog directory.
-2. **Add Metadata**
-   Include the title, date, and tags for the blog post.
-3. **Write the Content**
-   Draft the blog post with text, images, and drawings as needed.
-4. **Push the Changes**
-   Commit, sync, and push the updates to GitHub via Obsidian.
-
-The automated pipeline takes over from here, deploying the blog to the live website.
-
 **Nuggets**
 - The ironic tragedy, that life has to be lived forward but only makes sense in reverse
 - A man has a 1000 problems until he has a health problem, then he has 1 problem
@@ -377,3 +58,65 @@ The automated pipeline takes over from here, deploying the blog to the live webs
 - Ask for forgiveness not permission -- Stranger Things
 - People come from the same trunk branch out differently. They diverge
 - if thinking were the puzzles, writing is putting the pieces together -- Dan Koe
+
+**Blogs**
+inference
+/ˈin-fə-rən(t)s/ Noun
+1. a conclusion reached on the basis of evidence and reasoning
+2. the process of deriving logical conclusions
+this section showcases my inference over the years. how i 'infer' the world
+
+Blog: Decision Tree in Life
+Date: 2026-01-14
+Tags: life, reflections
+URL: https://www.wincheng.fyi/?tab=blogs&post=2026-01-14-decisions_tree_in_life
+
+Blog: Note to self for 2026
+Date: 2026-01-09
+Tags: life, reflections, resolutions
+URL: https://www.wincheng.fyi/?tab=blogs&post=2026-01-09-note_to_self_for_2026
+
+Blog: Branches of Life
+Date: 2025-12-31
+Tags: life
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-12-31-branches_of_life
+
+Blog: Do it for the Lore
+Date: 2025-12-07
+Tags: founders
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-12-07-lore
+
+Blog: Bad Advices
+Date: 2025-09-05
+Tags: life
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-09-05-bad_advices
+
+Blog: Products that Lasts
+Date: 2025-05-07
+Tags: my takes on tech
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-05-07-products_that_last
+
+Blog: First Paycheck
+Date: 2025-02-24
+Tags: life updates
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-02-24-first_paycheck
+
+Blog: Start of 2025
+Date: 2025-01-10
+Tags: new year new goals
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-01-10-start_of_2025
+
+Blog: Reading and Writing
+Date: 2024-12-27
+Tags: reading, writing, paul_graham
+URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-27-reading_and_writing
+
+Blog: Pilot
+Date: 2024-12-24
+Tags: life, blog_init, paul_graham
+URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-24-pilot
+
+Blog: Blog Infrastructure
+Date: 2024-12-24
+Tags: coding
+URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-24-blog_infrastructure

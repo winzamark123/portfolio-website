@@ -10,14 +10,18 @@ import {
   ProjectList,
   NuggetList,
 } from './const';
-import { useState, useEffect } from 'react';
-import { MDXRemote } from 'next-mdx-remote';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useMDXComponents } from '@/mdx-components';
 import type { BlogPost } from '../page';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
+
+// lazy import avoids next-mdx-remote SSR side effects that break Suspense hydration
+const LazyMDXRemote = lazy(() =>
+  import('next-mdx-remote').then((mod) => ({ default: mod.MDXRemote }))
+);
 
 const fadeVariants = {
   initial: { opacity: 0 },
@@ -420,24 +424,20 @@ interface MachineViewProps {
 }
 
 const MachineView = ({ content, status }: MachineViewProps) => {
-  const isReady = status === 'ready';
-  const isLoading = status === 'loading';
-  const isError = status === 'error';
-
   return (
     <section className="w-full max-w-5xl font-mono">
       <div className="space-y-3">
-        {isLoading && (
+        {status === 'loading' && (
           <p className="text-sm leading-relaxed text-foreground/70">
             loading machine view...
           </p>
         )}
-        {isError && (
+        {status === 'error' && (
           <p className="text-sm leading-relaxed text-foreground/70">
             unable to load /llms.txt
           </p>
         )}
-        {isReady && (
+        {status === 'ready' && (
           <pre className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
             {content}
           </pre>
@@ -503,7 +503,9 @@ const Blog = ({
               ))}
             </div>
             <MagazineLayout columns={selectedBlog.columns} gap="lg">
-              <MDXRemote {...selectedBlog.content} components={mdxComponents} />
+              <Suspense fallback={<Spinner />}>
+                <LazyMDXRemote {...selectedBlog.content} components={mdxComponents} />
+              </Suspense>
             </MagazineLayout>
           </article>
         </motion.div>
