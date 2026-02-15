@@ -1,0 +1,94 @@
+---
+type: Blog Post
+date: 2026-02-14
+tags:
+  - economics
+title: Flocking and Hotelling's Law
+columns: 3 
+---
+
+ever wonder why there are certain districts that sell one type of product?
+
+in New york theres Thompson Street for the **chess district**, 
+in Japan theres Kappabashi Street for the **kitchenware district**,
+in Thailand theres Pak Khlong Talat for the **flower district**.
+in Amsterdam theres the famous **Red Light District** :3
+
+it seems rather unintuitive that these stores would flock together in the same area even though
+there would be more competition. a product could and probably would have to sell at half the price 
+in a district where there is essentially what economist would say as "perfect competition". 
+if i were to open any shop that has sells the same category as the district my initial reaction 
+is to open as far away as possible from these stores. 
+
+for easier reference i want to coin this phenomenon as *flocking*, 
+where similar product, services, or attributes flock together in the same area.
+
+researching this, there are some logical answers to *flocking*, but the cool thing i 
+found out recently and wanted to share here is that theres also a *mathematical* answer 
+to this question! 
+
+alot of the answers can be found here on this 
+[reddit post](https://www.reddit.com/r/AskHistorians/comments/1lzft8/why_do_certain_metropolitan_areas_turn_into/)
+, but for those in for my explanation, here it is:
+
+#### Logical Intuition 
+if you were a foreigner visiting Thailand and wanted to get some fun action, what would be the first
+place you would think of? Certainly not the rural area of Bangkok, but the famous red light
+district of Pattaya. Why? because you know that the area is known for these type of services, in a way
+it guarantees quality, saves you time, and gives you a sense of security that you won't be scammed 
+in terms of pricing. 
+
+and that is essentially it. when thinking in terms of the customers, district allows the leveraged increase
+of traffic. A district might have 30 stores, making store owners likely have to halve their prices but with 
+the tradeoffs of having 30 times the traffic. (not literally, but it definitely is a significant tradeoffs), 
+customers would also have a higher trust in the product since the reputation of the district boosts the
+reputation of your stores as well. 
+
+there are more nuances and specific examples on the occurences of **flocking** that i'll gloss over. things like:
+- resources in the area 
+- security in the herds (i.e. diamond stores in the NY diamond district gets a lower percentage of robbery than those outside the district)
+- the ability to share information and resources between stores (i.e. sharing suppliers, sharing customers, etc)
+- and more 
+
+<MagazineImage
+  src="https://i.pinimg.com/1200x/40/54/bd/4054bdda19a3fb4c1de5442a6b243a44.jpg"
+  alt="birds flocking together"
+/>
+
+#### Mathematical Explanation
+the interesting thing about **flocking** that can also be explained mathematically is the concept of **Hotelling's Law**. 
+
+to explain this: 
+lets imagine a singular line (a street) where there are homes all throughout the street. 
+hot dog cart vendors wants to sell the hotdogs on this street. 
+
+1 hot dog cart opens on the street, where should they choose the location? it doesnt matter. since their
+product is currently inherently unique, customers will have to come to the store no matter how far 
+down the street they are 
+
+now a second store opens up, where should the stores now choose their location? the optimal location
+people are expecting are both ends of the street (where they are furthest apart), therefore both stores
+will capture half of the market. now with both carts at the end of the street, 
+the house in the middle can decide whether to go for the hot dog cart on the left or the 
+hot dog cart on the right, since the distance are equivalent.
+
+but what happens if cart B (the cart of the right side of the street) moves in closer to the middle of the street? now the distance between 
+the middle house and cart B is shorter, while the end of the street is further away, but no matter
+what, the distance of cart B will always be closer than the distance of cart A when compared by the right 
+end of the street. therefore cart B also captures the middle house share of the market. 
+
+naturally cart A seeing this will also move closer to the middle of the street to prevent cart B from capturing
+a bigger share of the market. this process continues until both of them ended up next to each other in the
+middle of the street. 
+
+i think that is what we unintuitive ignored about **flocking**. the optimal location of the carts on a street
+is at the both ends of the street BUT it is also optimal for both stores to be at the middle of the street.
+in fact, this is called the **Nash Equlibrium** -- a concept in game theory where no players can improve their 
+position since alternative strategies would lead to a worse outcome for themselves. (cart b choosing to move further away
+from the middle results in cart A capturing more of the market share)
+
+this concept also applies to 3 stores in a 2D plane and more. in the end, the Nash Equlibrium of the stores 
+opening up in a location results in the creation of districts and the phenomenon of **flocking**! 
+
+
+ 

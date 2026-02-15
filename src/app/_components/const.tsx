@@ -286,4 +286,8 @@ export const NuggetList = [
       'if thinking were the puzzles, writing is putting the pieces together',
     author: 'Dan Koe',
   },
+  {
+    quote: 'There are no permanent solutions in a dynamic environment',
+    author: 'Naval Ravikant',
+  },
 ];
