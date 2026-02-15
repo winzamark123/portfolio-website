@@ -66,6 +66,11 @@ inference
 2. the process of deriving logical conclusions
 this section showcases my inference over the years. how i 'infer' the world
 
+Blog: Flocking and Hotelling's Law
+Date: 2026-02-14
+Tags: economics
+URL: https://www.wincheng.fyi/?tab=blogs&post=2026-02-14-flocking_and_hotellings_law
+
 Blog: Decision Tree in Life
 Date: 2026-01-14
 Tags: life, reflections
