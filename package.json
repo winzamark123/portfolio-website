@@ -27,7 +27,7 @@
     "lucide-react": "^0.358.0",
     "marked": "^15.0.4",
     "mongodb": "^6.5.0",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
