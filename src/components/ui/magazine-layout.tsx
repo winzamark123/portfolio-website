@@ -42,10 +42,27 @@ interface MagazineImageProps extends React.HTMLAttributes<HTMLElement> {
   src: string;
   alt: string;
   caption?: string;
+  creditHref?: string;
+  creditLabel?: string;
 }
 
 const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
-  ({ className, src, alt, caption, ...props }, ref) => {
+  (
+    {
+      className,
+      src,
+      alt,
+      caption,
+      creditHref,
+      creditLabel = 'image credit',
+      ...props
+    },
+    ref
+  ) => {
+    const sourceHref = creditHref ?? src;
+    const isExternalSource =
+      sourceHref.startsWith('http://') || sourceHref.startsWith('https://');
+
     return (
       <figure
         ref={ref}
@@ -57,9 +74,20 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
           alt={alt}
           className="w-full object-contain mix-blend-multiply dark:mix-blend-normal"
         />
-        {caption && (
-          <figcaption className="text-sm italic text-muted-foreground">
-            {caption}
+        {(caption || sourceHref) && (
+          <figcaption className="mt-2 flex flex-col text-muted-foreground">
+            {caption && <p className="text-sm italic">{caption}</p>}
+            {sourceHref && (
+              <a
+                href={sourceHref}
+                className="self-end text-xs italic underline underline-offset-2 hover:text-foreground"
+                {...(isExternalSource
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+              >
+                - {creditLabel}
+              </a>
+            )}
           </figcaption>
         )}
       </figure>
