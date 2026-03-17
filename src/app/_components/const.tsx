@@ -129,6 +129,12 @@ export const ExperienceProps = [
 
 export const ProjectList = [
   {
+    title: 'git hermes',
+    description:
+      'an AI-powered CLI tool that generates git commit messages from your staged diffs. fast, lightweight, and configurable',
+    github_repo: 'https://github.com/winzamark123/git-hermes',
+  },
+  {
     title: 'decaf',
     description: 'your filtered dose of daily news.',
     github_repo: 'https://github.com/winzamark123/decaf',
@@ -140,6 +146,7 @@ export const ProjectList = [
       'bringing AI to your favorite whiteboard. An infinite canvas that allows you to generate code, text, and images with the help of AI. It supports a variety of tools and features to help you brainstorm and create.',
     github_repo: 'https://github.com/winzamark123/open-canvas',
     url: 'https://www.opencanvas.studio/',
+    preferred_url: 'https://www.opencanvas.studio/',
   },
   {
     title: 'os deep research',
@@ -161,6 +168,7 @@ export const ProjectList = [
       "mobile application displaying daily quotes from your favorite authors on your lock screen widget. Start your day with inspiration and wisdom from the world's greatest minds, delivered right to your phone.",
     github_repo: 'https://github.com/winzamark123/JustSayin',
     apple_url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
+    preferred_url: 'https://apps.apple.com/us/app/justsayinapp/id6502377306',
   },
 ];
 

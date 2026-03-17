@@ -346,7 +346,17 @@ const Projects = () => {
           className="mb-6 flex break-inside-avoid flex-col"
         >
           <div className="flex items-center gap-2 md:gap-4">
-            <h2 className="font-lora text-lg font-bold">{project.title}</h2>
+            <Link
+              href={
+                project.preferred_url ||
+                project.github_repo ||
+                project.url
+              }
+              target="_blank"
+              className="font-lora text-lg font-bold hover:underline"
+            >
+              {project.title}
+            </Link>
             <div className="flex gap-2">
               {project.github_repo && (
                 <Link href={project.github_repo} target="_blank">
