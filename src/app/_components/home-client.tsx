@@ -347,11 +347,7 @@ const Projects = () => {
         >
           <div className="flex items-center gap-2 md:gap-4">
             <Link
-              href={
-                project.preferred_url ||
-                project.github_repo ||
-                project.url
-              }
+              href={project.preferred_url || project.github_repo || project.url}
               target="_blank"
               className="font-lora text-lg font-bold hover:underline"
             >
