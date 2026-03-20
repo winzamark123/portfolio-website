@@ -189,7 +189,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                         </div>
                       )}
                       <img
-                        src="https://raw.githubusercontent.com/winzamark123/portfolio-website/output/github-snake-dark.svg"
+                        src="https://raw.githubusercontent.com/winzamark123/portfolio-website/output/github-snake.svg"
                         alt="github contribution snake animation"
                         className="w-full py-2"
                         onLoad={() => setImageLoaded(true)}
