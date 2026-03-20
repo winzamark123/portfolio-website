@@ -1,6 +1,5 @@
 'use client';
 import { MagazineLayout } from '@/components/ui/magazine-layout';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
@@ -189,13 +188,11 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                           <Spinner />
                         </div>
                       )}
-                      <Image
-                        src="https://ghchart.rshah.org/winzamark123"
-                        alt="Win's Github chart"
+                      <img
+                        src="https://raw.githubusercontent.com/winzamark123/portfolio-website/output/github-snake-dark.svg"
+                        alt="github contribution snake animation"
                         className="w-full py-2"
-                        width={800}
-                        height={200}
-                        onLoadingComplete={() => setImageLoaded(true)}
+                        onLoad={() => setImageLoaded(true)}
                         style={{ display: imageLoaded ? 'block' : 'none' }}
                       />
                     </motion.div>
