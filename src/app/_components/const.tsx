@@ -298,4 +298,13 @@ export const NuggetList = [
     quote: 'There are no permanent solutions in a dynamic environment',
     author: 'Naval Ravikant',
   },
+  {
+    quote:
+      'Branding by definition has to be distinctive. But good design, like math or science, seeks the right answer, and right answers tend to converge.',
+    author: 'Paul Graham',
+  },
+  {
+    quote: 'Buying a book means buying time to read as well',
+    author: 'Yaya Mar 2026',
+  },
 ];
