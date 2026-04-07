@@ -13,12 +13,13 @@
 - Twitter: https://x.com/winzamark12
 
 **Experience**
-- JigsawStack -- founding engineer (Jun 2025 - Current, San Francisco, CA). building small langauge models (SLMs) for developer use cases. https://jigsawstack.com/
-- Bustem -- frontend software engineer (Jan 2025 - Current, San Francisco, CA). founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands. https://bustem.com/
-- AggieWorks -- full-stack software engineer (Sep 2024 - Jan 2025, Davis, CA). led the development of a local business engagement platform enabling 35k+ students to discover deals, increasing engagement with local businesses. https://aggieworks.org/
-- Rhombus -- software engineer intern (Jun 2024 - Sep 2024, Sacramento, CA). built a user interface for frontend web admin console to highlight camera visual environment through computer vision and machine learning. https://www.rhombus.com/
-- HackDavis -- techincal product manager (Sep 2023 - Current, Davis, CA). deployed a website and judging app for a 1000+ person hackathon. with 275k+ visitors, 8300 unique visitors at peak month. https://2024.hackdavis.io/
-- Kebloom -- software engineer intern (Jun 2023 - Aug 2023, San Francisco, CA). developed a mobile application attracting over 300+ active early users. https://www.kebloom.com/
+- Agora -- founding engineer (San Francisco, CA). building AI observability for large enterprise companies. https://www.agora.so/
+- Interfaze (YC P26) - Prev JigsawStack -- founding engineer (San Francisco, CA). building small langauge models (SLMs) for developer use cases. https://interfaze.ai/
+- Bustem -- frontend software engineer (San Francisco, CA). founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands. https://bustem.com/
+- AggieWorks -- full-stack software engineer (Davis, CA). led the development of a local business engagement platform enabling 35k+ students to discover deals, increasing engagement with local businesses. https://aggieworks.org/
+- Rhombus -- software engineer intern (Sacramento, CA). built a user interface for frontend web admin console to highlight camera visual environment through computer vision and machine learning. https://www.rhombus.com/
+- HackDavis -- techincal product manager (Davis, CA). deployed a website and judging app for a 1000+ person hackathon. with 275k+ visitors, 8300 unique visitors at peak month. https://2024.hackdavis.io/
+- Kebloom -- software engineer intern (San Francisco, CA). developed a mobile application attracting over 300+ active early users. https://www.kebloom.com/
 
 **Projects**
 - git hermes -- an AI-powered CLI tool that generates git commit messages from your staged diffs. fast, lightweight, and configurable. github: https://github.com/winzamark123/git-hermes
@@ -59,6 +60,9 @@
 - Ask for forgiveness not permission -- Stranger Things
 - People come from the same trunk branch out differently. They diverge
 - if thinking were the puzzles, writing is putting the pieces together -- Dan Koe
+- There are no permanent solutions in a dynamic environment -- Naval Ravikant
+- Branding by definition has to be distinctive. But good design, like math or science, seeks the right answer, and right answers tend to converge. -- Paul Graham
+- Buying a book means buying time to read as well -- Yaya Mar 2026
 
 **Blogs**
 inference
@@ -72,6 +76,11 @@ Date: 2026-02-14
 Tags: economics
 URL: https://www.wincheng.fyi/?tab=blogs&post=2026-02-14-flocking_and_hotellings_law
 
+Blog: Polar Founders
+Date: 2026-02-10
+Tags: founders
+URL: https://www.wincheng.fyi/?tab=blogs&post=2026-02-10-polar_founders
+
 Blog: Decision Tree in Life
 Date: 2026-01-14
 Tags: life, reflections
@@ -81,11 +90,6 @@ Blog: Note to self for 2026
 Date: 2026-01-09
 Tags: life, reflections, resolutions
 URL: https://www.wincheng.fyi/?tab=blogs&post=2026-01-09-note_to_self_for_2026
-
-Blog: Branches of Life
-Date: 2025-12-31
-Tags: life
-URL: https://www.wincheng.fyi/?tab=blogs&post=2025-12-31-branches_of_life
 
 Blog: Do it for the Lore
 Date: 2025-12-07
@@ -102,10 +106,10 @@ Date: 2025-05-07
 Tags: my takes on tech
 URL: https://www.wincheng.fyi/?tab=blogs&post=2025-05-07-products_that_last
 
-Blog: First Paycheck
+Blog: Paycheck
 Date: 2025-02-24
 Tags: life updates
-URL: https://www.wincheng.fyi/?tab=blogs&post=2025-02-24-first_paycheck
+URL: https://www.wincheng.fyi/?tab=blogs&post=2025-02-24-paycheck
 
 Blog: Start of 2025
 Date: 2025-01-10
@@ -117,12 +121,12 @@ Date: 2024-12-27
 Tags: reading, writing, paul_graham
 URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-27-reading_and_writing
 
+Blog: Blog Infrastructure
+Date: 2024-12-25
+Tags: coding
+URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-25-blog_infrastructure
+
 Blog: Pilot
 Date: 2024-12-24
 Tags: life, blog_init, paul_graham
 URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-24-pilot
-
-Blog: Blog Infrastructure
-Date: 2024-12-24
-Tags: coding
-URL: https://www.wincheng.fyi/?tab=blogs&post=2024-12-24-blog_infrastructure

@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, FilePenLine, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, FilePenLine } from 'lucide-react';
+import { siX } from 'simple-icons';
 
 export const SocialProps = [
   {
@@ -31,10 +32,19 @@ export const SocialProps = [
   },
   {
     icon: (
-      <Twitter className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all" />
+      <svg
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all"
+      >
+        <title>{siX.title}</title>
+        <path d={siX.path} />
+      </svg>
     ),
     url: 'https://x.com/winzamark12',
-    description: 'Twitter',
+    description: 'X',
   },
 ];
 
@@ -61,19 +71,16 @@ export const ExperienceProps = [
   {
     company: 'Agora',
     position: 'founding engineer',
-    description:
-      'building AI observability for enterprises to monitor and manage their AI systems',
-    date: 'Nov 2025 - Current',
+    description: 'building AI observability for large enterprise companies',
     url: 'https://www.agora.so/',
     location: 'San Francisco, CA',
   },
   {
-    company: 'JigsawStack',
+    company: 'Interfaze (YC P26) - Prev JigsawStack',
     position: 'founding engineer',
     description:
       'building small langauge models (SLMs) for developer use cases',
-    date: 'Mar 2025 - Nov 2025',
-    url: 'https://jigsawstack.com/',
+    url: 'https://interfaze.ai/',
     location: 'San Francisco, CA',
   },
   {
@@ -81,7 +88,6 @@ export const ExperienceProps = [
     position: 'frontend software engineer',
     description:
       'founding team at a startup reinforcing brand protection for over 8000+ e-commerce brands',
-    date: 'Jan 2025 - Mar 2025',
     url: 'https://bustem.com/',
     location: 'San Francisco, CA',
   },
@@ -92,7 +98,6 @@ export const ExperienceProps = [
       'led the development of a local business engagement platform \
       enabling 35k+ students to discover deals, \
       increasing engagement with local businesses',
-    date: 'Sep 2024 - Jan 2025',
     url: 'https://aggieworks.org/',
     location: 'Davis, CA',
   },
@@ -102,7 +107,6 @@ export const ExperienceProps = [
     description:
       'built a user interface for frontend web admin console to highlight \
       camera visual environment through computer vision and machine learning',
-    date: 'Jun 2024 - Sep 2024',
     url: 'https://www.rhombus.com/',
     location: 'Sacramento, CA',
   },
@@ -112,7 +116,6 @@ export const ExperienceProps = [
     description:
       'deployed a website and judging app for a 1000+ person hackathon. \
       with 275k+ visitors, 8300 unique visitors at peak month',
-    date: 'Sep 2023 - Current',
     url: 'https://2024.hackdavis.io/',
     location: 'Davis, CA',
   },
@@ -121,7 +124,6 @@ export const ExperienceProps = [
     position: 'software engineer intern',
     description:
       'developed a mobile application attracting over 300+ active early users',
-    date: 'Jun 2023 - Aug 2023',
     url: 'https://www.kebloom.com/',
     location: 'San Francisco, CA',
   },
