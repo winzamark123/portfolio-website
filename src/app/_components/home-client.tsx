@@ -6,6 +6,7 @@ import {
   SocialProps,
   NavItems,
   ExperienceProps,
+  OSSContributions,
   ProjectList,
   NuggetList,
 } from './const';
@@ -337,6 +338,29 @@ const experience = () => {
 const Projects = () => {
   return (
     <MagazineLayout columns={3} gap="lg">
+      <div className="mb-6 flex break-inside-avoid flex-col gap-2 pt-1">
+        <p className="text-md font-bold">
+          OSS contributed to (albeit small hehe)
+        </p>
+        {OSSContributions.map((contribution) => (
+          <Link
+            key={`${contribution.org}/${contribution.repo}`}
+            href={contribution.pr_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-fit items-center gap-2 hover:underline"
+          >
+            <img
+              src={`https://github.com/${contribution.org}.png`}
+              alt={contribution.org}
+              className="h-5 w-5 rounded-full"
+            />
+            <span className="text-sm">
+              {contribution.org}/{contribution.repo}
+            </span>
+          </Link>
+        ))}
+      </div>
       {ProjectList.map((project) => (
         <div
           key={project.title}

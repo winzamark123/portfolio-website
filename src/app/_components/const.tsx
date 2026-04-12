@@ -129,6 +129,29 @@ export const ExperienceProps = [
   },
 ];
 
+export const OSSContributions = [
+  {
+    org: 'zed-industries',
+    repo: 'zed',
+    pr_url: 'https://github.com/zed-industries/zed/',
+  },
+  {
+    org: 'mintlify',
+    repo: 'guides',
+    pr_url: 'https://github.com/mintlify/guides/',
+  },
+  {
+    org: 'mixedbread-ai',
+    repo: 'mgrep',
+    pr_url: 'https://github.com/mixedbread-ai/mgrep/',
+  },
+  {
+    org: 'vercel',
+    repo: 'ai',
+    pr_url: 'https://github.com/vercel/ai/',
+  },
+];
+
 export const ProjectList = [
   {
     title: 'git hermes',
