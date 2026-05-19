@@ -19,10 +19,10 @@
 - AggieWorks -- full-stack software engineer (Davis, CA). led the development of a local business engagement platform enabling 35k+ students to discover deals, increasing engagement with local businesses. https://aggieworks.org/
 - Rhombus -- software engineer intern (Sacramento, CA). built a user interface for frontend web admin console to highlight camera visual environment through computer vision and machine learning. https://www.rhombus.com/
 - HackDavis -- techincal product manager (Davis, CA). deployed a website and judging app for a 1000+ person hackathon. with 275k+ visitors, 8300 unique visitors at peak month. https://2024.hackdavis.io/
-- Kebloom -- software engineer intern (San Francisco, CA). developed a mobile application attracting over 300+ active early users. https://www.kebloom.com/
 
 **Projects**
 - git hermes -- an AI-powered CLI tool that generates git commit messages from your staged diffs. fast, lightweight, and configurable. github: https://github.com/winzamark123/git-hermes
+- large clipboard history -- a Raycast extension that saves clipboard text too large for Raycast's built-in clipboard history, with search and paste-back. github: https://github.com/winzamark123/large-clipboard-history tech: typescript, raycast
 - decaf -- your filtered dose of daily news. site: https://www.decafo.co/ github: https://github.com/winzamark123/decaf
 - open canvas -- bringing AI to your favorite whiteboard. An infinite canvas that allows you to generate code, text, and images with the help of AI. It supports a variety of tools and features to help you brainstorm and create. site: https://www.opencanvas.studio/ github: https://github.com/winzamark123/open-canvas
 - os deep research -- an open source deep research framework for LLMs. fully customizable, modular, and easy to use. It allows you to run deep research tasks on any topic, generating comprehensive reports and insights using the latest AI models. github: https://github.com/JigsawStack/deep-research tech: typescript, ai sdk

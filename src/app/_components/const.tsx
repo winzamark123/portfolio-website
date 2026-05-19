@@ -119,14 +119,6 @@ export const ExperienceProps = [
     url: 'https://2024.hackdavis.io/',
     location: 'Davis, CA',
   },
-  {
-    company: 'Kebloom',
-    position: 'software engineer intern',
-    description:
-      'developed a mobile application attracting over 300+ active early users',
-    url: 'https://www.kebloom.com/',
-    location: 'San Francisco, CA',
-  },
 ];
 
 export const OSSContributions = [
@@ -158,6 +150,13 @@ export const ProjectList = [
     description:
       'an AI-powered CLI tool that generates git commit messages from your staged diffs. fast, lightweight, and configurable',
     github_repo: 'https://github.com/winzamark123/git-hermes',
+  },
+  {
+    title: 'large clipboard history',
+    description:
+      "a Raycast extension that saves clipboard text too large for Raycast's built-in clipboard history, with search and paste-back.",
+    github_repo: 'https://github.com/winzamark123/large-clipboard-history',
+    tech_tags: ['typescript', 'raycast'],
   },
   {
     title: 'decaf',
