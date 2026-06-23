@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import { Lora } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.scss';
 
 const lora = Lora({
@@ -21,22 +22,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/ResumeIcon.ico" />
-      </head>
-      <body className={lora.variable}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          forcedTheme="light"
-          disableTransitionOnChange
-        >
-          <div className="max-w-screen flex flex-col items-center justify-center">
-            {children}
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
+    <>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <link rel="icon" href="/ResumeIcon.ico" />
+        </head>
+        <body className={lora.variable}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            forcedTheme="light"
+            disableTransitionOnChange
+          >
+            <div className="max-w-screen flex flex-col items-center justify-center">
+              {children}
+            </div>
+          </ThemeProvider>
+        </body>
+      </html>
+      <Analytics />
+    </>
   );
 }
