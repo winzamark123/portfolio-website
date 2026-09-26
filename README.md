@@ -20,6 +20,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Browser-based writing
+
+Visit `/write` to create private drafts and publish to the blog without editing files manually. See [the writing setup guide](docs/writing.md) for GitHub App and R2 configuration, recovery behavior, and isolated tests. The public portfolio still works when writing is not configured.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

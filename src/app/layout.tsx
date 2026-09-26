@@ -38,9 +38,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
               {children}
             </div>
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
-      <Analytics />
     </>
   );
 }
