@@ -2,7 +2,6 @@ import 'server-only';
 import { randomUUID } from 'node:crypto';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
-import { z } from 'zod';
 import { writingConfig } from './config';
 import {
   commitFiles,
@@ -177,7 +176,6 @@ export async function publishDraft({ id, etag }: { id: string; etag: string }) {
   await previewDocument({ markdown: content.markdown });
   const snapshot = await repositorySnapshot();
   const path = draft.publication?.path ?? `public/blog/${content.slug}.mdx`;
-  const target = snapshot.files.find((file) => file.path === path);
   const posts = await Promise.all(
     snapshot.files
       .filter((file) => /^public\/blog\/[^/]+\.mdx?$/.test(file.path))
@@ -193,14 +191,14 @@ export async function publishDraft({ id, etag }: { id: string; etag: string }) {
   const sameRevision =
     current?.post.writerId === id &&
     current.post.writerRevision === draft.revision;
-  if (sameRevision && target) {
+  if (sameRevision) {
     return recordPublication({
       id,
       slug: content.slug,
       date: current.post.date,
       publication: {
         path,
-        fileSha: target.sha,
+        fileSha: current.sha,
         commitSha: await fileCommit({ path }),
         revision: draft.revision,
         publishedAt: new Date().toISOString(),
@@ -208,7 +206,7 @@ export async function publishDraft({ id, etag }: { id: string; etag: string }) {
     });
   }
   if (
-    (target?.sha ?? null) !== (draft.publication?.fileSha ?? null) ||
+    (current?.sha ?? null) !== (draft.publication?.fileSha ?? null) ||
     posts.some((file) => file.path !== path && file.post.slug === content.slug)
   ) {
     throw new WritingError(
@@ -216,20 +214,23 @@ export async function publishDraft({ id, etag }: { id: string; etag: string }) {
       409
     );
   }
-  const urls = new Map<string, string>();
-  for (const src of documentImages({ markdown: content.markdown })) {
-    if (!src.startsWith('/api/write/')) continue;
-    const match = src.match(
-      /^\/api\/write\/images\/([a-f0-9-]+)\/([a-f0-9-]+)\.webp$/
-    );
-    if (
-      !match ||
-      match[1] !== id ||
-      !z.string().uuid().safeParse(match[2]).success
+  const urls = new Map(
+    await Promise.all(
+      documentImages({ markdown: content.markdown })
+        .filter((src) => src.startsWith('/api/write/'))
+        .map(async (src) => {
+          const image = src.match(
+            /^\/api\/write\/images\/([a-f0-9-]+)\/([a-f0-9-]+)\.webp$/
+          );
+          if (image?.[1] !== id)
+            throw new WritingError(
+              'A private image does not belong to this draft.'
+            );
+          const key = `images/${id}/${image[2]}.webp`;
+          return [src, await publishImage({ key })] as const;
+        })
     )
-      throw new WritingError('A private image does not belong to this draft.');
-    urls.set(src, await publishImage({ key: `images/${id}/${match[2]}.webp` }));
-  }
+  );
   content.markdown = replaceImageUrls({ markdown: content.markdown, urls });
   await previewDocument({ markdown: content.markdown });
   const machine = snapshot.files.find(

@@ -1,5 +1,5 @@
 import sharp from 'sharp';
-import { idSchema, MAX_IMAGE_BYTES } from '@/lib/writing/schema';
+import { idSchema, IMAGE_TYPES, MAX_IMAGE_BYTES } from '@/lib/writing/schema';
 import { readBody, withWriter, WritingError } from '@/lib/writing/http';
 import { readDraft, readObject, storeImage } from '@/lib/writing/storage';
 
@@ -38,11 +38,7 @@ export async function PUT(
     action: async () => {
       const key = imageKey(params);
       await readDraft({ id: params.id });
-      if (
-        !['image/png', 'image/jpeg', 'image/webp'].includes(
-          request.headers.get('content-type') ?? ''
-        )
-      ) {
+      if (!IMAGE_TYPES.includes(request.headers.get('content-type') ?? '')) {
         throw new WritingError('Choose a PNG, JPEG, or WebP image.');
       }
       const input = await readBody({ request, limit: MAX_IMAGE_BYTES });

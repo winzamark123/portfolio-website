@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
+export const IMAGE_TYPES = ['image/png', 'image/jpeg', 'image/webp'];
 export const MAX_DOCUMENT_BYTES = 512 * 1024;
 export const idSchema = z.string().uuid();
 export const slugSchema = z.string().regex(/^[a-z0-9][a-z0-9_-]{0,119}$/);

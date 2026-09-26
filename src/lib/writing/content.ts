@@ -136,7 +136,7 @@ export function documentImages({ markdown }: { markdown: string }) {
       for (const attr of node.attributes) {
         if (
           attr.type === 'mdxJsxAttribute' &&
-          attr.name === 'src' &&
+          ['src', 'creditHref'].includes(attr.name) &&
           typeof attr.value === 'string'
         )
           urls.add(attr.value);

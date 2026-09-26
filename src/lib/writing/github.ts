@@ -96,7 +96,7 @@ export async function commitFiles({
   files: { path: string; content: string }[];
   message: string;
 }) {
-  const tree = z.object({ sha: shaSchema, tree: treeSchema.shape.tree }).parse(
+  const tree = z.object({ sha: shaSchema }).parse(
     await github({
       path: 'git/trees',
       method: 'POST',
@@ -106,6 +106,12 @@ export async function commitFiles({
       },
     })
   );
+  // the create response lists only the root's direct children, not nested blobs
+  const listing = treeSchema.parse(
+    await github({ path: `git/trees/${tree.sha}?recursive=1` })
+  );
+  if (listing.truncated)
+    throw new Error('The repository tree is too large to publish safely.');
   const commit = z.object({ sha: shaSchema }).parse(
     await github({
       path: 'git/commits',
@@ -126,7 +132,10 @@ export async function commitFiles({
     method: 'PATCH',
     body: { sha: commit.sha, force: false },
   });
-  return { commitSha: commit.sha, files: tree.tree };
+  return {
+    commitSha: commit.sha,
+    files: listing.tree.filter((item) => item.type === 'blob'),
+  };
 }
 
 export async function fileCommit({ path }: { path: string }) {

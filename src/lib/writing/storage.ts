@@ -127,7 +127,7 @@ export async function createDraft({
 }
 
 export async function listDrafts() {
-  const drafts: Draft[] = [];
+  const ids: string[] = [];
   let token: string | undefined;
   do {
     const result = await storage().send(
@@ -139,10 +139,13 @@ export async function listDrafts() {
     );
     for (const object of result.Contents ?? []) {
       const id = object.Key?.match(/^drafts\/([a-f0-9-]+)\.json$/)?.[1];
-      if (id) drafts.push((await readDraft({ id })).draft);
+      if (id) ids.push(id);
     }
     token = result.NextContinuationToken;
   } while (token);
+  const drafts = await Promise.all(
+    ids.map(async (id) => (await readDraft({ id })).draft)
+  );
   return drafts.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 

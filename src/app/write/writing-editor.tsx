@@ -54,7 +54,7 @@ import {
 } from 'react';
 import { MagazineImage } from '@/components/ui/magazine-layout';
 import { Button } from '@/components/ui/button';
-import { MAX_IMAGE_BYTES } from '@/lib/writing/schema';
+import { IMAGE_TYPES, MAX_IMAGE_BYTES } from '@/lib/writing/schema';
 import '@mdxeditor/editor/style.css';
 import './writing.css';
 
@@ -176,7 +176,7 @@ function UploadButton() {
       <input
         ref={input}
         type="file"
-        accept="image/png,image/jpeg,image/webp"
+        accept={IMAGE_TYPES.join(',')}
         multiple
         className="sr-only"
         aria-label="Upload images"
@@ -314,10 +314,7 @@ export default function WritingEditor({
       [src]: { file, state: 'uploading' },
     }));
     try {
-      if (
-        !['image/png', 'image/jpeg', 'image/webp'].includes(file.type) ||
-        file.size > MAX_IMAGE_BYTES
-      )
+      if (!IMAGE_TYPES.includes(file.type) || file.size > MAX_IMAGE_BYTES)
         throw new Error(
           'Choose a PNG, JPEG, or WebP image smaller than 4 MiB.'
         );

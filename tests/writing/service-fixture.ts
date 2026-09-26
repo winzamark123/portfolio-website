@@ -243,7 +243,18 @@ export async function startServiceFixture({
         }
         const id = sha(JSON.stringify(files));
         trees.set(id, files);
-        return json(response, { sha: id, tree: files }, 201);
+        // like GitHub, list only the root tree's direct children
+        const roots = Array.from(
+          new Set(files.map((file) => file.path.split('/')[0]))
+        );
+        return json(
+          response,
+          {
+            sha: id,
+            tree: roots.map((path) => ({ path, type: 'tree', sha: sha(path) })),
+          },
+          201
+        );
       }
       if (endpoint === 'git/commits' && request.method === 'POST') {
         const data = z

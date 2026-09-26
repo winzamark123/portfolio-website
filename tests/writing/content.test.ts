@@ -78,6 +78,16 @@ describe('safe authoring', () => {
     expect(result).toContain(src);
   });
 
+  it('collects private credit links so publishing can promote them', () => {
+    const src = '/api/write/images/a/b.webp';
+    const credit = '/api/write/images/a/c.webp';
+    expect(
+      documentImages({
+        markdown: `<MagazineImage src="${src}" alt="a bird" creditHref="${credit}" />`,
+      })
+    ).toEqual([src, credit]);
+  });
+
   it('validates dates and preserves existing URL rules', () => {
     const content = {
       title: 'Example',

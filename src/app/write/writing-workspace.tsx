@@ -119,6 +119,10 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
   }, []);
   const saving = useRef<Promise<SavedDraft> | null>(null);
   const dirty = !sameContent(content, draftContent({ draft: saved.draft }));
+  const valid = contentSchema.safeParse(content).success;
+  const disabled = publishing || Boolean(recovery);
+  const canSave =
+    !disabled && valid && !editorError && saveState !== 'conflict';
 
   useEffect(() => {
     try {
@@ -224,13 +228,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
     const shortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 's') {
         event.preventDefault();
-        if (
-          !editorError &&
-          !recovery &&
-          saveState !== 'conflict' &&
-          contentSchema.safeParse(contentRef.current).success
-        )
-          void save().catch(() => {});
+        if (canSave) void save().catch(() => {});
       }
     };
     window.addEventListener('beforeunload', beforeUnload);
@@ -239,7 +237,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
       window.removeEventListener('beforeunload', beforeUnload);
       window.removeEventListener('keydown', shortcut);
     };
-  }, [dirty, editorError, publishing, recovery, save, saveState, uploads]);
+  }, [canSave, dirty, publishing, save, uploads]);
 
   const refreshDeployment = useCallback(async () => {
     try {
@@ -273,6 +271,17 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
     setSaveState((state) => (state === 'conflict' ? state : 'unsaved'));
   }
 
+  // adopt a server revision as the working copy
+  function applySaved(next: SavedDraft) {
+    const nextContent = draftContent({ draft: next.draft });
+    savedRef.current = next;
+    contentRef.current = nextContent;
+    setSaved(next);
+    setContent(nextContent);
+    setSaveState('saved');
+    return nextContent;
+  }
+
   async function publish() {
     if (
       !window.confirm(
@@ -294,12 +303,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
         body: { etag: latest.etag },
         schema: savedDraftSchema,
       });
-      savedRef.current = next;
-      setSaved(next);
-      const nextContent = draftContent({ draft: next.draft });
-      contentRef.current = nextContent;
-      setContent(nextContent);
-      setSaveState('saved');
+      applySaved(next);
       setDeployment({
         state: 'pending',
         url: `/?tab=blogs&post=${next.draft.slug}`,
@@ -332,14 +336,9 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
         body: { etag: savedRef.current.etag },
         schema: savedDraftSchema,
       });
-      const nextContent = draftContent({ draft: next.draft });
-      savedRef.current = next;
-      contentRef.current = nextContent;
-      setSaved(next);
-      setContent(nextContent);
+      const nextContent = applySaved(next);
       setTags(nextContent.tags.join(', '));
       editor.current?.setMarkdown(nextContent.markdown);
-      setSaveState('saved');
       setError('');
     } catch (error) {
       setError(
@@ -367,8 +366,6 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
     setRecovery(null);
   }
 
-  const valid = contentSchema.safeParse(content).success;
-  const disabled = publishing || Boolean(recovery);
   const stateLabels: Record<SaveState, string> = {
     saved: 'Saved',
     unsaved: 'Unsaved changes',
@@ -408,12 +405,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
           <Button
             variant="outline"
             size="sm"
-            disabled={
-              disabled ||
-              !valid ||
-              Boolean(editorError) ||
-              saveState === 'conflict'
-            }
+            disabled={!canSave}
             onClick={() => void save().catch(() => {})}
           >
             Save
@@ -421,13 +413,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
           <Button
             variant="outline"
             size="sm"
-            disabled={
-              disabled ||
-              !valid ||
-              Boolean(editorError) ||
-              uploads > 0 ||
-              saveState === 'conflict'
-            }
+            disabled={!canSave || uploads > 0}
             onClick={() => void publish()}
           >
             {publishing
