@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
+import remarkGfm from 'remark-gfm';
+import { postSlug } from '@/lib/writing/schema';
 import { Suspense } from 'react';
 import HomeClient from './_components/home-client';
 
@@ -27,18 +29,20 @@ async function getBlogPosts(): Promise<BlogPost[]> {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContent);
 
-      const slug = file
-        .replace(/\.(mdx|md)$/, '')
-        .toLowerCase()
-        .replace(/\s+/g, '-');
+      const slug = postSlug({ filename: file });
 
       // Serialize the MDX content
-      const mdxSource = await serialize(content);
+      const mdxSource = await serialize(content, {
+        mdxOptions: { remarkPlugins: [remarkGfm] },
+      });
 
       return {
         title: data.title || 'Untitled',
         slug,
-        date: data.date || '',
+        date:
+          data.date instanceof Date
+            ? data.date.toISOString().slice(0, 10)
+            : data.date || '',
         tags: data.tags || [],
         columns: data.columns || 2,
         content: mdxSource,

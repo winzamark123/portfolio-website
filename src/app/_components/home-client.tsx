@@ -1,5 +1,6 @@
 'use client';
 import { MagazineLayout } from '@/components/ui/magazine-layout';
+import { BlogArticle } from '@/components/blog/blog-article';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
@@ -216,6 +217,12 @@ export default function HomeClient({ blogs }: HomeClientProps) {
           )}
         </AnimatePresence>
       </div>
+      <Link
+        href="/write"
+        className="mt-12 self-end text-xs text-muted-foreground hover:underline"
+      >
+        write
+      </Link>
       <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
         <div className="flex items-center gap-3 border border-foreground/15 bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
           <button
@@ -513,36 +520,19 @@ const Blog = ({
           >
             ← back to all posts
           </button>
-          <article className="prose prose-sm max-w-none dark:prose-invert">
-            <h2 className="mb-2 font-lora text-xl font-bold">
-              {selectedBlog.title}
-            </h2>
-            <p className="mb-4 text-gray-500">
-              {new Date(selectedBlog.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-            <div className="mb-4 flex flex-wrap gap-2">
-              {selectedBlog.tags?.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded bg-gray-200 px-2 py-1 dark:bg-gray-800"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-            <MagazineLayout columns={selectedBlog.columns} gap="lg">
-              <Suspense fallback={<Spinner />}>
-                <LazyMDXRemote
-                  {...selectedBlog.content}
-                  components={mdxComponents}
-                />
-              </Suspense>
-            </MagazineLayout>
-          </article>
+          <BlogArticle
+            title={selectedBlog.title}
+            date={selectedBlog.date}
+            tags={selectedBlog.tags}
+            columns={selectedBlog.columns}
+          >
+            <Suspense fallback={<Spinner />}>
+              <LazyMDXRemote
+                {...selectedBlog.content}
+                components={mdxComponents}
+              />
+            </Suspense>
+          </BlogArticle>
         </motion.div>
       ) : (
         <motion.div
