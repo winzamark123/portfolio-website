@@ -531,6 +531,28 @@ test('keeps the public blog and machine view working', async ({
   page,
   request,
 }) => {
+  await page.goto('/?tab=blogs');
+  for (const viewport of [
+    { width: 1280, height: 720 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    const definition = page.getByText(
+      'the process of deriving logical conclusions',
+      { exact: true }
+    );
+    await expect(definition).toBeVisible();
+    const fontSize = await definition.evaluate(
+      (element) => getComputedStyle(element).fontSize
+    );
+    const dates = page
+      .locator('button')
+      .filter({ has: page.locator('h2') })
+      .locator('p');
+    await expect(dates).toHaveCount(12);
+    for (const date of await dates.all())
+      await expect(date).toHaveCSS('font-size', fontSize);
+  }
   await page.goto('/?tab=blogs&post=2026-01-09-note_to_self_for_2026');
   await expect(
     page.getByRole('heading', { name: 'Note to self for 2026', exact: true })

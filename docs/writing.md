@@ -8,10 +8,12 @@ The writer fails closed when configuration is missing. The public portfolio does
 
 ### 1. Create a GitHub App
 
-Create an app under GitHub Settings → Developer settings → GitHub Apps. Use separate apps for production and local development if you need different callback URLs.
+Create an app under GitHub Settings → Developer settings → GitHub Apps. One app can support production and local development by registering both exact callback URLs. Separate apps are optional if you want stronger isolation.
 
-- Homepage: the site's URL.
-- User authorization callback: `https://www.wincheng.fyi/api/auth/callback/github` for production, or `http://localhost:3000/api/auth/callback/github` locally.
+- Homepage: `https://www.wincheng.fyi`.
+- Production authorization callback: `https://www.wincheng.fyi/api/auth/callback/github`.
+- Local authorization callback: `http://localhost:3000/api/auth/callback/github`.
+- Leave wildcard matching disabled. GitHub Apps support up to 10 callback URLs; a production-domain wildcard does not also match localhost.
 - Disable webhooks; this app does not receive GitHub webhooks.
 - Repository permissions: **Contents: read and write**, **Commit statuses: read**. Metadata read is implicit.
 - Account permission: **Email addresses: read** for the GitHub provider.

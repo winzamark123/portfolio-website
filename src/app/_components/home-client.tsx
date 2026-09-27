@@ -554,7 +554,7 @@ const Blog = ({
                 className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
               >
                 <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
-                <p className="text-gray-500">
+                <p className="text-sm text-gray-500">
                   {new Date(blog.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
