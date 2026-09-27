@@ -1,5 +1,6 @@
 import { beforeAll, afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { randomUUID } from 'node:crypto';
+import { readdirSync } from 'node:fs';
 import { startServiceFixture } from './service-fixture';
 import {
   createDraft,
@@ -99,6 +100,9 @@ describe('private drafts and publication', () => {
   });
 
   it('publishes one atomic content commit, promotes images, and updates llms.txt', async () => {
+    const originalPostCount = readdirSync('public/blog').filter((name) =>
+      /\.mdx?$/.test(name)
+    ).length;
     const first = await newPost();
     const image = randomUUID();
     const key = `images/${first.draft.id}/${image}.webp`;
@@ -118,7 +122,7 @@ describe('private drafts and publication', () => {
     expect(fixture.objects.has(`public/${key}`)).toBe(true);
     expect(publishedFile('public/llms.txt')).toContain('Blog: A new thought');
     expect(publishedFile('public/llms.txt')?.match(/^Blog: /gm)).toHaveLength(
-      13
+      originalPostCount + 1
     );
     expect(result.draft.publication?.revision).toBe(saved.draft.revision);
     expect(result.draft.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);

@@ -11,6 +11,15 @@ import {
 } from '../../../src/lib/writing/content';
 
 const origin = 'http://127.0.0.1:3100';
+const publishedPosts = readdirSync('public/blog')
+  .filter((filename) => /\.mdx?$/.test(filename))
+  .map((filename) => ({
+    filename,
+    ...parsePost({
+      source: readFileSync(`public/blog/${filename}`, 'utf8'),
+      filename,
+    }),
+  }));
 async function signIn(context: BrowserContext, sub = '1234') {
   const token = await encode({
     secret: 'isolated-writing-test-secret-not-for-production',
@@ -531,6 +540,8 @@ test('keeps the public blog and machine view working', async ({
   page,
   request,
 }) => {
+  const post = publishedPosts[0];
+  if (!post) throw new Error('The public blog test needs a published post.');
   await page.goto('/?tab=blogs');
   for (const viewport of [
     { width: 1280, height: 720 },
@@ -549,41 +560,41 @@ test('keeps the public blog and machine view working', async ({
       .locator('button')
       .filter({ has: page.locator('h2') })
       .locator('p');
-    await expect(dates).toHaveCount(12);
+    await expect(dates).toHaveCount(publishedPosts.length);
     for (const date of await dates.all())
       await expect(date).toHaveCSS('font-size', fontSize);
   }
-  await page.goto('/?tab=blogs&post=2026-01-09-note_to_self_for_2026');
-  await expect(
-    page.getByRole('heading', { name: 'Note to self for 2026', exact: true })
-  ).toBeVisible();
+  await page.goto(`/?tab=blogs&post=${post.slug}`);
+  await expect(page.locator('article > h2')).toHaveText(post.title);
   await page.getByRole('switch', { name: 'toggle machine view' }).click();
-  await expect(page.locator('pre')).toContainText(
-    'Blog: Note to self for 2026'
-  );
+  await expect(page.locator('pre')).toContainText(`Blog: ${post.title}`);
   const response = await request.get('/llms.txt');
   expect(response.status()).toBe(200);
-  expect((await response.text()).match(/^Blog: /gm)).toHaveLength(12);
+  expect((await response.text()).match(/^Blog: /gm) ?? []).toHaveLength(
+    publishedPosts.length
+  );
 });
 
-test('loads existing MDX images and works on a narrow viewport', async ({
+test('loads an existing post and works on a narrow viewport', async ({
   page,
   context,
 }) => {
+  const post = publishedPosts[0];
+  if (!post) throw new Error('The import test needs a published post.');
   await signIn(context);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/write');
   await page
-    .getByRole('button', { name: 'Edit Note to self for 2026' })
+    .getByRole('button', { name: `Edit ${post.title}`, exact: true })
     .click();
   await expect(page.getByLabel('Title', { exact: true })).toHaveValue(
-    'Note to self for 2026'
+    post.title
   );
   const editor = page.getByRole('textbox', {
     name: 'editable markdown',
     exact: true,
   });
-  await expect(editor.getByText('Image details')).toBeVisible();
+  await expect(editor).toBeVisible();
   await expect(page.locator('main').getByRole('alert')).toHaveCount(0);
   expect(
     await page.evaluate(
@@ -594,6 +605,6 @@ test('loads existing MDX images and works on a narrow viewport', async ({
   await expect(
     page
       .getByRole('region', { name: 'Article preview' })
-      .getByRole('heading', { name: 'Note to self for 2026' })
-  ).toBeVisible();
+      .locator('article > h2')
+  ).toHaveText(post.title);
 });

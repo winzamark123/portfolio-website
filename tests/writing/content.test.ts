@@ -122,10 +122,12 @@ describe('safe authoring', () => {
       siteUrl: 'https://www.wincheng.fyi',
     });
     expect(next.split('\nBlog: ')[0]).toBe(current.split('\nBlog: ')[0]);
-    expect(next.match(/^Blog: /gm)).toHaveLength(12);
-    expect(next).toContain(
-      'URL: https://www.wincheng.fyi/?tab=blogs&post=2026-01-09-note_to_self_for_2026'
-    );
+    expect(next.match(/^Blog: /gm) ?? []).toHaveLength(posts.length);
+    for (const post of posts) {
+      expect(next).toContain(
+        `URL: https://www.wincheng.fyi/?tab=blogs&post=${post.slug}`
+      );
+    }
     expect(next).not.toContain('<MagazineImage');
   });
 });
