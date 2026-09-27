@@ -1,0 +1,76 @@
+.writer-input {
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.25rem;
+  background: hsl(var(--background));
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+}
+
+.writer-input:focus-visible,
+.writer-image-button:focus-visible {
+  outline: 2px solid hsl(var(--foreground));
+  outline-offset: 2px;
+}
+
+.writer-editor .mdxeditor {
+  --basePageBg: hsl(var(--background));
+  --accentBase: hsl(var(--background));
+  font-family: inherit;
+}
+
+.writer-editor [role='toolbar'] {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  background: hsl(var(--background));
+  border-bottom: 1px solid hsl(var(--border));
+  border-radius: 0;
+}
+
+.writer-editor .writer-prose {
+  min-height: 55vh;
+  padding: 1.5rem 0.5rem;
+  outline: none;
+}
+
+.writer-prose h1,
+.writer-prose h2,
+.writer-prose h3 {
+  font-family: var(--font-lora), serif;
+}
+
+.writer-prose em {
+  color: #ef89a5;
+}
+
+.writer-prose a {
+  color: #3b82f6;
+}
+
+.writer-image-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.writer-image img {
+  max-height: 28rem;
+}
+
+.writer-image details label,
+.writer-image button {
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.writer-editor button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+@media (max-width: 640px) {
+  .writer-editor [role='toolbar'] {
+    position: static;
+  }
+}

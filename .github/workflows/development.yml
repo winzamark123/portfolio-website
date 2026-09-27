@@ -35,10 +35,23 @@ jobs:
       - name: Linting check
         run: pnpm run lint
 
+      - name: Check types and writing services
+        run: |
+          pnpm typecheck
+          pnpm test
+
       - name: Build Next.js app
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: pnpm run build
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Test writing in the production build
+        env:
+          WRITING_TEST_PRODUCTION: '1'
+        run: pnpm test:e2e
 
       - name: Success
         run: echo " ~Build successful~ "

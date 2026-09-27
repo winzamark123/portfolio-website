@@ -44,6 +44,7 @@ interface MagazineImageProps extends React.HTMLAttributes<HTMLElement> {
   caption?: string;
   creditHref?: string;
   creditLabel?: string;
+  onImageError?: React.ReactEventHandler<HTMLImageElement>;
 }
 
 const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
@@ -55,6 +56,7 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
       caption,
       creditHref,
       creditLabel = 'image credit',
+      onImageError,
       ...props
     },
     ref
@@ -72,6 +74,7 @@ const MagazineImage = React.forwardRef<HTMLElement, MagazineImageProps>(
         <img
           src={src}
           alt={alt}
+          onError={onImageError}
           className="w-full object-contain mix-blend-multiply dark:mix-blend-normal"
         />
         {(caption || sourceHref) && (
