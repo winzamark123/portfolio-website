@@ -9,6 +9,10 @@ import {
   parseDocument,
   parsePost,
 } from '../../../src/lib/writing/content';
+import {
+  draftContent,
+  savedDraftSchema,
+} from '../../../src/lib/writing/schema';
 
 const origin = 'http://127.0.0.1:3100';
 const publishedPosts = readdirSync('public/blog')
@@ -84,6 +88,165 @@ test('anonymous and non-owner sessions cannot access writing endpoints', async (
     ).status()
   ).toBe(403);
 });
+
+for (const scenario of [
+  { name: 'signed-out requests', anonymous: true },
+  { name: 'non-owner account 9999', subject: '9999' },
+  { name: 'non-owner account 5678', subject: '5678' },
+  { name: 'a session without an account ID', omitSubject: true },
+  { name: 'an expired owner session', maxAge: -60 },
+  { name: 'a forged owner session', secret: 'incorrect-test-signing-key' },
+  { name: 'a malformed session cookie', malformed: true },
+]) {
+  test(`blocks ${scenario.name} from every writing endpoint`, async ({
+    page,
+    context,
+    request,
+  }) => {
+    await signIn(context);
+    const headers = { Origin: origin };
+    const createdResponse = await context.request.post('/api/write/drafts', {
+      headers,
+      data: {},
+    });
+    expect(createdResponse.status()).toBe(200);
+    const created = savedDraftSchema.parse(await createdResponse.json());
+    const content = {
+      ...draftContent({ draft: created.draft }),
+      title: 'Private owner draft',
+      slug: 'private-owner-draft',
+      markdown: 'Private text belonging to the owner.',
+    };
+    const savedResponse = await context.request.put(
+      `/api/write/drafts/${created.draft.id}`,
+      { headers, data: { etag: created.etag, content } }
+    );
+    expect(savedResponse.status()).toBe(200);
+    const saved = savedDraftSchema.parse(await savedResponse.json());
+    const draftPath = `/api/write/drafts/${saved.draft.id}`;
+    const imagePath = `/api/write/images/${saved.draft.id}/00000000-0000-4000-8000-000000000000.webp`;
+    const image = await sharp({
+      create: { width: 10, height: 10, channels: 3, background: '#14865c' },
+    })
+      .png()
+      .toBuffer();
+    expect(
+      (
+        await context.request.put(imagePath, {
+          headers: { ...headers, 'Content-Type': 'image/png' },
+          data: image,
+        })
+      ).status()
+    ).toBe(200);
+    const before = inspectionSchema.parse(
+      await (await request.get('http://127.0.0.1:4100/inspect')).json()
+    );
+
+    await context.clearCookies();
+    if (!scenario.anonymous) {
+      const token = scenario.malformed
+        ? 'not-a-valid-session'
+        : await encode({
+            secret:
+              scenario.secret ??
+              'isolated-writing-test-secret-not-for-production',
+            token: {
+              name: 'Test writer',
+              email: 'writer@example.com',
+              ...(scenario.omitSubject
+                ? {}
+                : { sub: scenario.subject ?? '1234' }),
+            },
+            maxAge: scenario.maxAge ?? 3600,
+          });
+      await context.addCookies([
+        {
+          name: 'next-auth.session-token',
+          value: token,
+          url: origin,
+          httpOnly: true,
+          sameSite: 'Lax',
+        },
+      ]);
+    }
+    for (const path of [
+      '/api/write/drafts',
+      draftPath,
+      `${draftPath}/publish`,
+      imagePath,
+    ]) {
+      const response = await context.request.get(path);
+      expect(response.status(), path).toBe(401);
+      expect(response.headers()['cache-control']).toContain('no-store');
+      expect(await response.text()).not.toContain(content.markdown);
+    }
+    for (const attempt of [
+      { path: '/api/write/drafts', method: 'POST', data: {} },
+      {
+        path: draftPath,
+        method: 'PUT',
+        data: {
+          etag: saved.etag,
+          content: { ...content, markdown: 'An unauthorized edit.' },
+        },
+      },
+      {
+        path: `${draftPath}/publish`,
+        method: 'POST',
+        data: { etag: saved.etag },
+      },
+      {
+        path: `${draftPath}/refresh`,
+        method: 'POST',
+        data: { etag: saved.etag },
+      },
+      {
+        path: '/api/write/preview',
+        method: 'POST',
+        data: { markdown: content.markdown },
+      },
+    ]) {
+      const response = await context.request.fetch(attempt.path, {
+        method: attempt.method,
+        headers,
+        data: attempt.data,
+      });
+      expect(response.status(), `${attempt.method} ${attempt.path}`).toBe(401);
+    }
+    expect(
+      (
+        await context.request.put(imagePath, {
+          headers: { ...headers, 'Content-Type': 'image/png' },
+          data: image,
+        })
+      ).status()
+    ).toBe(401);
+
+    await page.goto('/write');
+    await expect(
+      page.getByRole('button', { name: 'Sign in with GitHub' })
+    ).toBeVisible();
+    await expect(page.getByRole('button', { name: 'New post' })).toHaveCount(0);
+    await page.goto(`/write/${saved.draft.id}`);
+    await expect(page).toHaveURL(`${origin}/write`);
+    await expect(
+      page.getByRole('button', { name: 'Sign in with GitHub' })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('textbox', { name: 'editable markdown', exact: true })
+    ).toHaveCount(0);
+
+    const after = inspectionSchema.parse(
+      await (await request.get('http://127.0.0.1:4100/inspect')).json()
+    );
+    expect(after).toEqual(before);
+    await signIn(context);
+    const ownerRead = await context.request.get(draftPath);
+    expect(ownerRead.status()).toBe(200);
+    expect(savedDraftSchema.parse(await ownerRead.json())).toEqual(saved);
+    expect((await context.request.get(imagePath)).status()).toBe(200);
+  });
+}
 
 test('writes, previews, saves, uploads, publishes, and keeps later edits private', async ({
   page,
@@ -573,6 +736,92 @@ test('keeps the public blog and machine view working', async ({
   expect((await response.text()).match(/^Blog: /gm) ?? []).toHaveLength(
     publishedPosts.length
   );
+});
+
+test('matches the portfolio frame and content edges across writing pages', async ({
+  page,
+  context,
+}) => {
+  const readFrame = () =>
+    page.locator('main').evaluate((element) => {
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return {
+        maxWidth: style.maxWidth,
+        paddingTop: style.paddingTop,
+        paddingRight: style.paddingRight,
+        paddingBottom: style.paddingBottom,
+        paddingLeft: style.paddingLeft,
+        left: rect.left,
+        width: rect.width,
+        availableWidth: document.documentElement.clientWidth,
+      };
+    });
+  await signIn(context);
+  const created = await context.request.post('/api/write/drafts', {
+    headers: { Origin: origin },
+    data: {},
+  });
+  expect(created.status()).toBe(200);
+  const { draft } = savedDraftSchema.parse(await created.json());
+  for (const viewport of [
+    { width: 1536, height: 900 },
+    { width: 1024, height: 1366 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await context.clearCookies();
+    await page.goto('/');
+    const portfolio = await readFrame();
+    const expectMatchingFrame = async () => {
+      const frame = await readFrame();
+      expect(frame).toMatchObject({
+        maxWidth: portfolio.maxWidth,
+        paddingTop: portfolio.paddingTop,
+        paddingRight: portfolio.paddingRight,
+        paddingBottom: portfolio.paddingBottom,
+        paddingLeft: portfolio.paddingLeft,
+      });
+      expect(frame.width).toBe(
+        Math.min(Number.parseFloat(portfolio.maxWidth), frame.availableWidth)
+      );
+      expect(frame.left).toBe((frame.availableWidth - frame.width) / 2);
+      return frame;
+    };
+    await page.goto('/write');
+    await expect(
+      page.getByRole('button', { name: 'Sign in with GitHub' })
+    ).toBeVisible();
+    await expectMatchingFrame();
+    await signIn(context);
+    await page.reload();
+    await expect(page.getByRole('button', { name: 'New post' })).toBeVisible();
+    await expectMatchingFrame();
+    await page.goto(`/write/${draft.id}`);
+    const editor = page.getByRole('textbox', {
+      name: 'editable markdown',
+      exact: true,
+    });
+    await expect(editor).toBeVisible();
+    const frame = await expectMatchingFrame();
+    const bounds = await editor.evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return {
+        left: rect.left + Number.parseFloat(style.paddingLeft),
+        right: rect.right - Number.parseFloat(style.paddingRight),
+      };
+    });
+    expect(bounds.left).toBe(frame.left + Number.parseFloat(frame.paddingLeft));
+    expect(bounds.right).toBe(
+      frame.left + frame.width - Number.parseFloat(frame.paddingRight)
+    );
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth
+      )
+    ).toBe(true);
+  }
 });
 
 test('loads an existing post and works on a narrow viewport', async ({

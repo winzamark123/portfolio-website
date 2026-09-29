@@ -46,7 +46,7 @@ export function WritingDashboard({
   }
 
   return (
-    <main className="w-full max-w-4xl px-5 py-10">
+    <main className="w-full max-w-7xl p-4 pb-24">
       <header className="flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <Link href="/" className="text-sm underline">
           ← portfolio

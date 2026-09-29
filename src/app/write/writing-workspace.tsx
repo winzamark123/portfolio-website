@@ -69,7 +69,7 @@ export function WritingWorkspace({ id }: { id: string }) {
   }, [id]);
   if (!saved)
     return (
-      <main className="w-full max-w-4xl p-8">
+      <main className="w-full max-w-7xl p-4 pb-24">
         <Link href="/write" className="underline">
           ← all writing
         </Link>
@@ -374,7 +374,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
     conflict: 'Save conflict',
   };
   return (
-    <main className="w-full max-w-6xl px-4 py-6 sm:px-8">
+    <main className="w-full max-w-7xl p-4 pb-24">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b pb-5">
         <Link
           href="/write"
@@ -666,7 +666,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
           </label>
         </div>
       </details>
-      <div className="writer-editor mx-auto max-w-3xl">
+      <div className="writer-editor w-full">
         <WritingEditor
           editorRef={attachEditor}
           initialMarkdown={initial.draft.markdown}

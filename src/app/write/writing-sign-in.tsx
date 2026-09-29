@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export function WritingSignIn({ configured }: { configured: boolean }) {
   return (
-    <main className="w-full max-w-xl px-6 py-20">
+    <main className="w-full max-w-7xl p-4 pb-24">
       <Link href="/" className="text-sm underline">
         ← portfolio
       </Link>
