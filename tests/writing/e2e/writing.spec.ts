@@ -351,6 +351,7 @@ test('writes, previews, saves, uploads, publishes, and keeps later edits private
   const post = published.files.find(
     (file) => file.path === 'public/blog/a-browser-written-post.mdx'
   );
+  expect(post?.content).toContain('columns: 3');
   expect(post?.content).toContain('bold words');
   expect(post?.content).toContain('A green test photo');
   expect(post?.content).not.toContain('/api/write/');
@@ -375,11 +376,56 @@ test('writes, previews, saves, uploads, publishes, and keeps later edits private
   await page.getByText('Post settings', { exact: false }).click();
   await expect(page.getByLabel('Post URL', { exact: true })).toBeDisabled();
   expect(page.url()).toBe(draftUrl);
-  const downloadPromise = page.waitForEvent('download');
-  await page.getByRole('button', { name: 'Export MDX' }).click();
-  expect((await downloadPromise).suggestedFilename()).toBe(
-    'a-browser-written-post.mdx'
-  );
+  await expect(page.getByRole('button', { name: /Export/ })).toHaveCount(0);
+});
+
+test('keeps column controls, preview layout, and saved settings in sync', async ({
+  page,
+  context,
+}) => {
+  await signIn(context);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/write');
+  await page.getByRole('button', { name: 'New post' }).click();
+  await page.getByText('Post settings', { exact: false }).click();
+  await page.getByRole('button', { name: 'Show live preview' }).click();
+
+  const settingsColumns = page.locator('details').getByLabel('Columns', {
+    exact: true,
+  });
+  const preview = page.getByRole('region', { name: 'Article preview' });
+  const previewColumns = preview.getByLabel('Columns', { exact: true });
+  const layout = preview.locator('article > div').last();
+  await expect(preview.getByRole('checkbox')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /Export/ })).toHaveCount(0);
+  await expect(previewColumns.locator('option')).toHaveText(['2', '3', '4']);
+  await expect(settingsColumns).toHaveValue('2');
+  await expect(previewColumns).toHaveValue('2');
+  await expect(layout).toHaveCSS('column-count', '2');
+
+  await settingsColumns.selectOption('3');
+  await expect(previewColumns).toHaveValue('3');
+  await expect(layout).toHaveCSS('column-count', '3');
+  for (const columns of ['4', '2', '3']) {
+    await previewColumns.selectOption(columns);
+    await expect(settingsColumns).toHaveValue(columns);
+    await expect(layout).toHaveCSS('column-count', columns);
+  }
+  await expect(
+    page.getByRole('status').filter({ hasText: /^Saved$/ })
+  ).toBeVisible();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(previewColumns).toHaveValue('3');
+  await expect(layout).toHaveCSS('column-count', '1');
+  await page.reload();
+  await page.getByText('Post settings', { exact: false }).click();
+  await page.getByRole('button', { name: 'Show live preview' }).click();
+  await expect(settingsColumns).toHaveValue('3');
+  await expect(previewColumns).toHaveValue('3');
+  await expect(layout).toHaveCSS('column-count', '1');
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await expect(layout).toHaveCSS('column-count', '3');
 });
 
 test('recovers interrupted saves and rejects stale writes from a second tab', async ({
@@ -407,7 +453,14 @@ test('recovers interrupted saves and rejects stale writes from a second tab', as
   await expect(
     page.getByRole('region', { name: 'Draft recovery' })
   ).toBeVisible();
+  await expect(page.getByRole('button', { name: /Export/ })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Show live preview' }).click();
+  const previewColumns = page
+    .getByRole('region', { name: 'Article preview' })
+    .getByLabel('Columns', { exact: true });
+  await expect(previewColumns).toBeDisabled();
   await page.getByRole('button', { name: 'Restore local copy' }).click();
+  await expect(previewColumns).toBeEnabled();
   await expect(page.getByLabel('Title', { exact: true })).toHaveValue(
     'Recovered title'
   );

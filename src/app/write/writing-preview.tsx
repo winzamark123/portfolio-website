@@ -4,7 +4,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { z } from 'zod';
 import { BlogArticle } from '@/components/blog/blog-article';
 import { useMDXComponents } from '@/mdx-components';
-import type { DraftContent } from '@/lib/writing/schema';
+import { contentSchema, type DraftContent } from '@/lib/writing/schema';
 import { writingRequest } from './client-api';
 
 const MDXRemote = lazy(() =>
@@ -16,13 +16,20 @@ const previewSchema = z.object({
   frontmatter: z.record(z.unknown()),
 });
 
-export function WritingPreview({ content }: { content: DraftContent }) {
+export function WritingPreview({
+  content,
+  disabled,
+  onColumnsChange,
+}: {
+  content: DraftContent;
+  disabled: boolean;
+  onColumnsChange: (columns: DraftContent['columns']) => void;
+}) {
   const [source, setSource] = useState<z.infer<typeof previewSchema> | null>(
     null
   );
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [mobile, setMobile] = useState(false);
   const components = useMDXComponents({});
   useEffect(() => {
     const controller = new AbortController();
@@ -59,12 +66,24 @@ export function WritingPreview({ content }: { content: DraftContent }) {
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm">
         <h2 className="font-lora text-xl font-bold">Preview</h2>
         <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={mobile}
-            onChange={(event) => setMobile(event.target.checked)}
-          />
-          Single-column preview
+          Columns
+          <select
+            aria-label="Columns"
+            className="writer-input"
+            value={content.columns}
+            disabled={disabled}
+            onChange={(event) =>
+              onColumnsChange(
+                contentSchema.shape.columns.parse(Number(event.target.value))
+              )
+            }
+          >
+            {[2, 3, 4].map((columns) => (
+              <option key={columns} value={columns}>
+                {columns}
+              </option>
+            ))}
+          </select>
         </label>
         <span role="status" className="text-xs text-muted-foreground">
           {loading
@@ -79,19 +98,11 @@ export function WritingPreview({ content }: { content: DraftContent }) {
           {error}
         </p>
       )}
-      <div
-        className={
-          mobile
-            ? 'mx-auto max-w-sm [&_article>div:last-child]:![column-count:1]'
-            : ''
-        }
-      >
-        <BlogArticle {...content} title={content.title || 'Untitled'}>
-          <Suspense fallback={<p>Loading preview…</p>}>
-            {source && <MDXRemote {...source} components={components} />}
-          </Suspense>
-        </BlogArticle>
-      </div>
+      <BlogArticle {...content} title={content.title || 'Untitled'}>
+        <Suspense fallback={<p>Loading preview…</p>}>
+          {source && <MDXRemote {...source} components={components} />}
+        </Suspense>
+      </BlogArticle>
     </section>
   );
 }

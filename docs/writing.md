@@ -1,6 +1,6 @@
 # Writing on the portfolio
 
-The `/write` page supports owner-only GitHub sign-in, private drafts, autosave, local recovery, MDX export, image uploads, a live article preview, and explicit Git-based publishing. The portfolio stays on Next.js and Vercel. R2 stores drafts and images; no database is required.
+The `/write` page supports owner-only GitHub sign-in, private drafts, autosave, local recovery, image uploads, a live article preview, and explicit Git-based publishing. The portfolio stays on Next.js and Vercel. R2 stores drafts and images; no database is required.
 
 ## Setup
 
@@ -84,7 +84,7 @@ If a commit does not deploy, check the Vercel Git integration, production branch
 - The editor supports Markdown shortcuts, source mode, headings, lists, links, quotes, code blocks, tables, and images.
 - Dropping images uses the drop location; pasting uses the text cursor. A document node is inserted before upload starts so subsequent typing cannot move it. Failed uploads can be retried or removed.
 - `MagazineImage` components have fields for alternative text, caption, credit URL, and credit label.
-- The writing surface stays single-column. The optional live preview uses the same `BlogArticle`, `MagazineLayout`, and MDX components as the public site. A single-column preview approximates a narrow reading layout.
+- The writing surface stays single-column. The optional live preview uses the same `BlogArticle`, `MagazineLayout`, and MDX components as the public site. Its Columns dropdown and the one in Post settings both update the saved column count (2, 3, or 4). Small screens always use one column. Column changes reach readers only after publishing.
 - Autosave runs after a 1.5-second pause. Save and `Cmd/Ctrl+S` save immediately.
 - Drafts use conditional R2 writes with ETags. A stale tab cannot overwrite a newer saved version.
 - Browser recovery is offered after interrupted saves. It never silently replaces the server version. Local storage is a recovery aid, not an offline synchronization system or a backup. Use a trusted device: recovery copies are not encrypted, and signing out does not erase an unsaved local copy.
@@ -95,7 +95,7 @@ If a commit does not deploy, check the Vercel Git integration, production branch
 
 The server validates authored MDX before previewing or publishing. JavaScript expressions, imports, spread properties, event handlers, unsupported components, and unsafe URL protocols are rejected. Code fences remain literal text. Supported HTML formatting and `MagazineImage` use an explicit attribute allowlist.
 
-Publishing reads the current Git tree, checks that the target file has not changed outside the editor, and updates the post and machine-view metadata in one commit. Unrelated repository changes are preserved. A non-fast-forward update is rejected rather than forced. If the published file was edited outside the writer, export any work you want to keep and choose **Reload published version**. This refreshes the working copy and its Git baseline after confirmation; earlier saved drafts remain in private history.
+Publishing reads the current Git tree, checks that the target file has not changed outside the editor, and updates the post and machine-view metadata in one commit. Unrelated repository changes are preserved. A non-fast-forward update is rejected rather than forced. If the published file was edited outside the writer, copy any text you want to keep from source mode along with your post settings, then choose **Reload published version**. This refreshes the working copy and its Git baseline after confirmation; earlier saved drafts remain in private history.
 
 The published frontmatter includes `writerId` and `writerRevision`. These are non-secret identifiers used to recognize an already committed revision after a partial failure. Retrying publication can recover draft status without writing the post again.
 
@@ -105,7 +105,7 @@ Published Git content and public images cannot be made private merely by removin
 
 Recovery snapshots are stored in the private bucket under `history/{draftId}/`. Failed conditional saves can also leave snapshots there, preserving both versions. Download a snapshot to recover its `markdown` and metadata. There is no automatic history deletion; optionally configure an R2 lifecycle rule for **only** the history prefix after choosing a retention period. Do not apply such a rule to current drafts or images.
 
-Export MDX downloads text and metadata, not an image archive. Private image URLs in draft exports still require sign-in. Back up the private bucket and published images separately if you need a full portable archive.
+Back up the private bucket and published images separately if you need a full portable archive. If saving and browser recovery are unavailable, copy your text from source mode along with your post settings before leaving the page.
 
 ## Tests
 

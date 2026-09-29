@@ -91,7 +91,7 @@ export async function writeDraft({
       error.$metadata.httpStatusCode === 412
     ) {
       throw new WritingError(
-        'This draft changed in another tab. Reload the saved version or export your local copy.',
+        'This draft changed in another tab. Copy any unsaved text and post settings before reloading the saved version.',
         409
       );
     }
@@ -161,7 +161,7 @@ export async function saveDraft({
   const saved = await readDraft({ id });
   if (saved.etag !== etag)
     throw new WritingError(
-      'This draft changed in another tab. Reload the saved version or export your local copy.',
+      'This draft changed in another tab. Copy any unsaved text and post settings before reloading the saved version.',
       409
     );
   if (saved.draft.publication && content.slug !== saved.draft.slug) {

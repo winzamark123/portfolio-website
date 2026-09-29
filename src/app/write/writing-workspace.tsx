@@ -15,7 +15,6 @@ import {
   type DraftContent,
   type SavedDraft,
 } from '@/lib/writing/schema';
-import { serializePost } from '@/lib/writing/post-format';
 import { writingRequest, WritingRequestError } from './client-api';
 import { WritingPreview } from './writing-preview';
 import './writing.css';
@@ -37,18 +36,6 @@ type SaveState = 'saved' | 'unsaved' | 'saving' | 'error' | 'conflict';
 
 function sameContent(a: DraftContent, b: DraftContent) {
   return JSON.stringify(a) === JSON.stringify(b);
-}
-
-function exportDraft({ content }: { content: DraftContent }) {
-  const blob = new Blob([serializePost({ content })], {
-    type: 'text/markdown;charset=utf-8',
-  });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `${content.slug || 'draft'}.mdx`;
-  link.click();
-  URL.revokeObjectURL(url);
 }
 
 export function WritingWorkspace({ id }: { id: string }) {
@@ -137,7 +124,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
       }
     } catch {
       setStorageError(
-        'Local recovery is unavailable in this browser. Keep an exported copy until your draft is saved.'
+        'Local recovery is unavailable in this browser. Keep this tab open until your draft is saved.'
       );
     }
     setRecoveryReady(true);
@@ -159,7 +146,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
       setStorageError('');
     } catch {
       setStorageError(
-        'The browser could not store a recovery copy. Export your draft if saving is unavailable.'
+        'The browser could not store a recovery copy. Copy your text from source mode and your post settings if saving is unavailable.'
       );
     }
   }, [content, dirty, recovery, recoveryReady, saved.etag, storageKey]);
@@ -323,7 +310,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
   async function reloadPublished() {
     if (
       !window.confirm(
-        'Replace this working draft with the current published file? Export any unsaved work first. Previous saved versions remain in private recovery history.'
+        'Replace this working draft with the current published file? Copy any unsaved text and post settings first. Previous saved versions remain in private recovery history.'
       )
     )
       return;
@@ -356,7 +343,7 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
     if (
       recovery.etag !== savedRef.current.etag &&
       !window.confirm(
-        'The server has a newer saved version. Use this local copy as your working version instead? Export it first if you want to keep both.'
+        'The server has a newer saved version. Use this local copy as your working version instead? Later saves will replace the saved version.'
       )
     )
       return;
@@ -395,13 +382,6 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
           <span role="status" className="mr-2 text-xs text-muted-foreground">
             {stateLabels[saveState]}
           </span>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => exportDraft({ content })}
-          >
-            Export MDX
-          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -442,7 +422,8 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
           )}
           {saveState === 'conflict' && (
             <p>
-              Export your local copy before{' '}
+              Copy any unsaved text from source mode and your post settings
+              before{' '}
               <button
                 className="underline"
                 onClick={() => window.location.reload()}
@@ -482,13 +463,6 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
               onClick={restoreLocal}
             >
               Restore local copy
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => exportDraft({ content: recovery.content })}
-            >
-              Export local copy
             </Button>
             <Button
               size="sm"
@@ -688,7 +662,13 @@ function DraftWorkspace({ initial }: { initial: SavedDraft }) {
           {preview ? 'Hide preview' : 'Show live preview'}
         </Button>
       </div>
-      {preview && <WritingPreview content={content} />}
+      {preview && (
+        <WritingPreview
+          content={content}
+          disabled={disabled}
+          onColumnsChange={(columns) => change({ ...content, columns })}
+        />
+      )}
     </main>
   );
 }
