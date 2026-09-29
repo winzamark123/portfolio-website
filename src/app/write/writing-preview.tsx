@@ -1,15 +1,16 @@
 'use client';
 
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { z } from 'zod';
 import { BlogArticle } from '@/components/blog/blog-article';
-import { useMDXComponents } from '@/mdx-components';
 import { contentSchema, type DraftContent } from '@/lib/writing/schema';
 import { writingRequest } from './client-api';
 
-const MDXRemote = lazy(() =>
-  import('next-mdx-remote').then((module) => ({ default: module.MDXRemote }))
-);
+const BlogContent = dynamic(() => import('@/components/blog/blog-content'), {
+  ssr: false,
+  loading: () => <p>Loading preview…</p>,
+});
 const previewSchema = z.object({
   compiledSource: z.string(),
   scope: z.record(z.unknown()),
@@ -30,7 +31,6 @@ export function WritingPreview({
   );
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const components = useMDXComponents({});
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
@@ -99,9 +99,7 @@ export function WritingPreview({
         </p>
       )}
       <BlogArticle {...content} title={content.title || 'Untitled'}>
-        <Suspense fallback={<p>Loading preview…</p>}>
-          {source && <MDXRemote {...source} components={components} />}
-        </Suspense>
+        {source && <BlogContent content={source} />}
       </BlogArticle>
     </section>
   );

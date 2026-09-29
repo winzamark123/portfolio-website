@@ -2,6 +2,7 @@
 import { MagazineLayout } from '@/components/ui/magazine-layout';
 import { BlogArticle } from '@/components/blog/blog-article';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   SocialProps,
@@ -11,18 +12,18 @@ import {
   ProjectList,
   NuggetList,
 } from './const';
-import { useState, useEffect, lazy, Suspense } from 'react';
-import { useMDXComponents } from '@/mdx-components';
+import { useState, useEffect } from 'react';
 import type { BlogPost } from '../page';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 
-// lazy import avoids next-mdx-remote SSR side effects that break Suspense hydration
-const LazyMDXRemote = lazy(() =>
-  import('next-mdx-remote').then((mod) => ({ default: mod.MDXRemote }))
-);
+// next-mdx-remote must render in the browser to avoid hydration errors
+const BlogContent = dynamic(() => import('@/components/blog/blog-content'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 const fadeVariants = {
   initial: { opacity: 0 },
@@ -55,10 +56,11 @@ interface HomeClientProps {
 export default function HomeClient({ blogs }: HomeClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const tabFromUrl = searchParams.get('tab') || 'experience';
-  const postSlugFromUrl = searchParams.get('post');
-  const [activeTab, setActiveTab] = useState(tabFromUrl);
-  const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
+  const activeTab = searchParams.get('tab') || 'experience';
+  const selectedBlog =
+    activeTab === 'blogs'
+      ? (blogs.find((blog) => blog.slug === searchParams.get('post')) ?? null)
+      : null;
   const [imageLoaded, setImageLoaded] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('human');
   const [machineContent, setMachineContent] = useState('');
@@ -93,37 +95,15 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     loadMachineContent();
   }, []);
 
-  useEffect(() => {
-    setActiveTab(tabFromUrl);
-
-    // If on blog tab and post slug is in URL, select that blog
-    if (tabFromUrl === 'blogs' && postSlugFromUrl) {
-      const blog = blogs.find((b) => b.slug === postSlugFromUrl);
-      if (blog) {
-        setSelectedBlog(blog);
-      }
-    } else if (tabFromUrl !== 'blogs') {
-      // Reset selected blog when changing to other tabs
-      setSelectedBlog(null);
-    } else if (!postSlugFromUrl) {
-      // No post in URL but on blog tab, reset selection
-      setSelectedBlog(null);
-    }
-  }, [tabFromUrl, postSlugFromUrl, blogs]);
-
   const handleTabChange = ({ tab }: { tab: string }) => {
-    setActiveTab(tab);
-    setSelectedBlog(null);
     router.push(`/?tab=${tab}`);
   };
 
   const handleSelectBlog = ({ blog }: { blog: BlogPost }) => {
-    setSelectedBlog(blog);
     router.push(`/?tab=blogs&post=${blog.slug}`);
   };
 
   const handleBackToList = () => {
-    setSelectedBlog(null);
     router.push('/?tab=blogs');
   };
 
@@ -499,8 +479,6 @@ const Blog = ({
   handleSelectBlog,
   handleBackToList,
 }: BlogProps) => {
-  const mdxComponents = useMDXComponents({});
-
   return (
     <AnimatePresence mode="wait">
       {selectedBlog ? (
@@ -526,12 +504,7 @@ const Blog = ({
             tags={selectedBlog.tags}
             columns={selectedBlog.columns}
           >
-            <Suspense fallback={<Spinner />}>
-              <LazyMDXRemote
-                {...selectedBlog.content}
-                components={mdxComponents}
-              />
-            </Suspense>
+            <BlogContent content={selectedBlog.content} />
           </BlogArticle>
         </motion.div>
       ) : (

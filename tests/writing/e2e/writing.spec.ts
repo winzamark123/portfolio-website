@@ -733,6 +733,47 @@ test('retries failed image uploads without moving or duplicating the image', asy
   ).toBeEnabled();
 });
 
+test('clears failed uploads when their image nodes are removed', async ({
+  page,
+  context,
+}) => {
+  await signIn(context);
+  await page.goto('/write');
+  await page.getByRole('button', { name: 'New post' }).click();
+  const editor = page.getByRole('textbox', {
+    name: 'editable markdown',
+    exact: true,
+  });
+  await editor.click();
+  await page.getByLabel('Upload images', { exact: true }).setInputFiles({
+    name: 'invalid.png',
+    mimeType: 'image/png',
+    buffer: Buffer.from('not an image'),
+  });
+  await expect(
+    page.getByRole('button', { name: 'Retry upload' })
+  ).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Publish', exact: true })
+  ).toBeDisabled();
+  await editor.press('ControlOrMeta+End');
+  await editor.press('Enter');
+  await editor.pressSequentially('Keep this text after removing the image.');
+  await expect(
+    page.getByRole('button', { name: 'Retry upload' })
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Remove image', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Retry upload' })).toHaveCount(
+    0
+  );
+  await expect(
+    page.getByRole('button', { name: 'Publish', exact: true })
+  ).toBeEnabled();
+  await expect(editor).toContainText(
+    'Keep this text after removing the image.'
+  );
+});
+
 test('hydrates the writer without runtime errors', async ({
   page,
   context,
@@ -749,6 +790,92 @@ test('hydrates the writer without runtime errors', async ({
   await expect(
     page.getByRole('textbox', { name: 'editable markdown', exact: true })
   ).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('keeps public navigation in sync with the URL and browser history', async ({
+  page,
+}) => {
+  const post = publishedPosts[0];
+  if (!post) throw new Error('The navigation test needs a published post.');
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  const articleTitle = page.locator('article > h2');
+  const postButton = page.getByRole('button').filter({
+    has: page.getByRole('heading', { name: post.title, exact: true }),
+  });
+  await page.goto('/');
+  await expect(
+    page.getByRole('button', { name: 'experience', exact: true })
+  ).toHaveClass(/(^|\s)underline(\s|$)/);
+  await page.getByRole('button', { name: 'blogs', exact: true }).click();
+  await expect(page).toHaveURL(`${origin}/?tab=blogs`);
+  await postButton.click();
+  await expect(page).toHaveURL(`${origin}/?tab=blogs&post=${post.slug}`);
+  await expect(articleTitle).toHaveText(post.title);
+  await page.getByRole('button', { name: 'projects', exact: true }).click();
+  await expect(page).toHaveURL(`${origin}/?tab=projects`);
+  await expect(articleTitle).toHaveCount(0);
+
+  await page.goBack();
+  await expect(articleTitle).toHaveText(post.title);
+  await page.goBack();
+  await expect(page).toHaveURL(`${origin}/?tab=blogs`);
+  await expect(postButton).toBeVisible();
+  await page.goForward();
+  await expect(articleTitle).toHaveText(post.title);
+  await page
+    .getByRole('button', { name: '← back to all posts', exact: true })
+    .click();
+  await expect(page).toHaveURL(`${origin}/?tab=blogs`);
+  await postButton.click();
+  await expect(page).toHaveURL(`${origin}/?tab=blogs&post=${post.slug}`);
+  await expect(articleTitle).toHaveText(post.title);
+  await page.reload();
+  await expect(articleTitle).toHaveText(post.title);
+  await page.getByRole('button', { name: "hey, i'm Win", exact: true }).click();
+  await expect(page).toHaveURL(`${origin}/?tab=experience`);
+  await expect(articleTitle).toHaveCount(0);
+  await page.goto('/projects');
+  await expect(page).toHaveURL(`${origin}/?tab=projects`);
+  await page.goto('/?tab=blogs&post=missing-post');
+  await expect(
+    page.getByRole('heading', { name: 'inference', exact: true })
+  ).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('renders every public post with the shared metadata', async ({
+  page,
+  request,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 1280, height: 900 });
+  const response = await request.get('/');
+  expect(response.status()).toBe(200);
+  expect(await response.text()).toContain('<main');
+  for (const post of publishedPosts) {
+    await page.goto(`/?tab=blogs&post=${post.slug}`);
+    const article = page.locator('article');
+    await expect(article.locator('h2').first()).toHaveText(post.title);
+    const layout = article.locator(':scope > div').last();
+    await expect(layout).toHaveCSS('column-count', String(post.columns));
+    await expect(article.getByRole('status', { name: 'Loading' })).toHaveCount(
+      0
+    );
+    await expect(layout).not.toBeEmpty();
+    for (const tag of post.tags)
+      await expect(article.getByText(`#${tag}`, { exact: true })).toBeVisible();
+    await expect(article).toContainText(
+      new Date(`${post.date}T12:00:00Z`).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC',
+      })
+    );
+  }
   expect(errors).toEqual([]);
 });
 

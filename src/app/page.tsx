@@ -1,24 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
-import { postSlug } from '@/lib/writing/schema';
+import { parsePost } from '@/lib/writing/content';
 import { Suspense } from 'react';
 import HomeClient from './_components/home-client';
 
 export const dynamic = 'force-dynamic';
 
-export interface BlogPost {
-  title: string;
-  slug: string;
-  date: string;
-  tags: string[];
-  columns: 2 | 3 | 4;
-  content: any;
-}
+export type BlogPost = Awaited<ReturnType<typeof getBlogPosts>>[number];
 
-async function getBlogPosts(): Promise<BlogPost[]> {
+async function getBlogPosts() {
   const blogDirectory = path.join(process.cwd(), 'public', 'blog');
   const files = fs.readdirSync(blogDirectory);
 
@@ -27,24 +19,17 @@ async function getBlogPosts(): Promise<BlogPost[]> {
     .map(async (file) => {
       const filePath = path.join(blogDirectory, file);
       const fileContent = fs.readFileSync(filePath, 'utf8');
-      const { data, content } = matter(fileContent);
-
-      const slug = postSlug({ filename: file });
-
-      // Serialize the MDX content
-      const mdxSource = await serialize(content, {
+      const post = parsePost({ source: fileContent, filename: file });
+      const mdxSource = await serialize(post.markdown, {
         mdxOptions: { remarkPlugins: [remarkGfm] },
       });
 
       return {
-        title: data.title || 'Untitled',
-        slug,
-        date:
-          data.date instanceof Date
-            ? data.date.toISOString().slice(0, 10)
-            : data.date || '',
-        tags: data.tags || [],
-        columns: data.columns || 2,
+        title: post.title || 'Untitled',
+        slug: post.slug,
+        date: post.date,
+        tags: post.tags,
+        columns: post.columns,
         content: mdxSource,
       };
     });
@@ -59,8 +44,18 @@ async function getBlogPosts(): Promise<BlogPost[]> {
   });
 }
 
+let blogPosts: ReturnType<typeof getBlogPosts> | undefined;
+
 export default async function Home() {
-  const blogs = await getBlogPosts();
+  // published files only change with a new deployment
+  const blogs = await (
+    process.env.NODE_ENV === 'production'
+      ? (blogPosts ??= getBlogPosts())
+      : getBlogPosts()
+  ).catch((error: unknown) => {
+    blogPosts = undefined;
+    throw error;
+  });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

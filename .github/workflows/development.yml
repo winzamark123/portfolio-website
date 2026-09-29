@@ -41,8 +41,6 @@ jobs:
           pnpm test
 
       - name: Build Next.js app
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: pnpm run build
 
       - name: Install Chromium

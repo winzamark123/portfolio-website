@@ -304,10 +304,8 @@ export default function WritingEditor({
   editorRef: Ref<MDXEditorMethods>;
 }) {
   const [uploads, setUploads] = useState<Record<string, Upload>>({});
-  useEffect(
-    () => onUploadsChange(Object.keys(uploads).length),
-    [uploads, onUploadsChange]
-  );
+  const uploadCount = Object.keys(uploads).length;
+  useEffect(() => onUploadsChange(uploadCount), [uploadCount, onUploadsChange]);
   async function upload({ src, file }: { src: string; file: File }) {
     setUploads((current) => ({
       ...current,
@@ -330,6 +328,7 @@ export default function WritingEditor({
             : 'The image could not be uploaded. Check its size and format, then retry.'
         );
       setUploads((current) => {
+        if (!current[src]) return current;
         const next = { ...current };
         delete next[src];
         return next;
@@ -420,13 +419,15 @@ export default function WritingEditor({
         onChange={(markdown, initialNormalize) => {
           if (!initialNormalize) {
             onError('');
-            setUploads((current) =>
-              Object.fromEntries(
-                Object.entries(current).filter(([src]) =>
-                  markdown.includes(src)
-                )
-              )
-            );
+            setUploads((current) => {
+              const entries = Object.entries(current);
+              const remaining = entries.filter(([src]) =>
+                markdown.includes(src)
+              );
+              return remaining.length === entries.length
+                ? current
+                : Object.fromEntries(remaining);
+            });
             onChange(markdown);
           }
         }}
