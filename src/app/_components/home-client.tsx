@@ -14,6 +14,8 @@ import {
 } from './const';
 import { useState, useEffect } from 'react';
 import type { BlogPost } from '../page';
+import type { ContributionDay } from '@/lib/contributions';
+import { ContributionGraph } from '@/components/contribution-graph';
 import { Spinner } from '../../components/ui/spinner';
 import { Apple, Github, Link2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -51,9 +53,10 @@ const content = {
 
 interface HomeClientProps {
   blogs: BlogPost[];
+  contributions: ContributionDay[][] | null;
 }
 
-export default function HomeClient({ blogs }: HomeClientProps) {
+export default function HomeClient({ blogs, contributions }: HomeClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const activeTab = searchParams.get('tab') || 'experience';
@@ -61,7 +64,6 @@ export default function HomeClient({ blogs }: HomeClientProps) {
     activeTab === 'blogs'
       ? (blogs.find((blog) => blog.slug === searchParams.get('post')) ?? null)
       : null;
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('human');
   const [machineContent, setMachineContent] = useState('');
   const [machineStatus, setMachineStatus] = useState<MachineStatus>('loading');
@@ -155,7 +157,7 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                 </AnimatePresence>
 
                 <AnimatePresence mode="wait">
-                  {activeTab === 'projects' && (
+                  {activeTab === 'projects' && contributions && (
                     <motion.div
                       key="github-chart"
                       variants={fadeVariants}
@@ -163,20 +165,9 @@ export default function HomeClient({ blogs }: HomeClientProps) {
                       animate="animate"
                       exit="exit"
                       transition={fadeTransition}
-                      className="flex w-full flex-col"
+                      className="w-full"
                     >
-                      {!imageLoaded && (
-                        <div className="flex justify-center">
-                          <Spinner />
-                        </div>
-                      )}
-                      <img
-                        src="https://raw.githubusercontent.com/winzamark123/portfolio-website/output/github-snake.svg"
-                        alt="github contribution snake animation"
-                        className="w-full py-2"
-                        onLoad={() => setImageLoaded(true)}
-                        style={{ display: imageLoaded ? 'block' : 'none' }}
-                      />
+                      <ContributionGraph weeks={contributions} />
                     </motion.div>
                   )}
                 </AnimatePresence>

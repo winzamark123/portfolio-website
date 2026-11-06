@@ -3,6 +3,7 @@ import path from 'node:path';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import { parsePost } from '@/lib/writing/content';
+import { getContributionWeeks } from '@/lib/contributions';
 import { Suspense } from 'react';
 import HomeClient from './_components/home-client';
 
@@ -48,18 +49,20 @@ let blogPosts: ReturnType<typeof getBlogPosts> | undefined;
 
 export default async function Home() {
   // published files only change with a new deployment
-  const blogs = await (
-    process.env.NODE_ENV === 'production'
+  const [blogs, contributions] = await Promise.all([
+    (process.env.NODE_ENV === 'production'
       ? (blogPosts ??= getBlogPosts())
       : getBlogPosts()
-  ).catch((error: unknown) => {
-    blogPosts = undefined;
-    throw error;
-  });
+    ).catch((error: unknown) => {
+      blogPosts = undefined;
+      throw error;
+    }),
+    getContributionWeeks(),
+  ]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <HomeClient blogs={blogs} />
+      <HomeClient blogs={blogs} contributions={contributions} />
     </Suspense>
   );
 }
