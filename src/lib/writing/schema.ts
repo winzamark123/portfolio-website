@@ -26,6 +26,7 @@ export const publicationSchema = z.object({
   commitSha: z.string().regex(/^[a-f0-9]{40}$/),
   revision: idSchema,
   publishedAt: z.string().datetime(),
+  imported: z.boolean().optional(),
 });
 
 export const draftSchema = contentSchema.extend({

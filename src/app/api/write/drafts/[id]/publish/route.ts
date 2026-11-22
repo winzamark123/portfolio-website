@@ -1,8 +1,7 @@
 import { z } from 'zod';
-import { readJson, withWriter, WritingError } from '@/lib/writing/http';
-import { publishDraft } from '@/lib/writing/publishing';
+import { readJson, withWriter } from '@/lib/writing/http';
+import { publicationStatus, publishDraft } from '@/lib/writing/publishing';
 import { readDraft } from '@/lib/writing/storage';
-import { deploymentStatus } from '@/lib/writing/github';
 import { idSchema } from '@/lib/writing/schema';
 
 export const dynamic = 'force-dynamic';
@@ -33,14 +32,7 @@ export async function GET(
     request,
     action: async () => {
       const { draft } = await readDraft({ id: idSchema.parse(params.id) });
-      if (!draft.publication)
-        throw new WritingError('This post has not been published.', 404);
-      return Response.json(
-        await deploymentStatus({
-          sha: draft.publication.commitSha,
-          slug: draft.slug,
-        })
-      );
+      return Response.json(await publicationStatus({ draft }));
     },
   });
 }

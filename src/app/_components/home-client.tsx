@@ -188,12 +188,6 @@ export default function HomeClient({ blogs, contributions }: HomeClientProps) {
           )}
         </AnimatePresence>
       </div>
-      <Link
-        href="/write"
-        className="mt-12 self-end text-xs text-muted-foreground hover:underline"
-      >
-        write
-      </Link>
       <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
         <div className="flex items-center gap-3 border border-foreground/15 bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
           <button
@@ -471,65 +465,73 @@ const Blog = ({
   handleBackToList,
 }: BlogProps) => {
   return (
-    <AnimatePresence mode="wait">
-      {selectedBlog ? (
-        <motion.div
-          key={selectedBlog.slug}
-          variants={fadeVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={fadeTransition}
-          className="w-full"
-        >
-          <button
-            type="button"
-            onClick={handleBackToList}
-            className="mb-4 text-xs hover:underline"
+    <div className="flex w-full flex-col">
+      <AnimatePresence mode="wait">
+        {selectedBlog ? (
+          <motion.div
+            key={selectedBlog.slug}
+            variants={fadeVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={fadeTransition}
+            className="w-full"
           >
-            ← back to all posts
-          </button>
-          <BlogArticle
-            title={selectedBlog.title}
-            date={selectedBlog.date}
-            tags={selectedBlog.tags}
-            columns={selectedBlog.columns}
+            <button
+              type="button"
+              onClick={handleBackToList}
+              className="mb-4 text-xs hover:underline"
+            >
+              ← back to all posts
+            </button>
+            <BlogArticle
+              title={selectedBlog.title}
+              date={selectedBlog.date}
+              tags={selectedBlog.tags}
+              columns={selectedBlog.columns}
+            >
+              <BlogContent content={selectedBlog.content} />
+            </BlogArticle>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="blog-list"
+            variants={fadeVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={fadeTransition}
+            className="flex w-full flex-col gap-6"
           >
-            <BlogContent content={selectedBlog.content} />
-          </BlogArticle>
-        </motion.div>
-      ) : (
-        <motion.div
-          key="blog-list"
-          variants={fadeVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={fadeTransition}
-          className="flex w-full flex-col gap-6"
-        >
-          <InferenceDefinition />
-          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {blogs.map((blog) => (
-              <button
-                key={blog.slug}
-                type="button"
-                onClick={() => handleSelectBlog({ blog })}
-                className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
-              >
-                <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
-                <p className="text-sm text-gray-500">
-                  {new Date(blog.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </p>
-              </button>
-            ))}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <InferenceDefinition />
+            <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {blogs.map((blog) => (
+                <button
+                  key={blog.slug}
+                  type="button"
+                  onClick={() => handleSelectBlog({ blog })}
+                  className="flex flex-col gap-2 border-2 border-black p-3 text-left hover:border-emerald-500 md:p-4"
+                >
+                  <h2 className="font-lora text-lg font-bold">{blog.title}</h2>
+                  <p className="text-sm text-gray-500">
+                    {new Date(blog.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <Link
+        href="/write"
+        className="mt-12 self-end text-xs text-muted-foreground hover:underline"
+      >
+        write
+      </Link>
+    </div>
   );
 };

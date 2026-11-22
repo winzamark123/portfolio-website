@@ -1037,3 +1037,89 @@ test('loads an existing post and works on a narrow viewport', async ({
       .locator('article > h2')
   ).toHaveText(post.title);
 });
+
+test('shows the write link only on the blogs subpage', async ({ page }) => {
+  const post = publishedPosts[0];
+  if (!post) throw new Error('The write link test needs a published post.');
+  const writeLink = page.getByRole('link', { name: 'write', exact: true });
+  await page.goto('/');
+  await expect(writeLink).toHaveCount(0);
+  await page.getByRole('button', { name: 'projects', exact: true }).click();
+  await expect(writeLink).toHaveCount(0);
+  await page.getByRole('button', { name: 'nuggets', exact: true }).click();
+  await expect(writeLink).toHaveCount(0);
+  await page.getByRole('button', { name: 'blogs', exact: true }).click();
+  await expect(writeLink).toBeVisible();
+  await expect(writeLink).toHaveAttribute('href', '/write');
+  await page
+    .getByRole('button')
+    .filter({
+      has: page.getByRole('heading', { name: post.title, exact: true }),
+    })
+    .click();
+  await expect(writeLink).toBeVisible();
+  await page.getByRole('switch', { name: 'toggle machine view' }).click();
+  await expect(writeLink).toHaveCount(0);
+});
+
+test('hides unedited published posts and deployed publications from drafts', async ({
+  page,
+  context,
+  request,
+}) => {
+  const post = publishedPosts[0];
+  if (!post) throw new Error('The drafts list test needs a published post.');
+  await signIn(context);
+  await request.post('http://127.0.0.1:4100/control', {
+    data: { status: 'pending' },
+  });
+  await page.goto('/write');
+  await page
+    .getByRole('button', { name: `Edit ${post.title}`, exact: true })
+    .click();
+  await expect(page.getByLabel('Title', { exact: true })).toHaveValue(
+    post.title
+  );
+  await page.getByRole('link', { name: '← all writing', exact: true }).click();
+  const draftsSection = page.getByRole('region', {
+    name: 'Drafts and revisions',
+  });
+  await expect(
+    draftsSection.getByText('No drafts yet. Choose New post to start writing.')
+  ).toBeVisible();
+
+  await page.getByRole('button', { name: 'New post' }).click();
+  await page
+    .getByLabel('Title', { exact: true })
+    .fill('Deploying then published');
+  const editor = page.getByRole('textbox', {
+    name: 'editable markdown',
+    exact: true,
+  });
+  await editor.click();
+  await editor.pressSequentially('A short post.');
+  await page.getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(
+    page.getByRole('status').filter({ hasText: /^Saved$/ })
+  ).toBeVisible();
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.getByRole('button', { name: 'Publish', exact: true }).click();
+  await expect(
+    page.getByText(
+      'The submitted revision is deploying. Readers still see the previous version.'
+    )
+  ).toBeVisible();
+
+  await page.getByRole('link', { name: '← all writing', exact: true }).click();
+  await expect(
+    draftsSection.getByRole('link', { name: /Deploying then published/ })
+  ).toBeVisible();
+
+  await request.post('http://127.0.0.1:4100/control', {
+    data: { status: 'success' },
+  });
+  await page.reload();
+  await expect(
+    draftsSection.getByText('No drafts yet. Choose New post to start writing.')
+  ).toBeVisible();
+});

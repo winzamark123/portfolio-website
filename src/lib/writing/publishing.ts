@@ -1,10 +1,13 @@
 import 'server-only';
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
+import fs from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import { writingConfig } from './config';
 import {
   commitFiles,
+  deploymentStatus,
   fileCommit,
   readGitFile,
   repositorySnapshot,
@@ -67,6 +70,7 @@ export async function importPost({ slug }: { slug: string }) {
         fileSha: file.sha,
         commitSha: await fileCommit({ path: file.path }),
         publishedAt: new Date().toISOString(),
+        imported: true,
       },
     });
   }
@@ -111,6 +115,7 @@ export async function refreshPublishedPost({
         commitSha: await fileCommit({ path: file.path }),
         revision,
         publishedAt: new Date().toISOString(),
+        imported: true,
       },
     },
   });
@@ -271,4 +276,60 @@ export async function publishDraft({ id, etag }: { id: string; etag: string }) {
       publishedAt: new Date().toISOString(),
     },
   });
+}
+
+async function publishedFileMatches({
+  filePath,
+  fileSha,
+}: {
+  filePath: string;
+  fileSha: string;
+}) {
+  const blogDir = resolve(process.cwd(), 'public/blog');
+  const fullPath = resolve(process.cwd(), filePath);
+  if (!fullPath.startsWith(`${blogDir}/`)) return false;
+  try {
+    const content = await fs.readFile(fullPath);
+    const sha = createHash('sha1')
+      .update(`blob ${content.length}\0`)
+      .update(content)
+      .digest('hex');
+    return sha === fileSha;
+  } catch {
+    return false;
+  }
+}
+
+export async function publicationStatus({ draft }: { draft: Draft }) {
+  const { publication } = draft;
+  if (!publication)
+    throw new WritingError('This post has not been published.', 404);
+  const url = `${new URL(writingConfig().NEXTAUTH_URL).origin}/?tab=blogs&post=${draft.slug}`;
+  if (
+    publication.imported ||
+    (await publishedFileMatches({
+      filePath: publication.path,
+      fileSha: publication.fileSha,
+    }))
+  ) {
+    return { state: 'success', url };
+  }
+  return deploymentStatus({ sha: publication.commitSha, slug: draft.slug });
+}
+
+export async function listActiveDrafts() {
+  const drafts = await listDrafts();
+  const visible = await Promise.all(
+    drafts.map(async (draft) => {
+      const { publication } = draft;
+      if (!publication || publication.revision !== draft.revision) return true;
+      try {
+        const status = await publicationStatus({ draft });
+        return status.state !== 'success';
+      } catch {
+        return true;
+      }
+    })
+  );
+  return drafts.filter((_, index) => visible[index]);
 }

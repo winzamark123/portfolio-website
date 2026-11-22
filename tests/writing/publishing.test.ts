@@ -11,7 +11,9 @@ import {
 } from '../../src/lib/writing/storage';
 import {
   importPost,
+  listActiveDrafts,
   previewDocument,
+  publicationStatus,
   publishDraft,
   refreshPublishedPost,
 } from '../../src/lib/writing/publishing';
@@ -290,5 +292,91 @@ describe('private drafts and publication', () => {
     expect(
       await deploymentStatus({ sha: fixture.head, slug: 'example' })
     ).toMatchObject({ state: 'unknown' });
+  });
+
+  it('hides unedited imported posts and live publications from active drafts', async () => {
+    fixture.setStatus('pending');
+    const imported = await importPost({
+      slug: '2026-01-09-note_to_self_for_2026',
+    });
+    expect(await publicationStatus({ draft: imported.draft })).toMatchObject({
+      state: 'success',
+    });
+    expect(await listActiveDrafts()).toHaveLength(0);
+
+    const edited = await saveDraft({
+      id: imported.draft.id,
+      etag: imported.etag,
+      content: {
+        ...draftContent({ draft: imported.draft }),
+        markdown: `${imported.draft.markdown}\nA private note.`,
+      },
+    });
+    expect((await listActiveDrafts()).map((draft) => draft.id)).toEqual([
+      imported.draft.id,
+    ]);
+
+    await refreshPublishedPost({ id: imported.draft.id, etag: edited.etag });
+    expect(await listActiveDrafts()).toHaveLength(0);
+
+    const draft = await newPost();
+    expect((await listActiveDrafts()).map((item) => item.id)).toEqual([
+      draft.draft.id,
+    ]);
+
+    const published = await publishDraft({
+      id: draft.draft.id,
+      etag: draft.etag,
+    });
+    expect((await listActiveDrafts()).map((item) => item.id)).toEqual([
+      published.draft.id,
+    ]);
+
+    fixture.setStatus('failure');
+    expect((await listActiveDrafts()).map((item) => item.id)).toEqual([
+      published.draft.id,
+    ]);
+
+    fixture.setStatus('success');
+    expect(await listActiveDrafts()).toHaveLength(0);
+
+    await saveDraft({
+      id: published.draft.id,
+      etag: published.etag,
+      content: {
+        ...draftContent({ draft: published.draft }),
+        markdown: 'An unpublished follow-up.',
+      },
+    });
+    expect((await listActiveDrafts()).map((item) => item.id)).toEqual([
+      published.draft.id,
+    ]);
+  });
+
+  it('hides legacy imported drafts whose file matches the published post on disk', async () => {
+    fixture.setStatus('unknown');
+    const imported = await importPost({
+      slug: '2026-01-09-note_to_self_for_2026',
+    });
+    const key = `private/drafts/${imported.draft.id}.json`;
+    const legacy = {
+      ...imported.draft,
+      publication: imported.draft.publication
+        ? {
+            path: imported.draft.publication.path,
+            fileSha: imported.draft.publication.fileSha,
+            commitSha: imported.draft.publication.commitSha,
+            revision: imported.draft.publication.revision,
+            publishedAt: imported.draft.publication.publishedAt,
+          }
+        : null,
+    };
+    const stored = fixture.objects.get(key);
+    if (!stored) throw new Error('Expected stored draft in fixture');
+    fixture.objects.set(key, {
+      ...stored,
+      body: Buffer.from(JSON.stringify(legacy)),
+    });
+    expect(await listActiveDrafts()).toHaveLength(0);
   });
 });
